@@ -10,10 +10,12 @@ namespace NuCache.Controllers
 	public class PackagesController : ApiController
 	{
 		private readonly PackageCache _cache;
+		private readonly WebClient _client;
 
-		public PackagesController(PackageCache cache)
+		public PackagesController(PackageCache cache, WebClient client)
 		{
 			_cache = cache;
+			_client = client;
 		}
 
 		[HttpGet]
@@ -39,8 +41,7 @@ namespace NuCache.Controllers
 		[HttpGet]
 		public HttpResponseMessage Metadata()
 		{
-			var client = new WebClient();
-			var xml = client.MakeRequest(new Uri("http://www.nuget.org/api/v2/$metadata"));
+			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/$metadata"));
 
 			return new HttpResponseMessage
 			{
@@ -52,8 +53,7 @@ namespace NuCache.Controllers
 		[HttpGet]
 		public HttpResponseMessage List()
 		{
-			var client = new WebClient();
-			var xml = client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Packages"));
+			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Packages"));
 
 			return new HttpResponseMessage
 			{
@@ -65,8 +65,7 @@ namespace NuCache.Controllers
 		[HttpGet]
 		public HttpResponseMessage Search()
 		{
-			var client = new WebClient();
-			var xml = client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Search()" + Request.RequestUri.Query));
+			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Search()" + Request.RequestUri.Query));
 
 			return new HttpResponseMessage
 			{
