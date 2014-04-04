@@ -21,15 +21,7 @@ namespace NuCache.Controllers
 		[HttpGet]
 		public HttpResponseMessage Get()
 		{
-			var xml = @"
-				<service xmlns=""http://www.w3.org/2007/app"" xmlns:atom=""http://www.w3.org/2005/Atom"" xml:base=""http://www.nuget.org/api/v2/"">
-					<workspace>
-						<atom:title>Default</atom:title>
-						<collection href=""Packages"">
-							<atom:title>Packages</atom:title>
-						</collection>
-					</workspace>
-				</service>";
+			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/"));
 
 			return new HttpResponseMessage
 			{
