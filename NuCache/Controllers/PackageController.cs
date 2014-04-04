@@ -66,7 +66,7 @@ namespace NuCache.Controllers
 		public HttpResponseMessage Search()
 		{
 			var client = new WebClient();
-			var xml = client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Search" + Request.RequestUri.Query));
+			var xml = client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Search()" + Request.RequestUri.Query));
 
 			return new HttpResponseMessage
 			{
