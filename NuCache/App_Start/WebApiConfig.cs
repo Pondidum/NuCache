@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Mvc;
 using NuCache.App_Start;
 using StructureMap;
 using StructureMap.Graph;
@@ -40,6 +41,12 @@ namespace NuCache
 				name: "Search",
 				routeTemplate: "api/v2/search()",
 				defaults: new {controller = "Packages", action = "Search"}
+			);
+
+			config.Routes.MapHttpRoute(
+				name: "Download",
+				routeTemplate: "api/v2/package/{packageID}/{version}",
+				defaults: new { controller = "Packages", action = "GetPackageByID", packageID = UrlParameter.Optional, version = UrlParameter.Optional}
 			);
 		}
 	}

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace NuCache.Infrastructure
 {
@@ -17,6 +19,14 @@ namespace NuCache.Infrastructure
 			{
 				return reader.ReadToEnd();
 			}
+		}
+
+		public async Task<HttpResponseMessage> GetResponseAsync(Uri url)
+		{
+			var client = new HttpClient();
+			var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+			return await client.SendAsync(request);
 		}
 	}
 }

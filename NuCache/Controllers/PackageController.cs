@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Xml.Linq;
 using NuCache.Infrastructure;
@@ -66,18 +69,17 @@ namespace NuCache.Controllers
 			};
 		}
 
-		public void GetByPackageID(string packageID, string version)
+		[HttpGet]
+		public async Task<HttpResponseMessage> GetPackageByID(string packageID, string version)
 		{
-			if (_cache.ContainsPackage(packageID, version))
-			{
-				_cache.Package(packageID, version);  //return
-			}
+			var url = new Uri("http://www.nuget.org/api/v2/Package/" + packageID + "/" + version);
 
-			//get from webclient
-			//var package = _webClient.MakeRequest();
+			var result = await _client.GetResponseAsync(url);
 
-			//_cache.Add(package);
+			var name = Path.GetFileName(result.RequestMessage.RequestUri.AbsolutePath);
+			result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = name};
+
+			return result;
 		}
-
 	}
 }
