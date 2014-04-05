@@ -11,7 +11,7 @@ namespace NuCache.App_Start
 		{
 			var url = new Uri("http://nuget.org");
 
-			For<IPackageRepository>().Use<RemotePackageRepository>().Ctor<Uri>().Is(url);
+			For<IPackageSource>().Use<RemotePackageSource>().Ctor<Uri>().Is(url);
 
 			For<WebClient>().Use<WebClient>();
 			For<PackageCache>().Singleton().Use<PackageCache>();

@@ -7,12 +7,12 @@ using NuCache.Infrastructure;
 
 namespace NuCache.Controllers
 {
-	public class RemotePackageRepository : IPackageRepository
+	public class RemotePackageSource : IPackageSource
 	{
 		private readonly Uri _remoteUrl;
 		private readonly WebClient _client;
 
-		public RemotePackageRepository(WebClient client, Uri remoteUrl)
+		public RemotePackageSource(WebClient client, Uri remoteUrl)
 		{
 			_remoteUrl = remoteUrl;
 			_client = client;

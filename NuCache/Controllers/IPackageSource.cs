@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace NuCache.Controllers
 {
-	public interface IPackageRepository
+	public interface IPackageSource
 	{
 		Task<HttpResponseMessage> Get(Uri request);
 		Task<HttpResponseMessage> Metadata(Uri request);

@@ -8,50 +8,47 @@ namespace NuCache.Controllers
 {
 	public class PackagesController : ApiController
 	{
-		private readonly PackageCache _cache;
-		private readonly IPackageRepository _repository;
+		private readonly IPackageSource _packageSource;
 
-
-		public PackagesController(PackageCache cache, IPackageRepository repository)
+		public PackagesController(IPackageSource source)
 		{
-			_cache = cache;
-			_repository = repository;
+			_packageSource = source;
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Get()
 		{
-			return await _repository.Get(Request.RequestUri);
+			return await _packageSource.Get(Request.RequestUri);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Metadata()
 		{
-			return await _repository.Metadata(Request.RequestUri);
+			return await _packageSource.Metadata(Request.RequestUri);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> List()
 		{
-			return await _repository.List(Request.RequestUri);
+			return await _packageSource.List(Request.RequestUri);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Search()
 		{
-			return await _repository.Search(Request.RequestUri);
+			return await _packageSource.Search(Request.RequestUri);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> FindPackagesByID()
 		{
-			return await _repository.FindPackagesByID(Request.RequestUri);
+			return await _packageSource.FindPackagesByID(Request.RequestUri);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> GetPackageByID()
 		{
-			return await _repository.GetPackageByID(Request.RequestUri);
+			return await _packageSource.GetPackageByID(Request.RequestUri);
 		}
 	}
 }
