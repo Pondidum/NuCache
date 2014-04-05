@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using NuCache.Infrastructure;
 
-namespace NuCache.Controllers
+namespace NuCache.PackageSources
 {
 	public class RemotePackageSource : IPackageSource
 	{

@@ -1,6 +1,7 @@
 ﻿using System;
 using NuCache.Controllers;
 using NuCache.Infrastructure;
+using NuCache.PackageSources;
 using StructureMap.Configuration.DSL;
 
 namespace NuCache.App_Start
