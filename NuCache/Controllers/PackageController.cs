@@ -57,16 +57,19 @@ namespace NuCache.Controllers
 			};
 		}
 
-		[HttpGet]
-		public HttpResponseMessage Search()
-		{
-			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Search()" + Request.RequestUri.Query));
+		//$count?$filter=IsLatestVersion&searchTerm=%27%27&targetFramework=%27net45%27&includePrerelease=false
 
-			return new HttpResponseMessage
-			{
-				RequestMessage = Request,
-				Content = new XmlContent(XDocument.Parse(xml))
-			};
+		[HttpGet]
+		public async Task<HttpResponseMessage> Search()
+		{
+
+			var builder = new UriBuilder(Request.RequestUri);
+			builder.Host = "nuget.org";
+			builder.Port = -1;
+
+			var result = await _client.GetResponseAsync(builder.Uri);
+
+			return result;
 		}
 
 		[HttpGet]
