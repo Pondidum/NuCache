@@ -78,7 +78,9 @@
     <Compile Include="App_Start\StructureMapDependencyResolver.cs" />
     <Compile Include="App_Start\StructureMapDependencyScope.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\IPackageRepository.cs" />
     <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\RemotePackageRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
