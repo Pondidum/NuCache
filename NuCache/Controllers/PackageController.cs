@@ -22,67 +22,43 @@ namespace NuCache.Controllers
 		}
 
 		[HttpGet]
-		public HttpResponseMessage Get()
+		public async Task<HttpResponseMessage> Get()
 		{
-			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/"));
-
-			return new HttpResponseMessage
-			{
-				RequestMessage = Request,
-				Content = new XmlContent(XDocument.Parse(xml)),
-			};
+			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/"));
 		}
 
 		[HttpGet]
-		public HttpResponseMessage Metadata()
+		public async Task<HttpResponseMessage> Metadata()
 		{
-			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/$metadata"));
-
-			return new HttpResponseMessage
-			{
-				RequestMessage = Request,
-				Content = new XmlContent(XDocument.Parse(xml))
-			};
+			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/$metadata"));
 		}
 
 		[HttpGet]
-		public HttpResponseMessage List()
+		public async Task<HttpResponseMessage> List()
 		{
-			var xml = _client.MakeRequest(new Uri("http://www.nuget.org/api/v2/Packages"));
-
-			return new HttpResponseMessage
-			{
-				RequestMessage = Request,
-				Content = new XmlContent(XDocument.Parse(xml)),
-			};
+			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/Packages"));
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Search()
 		{
-
 			var builder = new UriBuilder(Request.RequestUri);
 			builder.Host = "nuget.org";
 			builder.Port = -1;
 
-			var result = await _client.GetResponseAsync(builder.Uri);
-
-			return result;
+			return await _client.GetResponseAsync(builder.Uri);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> FindPackagesByID(string id)
 		{
-			var url = new Uri("http://www.nuget.org/api/v2/FindPackagesById()?id=" + id);
-
-			return await _client.GetResponseAsync(url);
+			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/FindPackagesById()?id=" + id));
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> GetPackageByID(string packageID, string version)
 		{
 			var url = new Uri("http://www.nuget.org/api/v2/Package/" + packageID + "/" + version);
-
 			var result = await _client.GetResponseAsync(url);
 
 			var name = Path.GetFileName(result.RequestMessage.RequestUri.AbsolutePath);
