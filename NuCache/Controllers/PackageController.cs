@@ -57,8 +57,6 @@ namespace NuCache.Controllers
 			};
 		}
 
-		//$count?$filter=IsLatestVersion&searchTerm=%27%27&targetFramework=%27net45%27&includePrerelease=false
-
 		[HttpGet]
 		public async Task<HttpResponseMessage> Search()
 		{
@@ -70,6 +68,14 @@ namespace NuCache.Controllers
 			var result = await _client.GetResponseAsync(builder.Uri);
 
 			return result;
+		}
+
+		[HttpGet]
+		public async Task<HttpResponseMessage> FindPackagesByID(string id)
+		{
+			var url = new Uri("http://www.nuget.org/api/v2/FindPackagesById()?id=" + id);
+
+			return await _client.GetResponseAsync(url);
 		}
 
 		[HttpGet]

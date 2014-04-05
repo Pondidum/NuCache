@@ -40,6 +40,12 @@ namespace NuCache
 			);
 
 			config.Routes.MapHttpRoute(
+				name: "FindByID",
+				routeTemplate: "api/v2/FindPackagesByID()",
+				defaults: new { controller = "Packages", action = "FindPackagesByID" }
+			);
+
+			config.Routes.MapHttpRoute(
 				name: "Search",
 				routeTemplate: "api/v2/search()/{method}",
 				defaults: new {controller = "Packages", action = "Search", method = UrlParameter.Optional}
