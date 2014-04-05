@@ -9,54 +9,44 @@ namespace NuCache.PackageSources
 {
 	public class RemotePackageSource : IPackageSource
 	{
-		private readonly Uri _remoteUrl;
+
 		private readonly WebClient _client;
+		private readonly UriHostTransformer _transformer;
 
-		public RemotePackageSource(WebClient client, Uri remoteUrl)
+		public RemotePackageSource(WebClient client, UriHostTransformer transformer)
 		{
-			_remoteUrl = remoteUrl;
 			_client = client;
-		}
-
-		private Uri BuildUri(Uri input)
-		{
-			var builder = new UriBuilder(input);
-
-			builder.Scheme = _remoteUrl.Scheme;
-			builder.Host = _remoteUrl.Host;
-			builder.Port = -1;
-
-			return builder.Uri;
+			_transformer = transformer;
 		}
 
 		public async Task<HttpResponseMessage> Get(Uri request)
 		{
-			return await _client.GetResponseAsync(BuildUri(request));
+			return await _client.GetResponseAsync(_transformer.Transform(request));
 		}
 
 		public async Task<HttpResponseMessage> Metadata(Uri request)
 		{
-			return await _client.GetResponseAsync(BuildUri(request));
+			return await _client.GetResponseAsync(_transformer.Transform(request));
 		}
 
 		public async Task<HttpResponseMessage> List(Uri request)
 		{
-			return await _client.GetResponseAsync(BuildUri(request));
+			return await _client.GetResponseAsync(_transformer.Transform(request));
 		}
 
 		public async Task<HttpResponseMessage> Search(Uri request)
 		{
-			return await _client.GetResponseAsync(BuildUri(request));
+			return await _client.GetResponseAsync(_transformer.Transform(request));
 		}
 
 		public async Task<HttpResponseMessage> FindPackagesByID(Uri request)
 		{
-			return await _client.GetResponseAsync(BuildUri(request));
+			return await _client.GetResponseAsync(_transformer.Transform(request));
 		}
 
 		public async Task<HttpResponseMessage> GetPackageByID(Uri request)
 		{
-			var result = await _client.GetResponseAsync(BuildUri(request));
+			var result = await _client.GetResponseAsync(_transformer.Transform(request));
 
 			//not certain why this gets missed by the web client on a download
 			var name = Path.GetFileName(result.RequestMessage.RequestUri.AbsolutePath);
