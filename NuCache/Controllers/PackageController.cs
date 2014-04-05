@@ -55,13 +55,13 @@ namespace NuCache.Controllers
 		}
 
 		[HttpGet]
-		public async Task<HttpResponseMessage> FindPackagesByID(string id)
+		public async Task<HttpResponseMessage> FindPackagesByID()
 		{
 			return await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 		}
 
 		[HttpGet]
-		public async Task<HttpResponseMessage> GetPackageByID(string packageID, string version)
+		public async Task<HttpResponseMessage> GetPackageByID()
 		{
 			var result = await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 
