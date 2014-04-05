@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="Infrastructure\PackageCache.cs" />
     <Compile Include="Infrastructure\WebClient.cs" />
-    <Compile Include="Infrastructure\XmlContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
