@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuCache", "NuCache\NuCache.csproj", "{AD772A73-3D0A-4030-A797-0B20E1AF70E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddPackageTest", "AddPackageTest\AddPackageTest.csproj", "{8AC9F671-216B-497F-BA11-ED4EF68469EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{AD772A73-3D0A-4030-A797-0B20E1AF70E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD772A73-3D0A-4030-A797-0B20E1AF70E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD772A73-3D0A-4030-A797-0B20E1AF70E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8AC9F671-216B-497F-BA11-ED4EF68469EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8AC9F671-216B-497F-BA11-ED4EF68469EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8AC9F671-216B-497F-BA11-ED4EF68469EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8AC9F671-216B-497F-BA11-ED4EF68469EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
