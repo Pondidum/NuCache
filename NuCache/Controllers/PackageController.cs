@@ -21,46 +21,51 @@ namespace NuCache.Controllers
 			_client = client;
 		}
 
+		private Uri BuildUri(Uri input)
+		{
+			var builder = new UriBuilder(input);
+			builder.Host = "nuget.org";
+			builder.Port = -1;
+
+			return builder.Uri;
+		}
+
 		[HttpGet]
 		public async Task<HttpResponseMessage> Get()
 		{
-			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/"));
+			return await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Metadata()
 		{
-			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/$metadata"));
+			return await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> List()
 		{
-			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/Packages"));
+			return await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Search()
 		{
-			var builder = new UriBuilder(Request.RequestUri);
-			builder.Host = "nuget.org";
-			builder.Port = -1;
-
-			return await _client.GetResponseAsync(builder.Uri);
+			return await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> FindPackagesByID(string id)
 		{
-			return await _client.GetResponseAsync(new Uri("http://www.nuget.org/api/v2/FindPackagesById()?id=" + id));
+			return await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> GetPackageByID(string packageID, string version)
 		{
-			var url = new Uri("http://www.nuget.org/api/v2/Package/" + packageID + "/" + version);
-			var result = await _client.GetResponseAsync(url);
+			var result = await _client.GetResponseAsync(BuildUri(Request.RequestUri));
 
+			//not certain why this gets missed by the web client on a download
 			var name = Path.GetFileName(result.RequestMessage.RequestUri.AbsolutePath);
 			result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = name};
 
