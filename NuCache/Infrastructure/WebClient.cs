@@ -6,7 +6,7 @@ namespace NuCache.Infrastructure
 {
 	public class WebClient
 	{
-		public async Task<HttpResponseMessage> GetResponseAsync(Uri url)
+		public virtual async Task<HttpResponseMessage> GetResponseAsync(Uri url)
 		{
 			var client = new HttpClient();
 			var request = new HttpRequestMessage(HttpMethod.Get, url);
