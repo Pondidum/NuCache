@@ -17,7 +17,7 @@ namespace NuCache
 			{
 				Scheme = _targetHost.Scheme,
 				Host = _targetHost.Host,
-				Port = -1
+				Port = _targetHost.IsDefaultPort ? -1 : _targetHost.Port,
 			};
 
 			return builder.Uri;

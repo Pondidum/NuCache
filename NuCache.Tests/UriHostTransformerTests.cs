@@ -32,5 +32,14 @@ namespace NuCache.Tests
 				.Transform(new Uri("http://localhost.fiddler:42174/api/v2/search()/$count?offset=23"))
 				.ShouldEqual(new Uri("http://nuget.org/api/v2/search()/$count?offset=23"));
 		}
+
+		public void When_changing_to_a_host_with_a_port()
+		{
+			var transformer = new UriHostTransformer(new Uri("http://localhost.fiddler:42174"));
+
+			transformer
+				.Transform(new Uri("https://example.com"))
+				.ShouldEqual(new Uri("http://localhost.fiddler:42174"));
+		}
 	}
 }
