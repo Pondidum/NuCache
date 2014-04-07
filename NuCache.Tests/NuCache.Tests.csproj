@@ -55,6 +55,7 @@
     <Compile Include="FileSystemTests\DirectoryExistsTests.cs" />
     <Compile Include="FileSystemTests\FileExistsTests.cs" />
     <Compile Include="FileSystemTests\BaseFileSystemFileTest.cs" />
+    <Compile Include="FileSystemTests\ListDirectoryTests.cs" />
     <Compile Include="FileSystemTests\ReadFileTests.cs" />
     <Compile Include="FileSystemTests\WriteFileTests.cs" />
     <Compile Include="PackageSources\RemotePackageSourceTests.cs" />
