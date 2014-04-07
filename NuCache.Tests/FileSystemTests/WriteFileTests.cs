@@ -4,20 +4,9 @@ using Should;
 
 namespace NuCache.Tests.FileSystemTests
 {
-	public class WriteFileTests: IDisposable
+	public class WriteFileTests: FileSystemTestBase
 	{
 		private const string Contents = "Some test string with !£$%^&*() characters.";
-
-		private readonly string _filename;
-		private readonly FileSystem _fileSystem;
-
-		public WriteFileTests()
-		{
-			_fileSystem = new FileSystem();
-
-			_filename = Guid.NewGuid().ToString() + ".tmp";
-			File.Create(_filename).Close();
-		}
 
 		private Stream StreamFromString(string input)
 		{
@@ -35,38 +24,22 @@ namespace NuCache.Tests.FileSystemTests
 		{
 			using (var stream = StreamFromString(Contents))
 			{
-				_fileSystem.WriteFile(_filename, stream);
+				FileSystem.WriteFile(Filename, stream);
 			}
 
-			File.ReadAllText(_filename).ShouldEqual(Contents);
+			File.ReadAllText(Filename).ShouldEqual(Contents);
 		}
 
 		public void When_writing_a_non_existing_file()
 		{
-			File.Delete(_filename);
+			File.Delete(Filename);
 
 			using (var stream = StreamFromString(Contents))
 			{
-				_fileSystem.WriteFile(_filename, stream);
+				FileSystem.WriteFile(Filename, stream);
 			}
 
-			File.ReadAllText(_filename).ShouldEqual(Contents);
-		}
-
-		public void Dispose()
-		{
-			try
-			{
-				if (File.Exists(_filename))
-				{
-					File.Delete(_filename);
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine("Enable to delete '{0}'", _filename);
-			}
-
+			File.ReadAllText(Filename).ShouldEqual(Contents);
 		}
 	}
 }
