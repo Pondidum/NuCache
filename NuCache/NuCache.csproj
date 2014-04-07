@@ -79,6 +79,7 @@
     <Compile Include="App_Start\StructureMapDependencyResolver.cs" />
     <Compile Include="App_Start\StructureMapDependencyScope.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="FileSystem.cs" />
     <Compile Include="FileSystemPackageCache.cs" />
     <Compile Include="IFileSystem.cs">
       <SubType>Code</SubType>
