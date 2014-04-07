@@ -15,7 +15,8 @@ namespace NuCache.Tests.FileSystemTests
 			_fileSystem = new FileSystem();
 
 			_filename = Guid.NewGuid().ToString() + ".tmp";
-			File.Create(_filename);
+			
+			File.Create(_filename).Close();
 		}
 
 		public void When_passed_a_relative_path_and_the_file_exists()
