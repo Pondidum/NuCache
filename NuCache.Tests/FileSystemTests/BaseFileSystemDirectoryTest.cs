@@ -23,7 +23,7 @@ namespace NuCache.Tests.FileSystemTests
 			{
 				if (Directory.Exists(DirectoryName))
 				{
-					Directory.Delete(DirectoryName);
+					Directory.Delete(DirectoryName, true);
 				}
 			}
 			catch (Exception ex)
