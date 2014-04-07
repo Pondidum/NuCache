@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileSystemTests\DeleteFileTests.cs" />
     <Compile Include="FileSystemTests\FileExistsTests.cs" />
     <Compile Include="FileSystemTests\FileSystemTestBase.cs" />
     <Compile Include="FileSystemTests\ReadFileTests.cs" />
