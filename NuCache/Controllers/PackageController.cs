@@ -2,8 +2,6 @@
 using System.Web.Http;
 using System.Threading.Tasks;
 
-using NuCache.Infrastructure;
-
 namespace NuCache.Controllers
 {
 	public class PackagesController : ApiController
