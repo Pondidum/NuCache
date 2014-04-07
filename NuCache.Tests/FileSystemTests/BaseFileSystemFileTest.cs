@@ -26,7 +26,7 @@ namespace NuCache.Tests.FileSystemTests
 					File.Delete(Filename);
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				Console.WriteLine("Enable to delete '{0}'", Filename);
 			}

@@ -26,7 +26,7 @@ namespace NuCache.Tests.FileSystemTests
 					Directory.Delete(DirectoryName, true);
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				Console.WriteLine("Enable to delete '{0}'", DirectoryName);
 			}
