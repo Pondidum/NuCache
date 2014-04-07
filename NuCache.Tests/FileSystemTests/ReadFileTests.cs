@@ -4,7 +4,7 @@ using Should.Core.Assertions;
 
 namespace NuCache.Tests.FileSystemTests
 {
-	public class ReadFileTests : FileSystemTestBase
+	public class ReadFileTests : BaseFileSystemFileTest
 	{
 		private const string Contents = "Some test string with !£$%^&*() characters.";
 

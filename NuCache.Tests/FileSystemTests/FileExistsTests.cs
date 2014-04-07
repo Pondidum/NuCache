@@ -4,7 +4,7 @@ using Should.Core.Assertions;
 
 namespace NuCache.Tests.FileSystemTests
 {
-	public class FileExistsTests : FileSystemTestBase
+	public class FileExistsTests : BaseFileSystemFileTest
 	{
 		public void When_passed_a_relative_path_and_the_file_exists()
 		{

@@ -3,12 +3,12 @@ using System.IO;
 
 namespace NuCache.Tests.FileSystemTests
 {
-	public class FileSystemTestBase : IDisposable
+	public class BaseFileSystemFileTest	 : IDisposable
 	{
 		protected string Filename;
 		protected FileSystem FileSystem;
 
-		public FileSystemTestBase()
+		public BaseFileSystemFileTest()
 		{
 			FileSystem = new FileSystem();
 

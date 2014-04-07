@@ -3,7 +3,7 @@ using Should;
 
 namespace NuCache.Tests.FileSystemTests
 {
-	public class DeleteFileTests : FileSystemTestBase
+	public class DeleteFileTests : BaseFileSystemFileTest
 	{
 		public void When_deleting_an_existing_file_by_relative_path()
 		{

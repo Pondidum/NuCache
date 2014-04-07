@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="FileSystemTests\DeleteFileTests.cs" />
     <Compile Include="FileSystemTests\FileExistsTests.cs" />
-    <Compile Include="FileSystemTests\FileSystemTestBase.cs" />
+    <Compile Include="FileSystemTests\BaseFileSystemFileTest.cs" />
     <Compile Include="FileSystemTests\ReadFileTests.cs" />
     <Compile Include="FileSystemTests\WriteFileTests.cs" />
     <Compile Include="PackageSources\RemotePackageSourceTests.cs" />
