@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileSystemTests\FileExistsTests.cs" />
+    <Compile Include="FileSystemTests\WriteFileTests.cs" />
     <Compile Include="PackageSources\RemotePackageSourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UriHostTransformerTests.cs" />
