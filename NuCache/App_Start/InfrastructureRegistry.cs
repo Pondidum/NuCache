@@ -13,7 +13,6 @@ namespace NuCache.App_Start
 			For<IPackageSource>().Use<RemotePackageSource>();
 			For<ApplicationSettings>().Singleton().Use<ApplicationSettings>();
 			For<WebClient>().Use<WebClient>();
-			For<PackageCache>().Singleton().Use<PackageCache>();
 		}
 	}
 }
