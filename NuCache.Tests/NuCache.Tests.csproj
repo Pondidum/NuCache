@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileSystemTests\BaseFileSystemDirectoryTest.cs" />
+    <Compile Include="FileSystemTests\CreateDirectoryTests.cs" />
     <Compile Include="FileSystemTests\DeleteFileTests.cs" />
     <Compile Include="FileSystemTests\DirectoryExistsTests.cs" />
     <Compile Include="FileSystemTests\FileExistsTests.cs" />
