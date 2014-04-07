@@ -7,17 +7,19 @@ namespace NuCache.Tests.PackageSources
 {
 	public class RemotePackageSourceTests
 	{
-
 		private void Test(Action<RemotePackageSource, Uri> method)
 		{
+			var settings = Substitute.For<ApplicationSettings>();
 			var client = Substitute.For<WebClient>();
-			var transformer = new UriHostTransformer(new Uri("http://localhost.fiddler:42174"));
+			var transformer = new UriHostTransformer();
 
-			var source = new RemotePackageSource(client, transformer);
+			settings.RemoteFeed.Returns(new Uri("http://localhost.fiddler:42174"));
+
+			var source = new RemotePackageSource(settings,client, transformer);
 
 			method(source, new Uri("http://example.com/api/v2"));
 
-			client.Received().GetResponseAsync(new Uri("http://localhost.fiddler:42174/api/v2"));	
+			client.Received().GetResponseAsync(new Uri("http://localhost.fiddler:42174/api/v2"));
 		}
 
 		public void When_calling_get()

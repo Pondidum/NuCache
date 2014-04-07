@@ -9,11 +9,9 @@ namespace NuCache.App_Start
 	{
 		public InfrastructureRegistry()
 		{
-			var url = new Uri("http://nuget.org");
-
-			For<UriHostTransformer>().Use<UriHostTransformer>().Ctor<Uri>().Is(url);
+			For<UriHostTransformer>().Use<UriHostTransformer>();
 			For<IPackageSource>().Use<RemotePackageSource>();
-
+			For<ApplicationSettings>().Singleton().Use<ApplicationSettings>();
 			For<WebClient>().Use<WebClient>();
 			For<PackageCache>().Singleton().Use<PackageCache>();
 		}
