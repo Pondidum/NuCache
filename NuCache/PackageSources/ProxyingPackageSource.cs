@@ -7,13 +7,13 @@ using NuCache.Infrastructure;
 
 namespace NuCache.PackageSources
 {
-	public class RemotePackageSource : IPackageSource
+	public class ProxyingPackageSource : IPackageSource
 	{
 		private readonly ApplicationSettings _settings;
 		private readonly WebClient _client;
 		private readonly UriHostTransformer _transformer;
 
-		public RemotePackageSource(ApplicationSettings settings, WebClient client, UriHostTransformer transformer)
+		public ProxyingPackageSource(ApplicationSettings settings, WebClient client, UriHostTransformer transformer)
 		{
 			_settings = settings;
 			_client = client;

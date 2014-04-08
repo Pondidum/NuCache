@@ -87,7 +87,7 @@
     <Compile Include="IPackageCache.cs" />
     <Compile Include="IPackageSource.cs" />
     <Compile Include="Controllers\PackageController.cs" />
-    <Compile Include="PackageSources\RemotePackageSource.cs" />
+    <Compile Include="PackageSources\ProxyingPackageSource.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

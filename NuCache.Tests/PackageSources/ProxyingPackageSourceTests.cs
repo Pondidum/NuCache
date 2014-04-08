@@ -5,9 +5,9 @@ using NuCache.PackageSources;
 
 namespace NuCache.Tests.PackageSources
 {
-	public class RemotePackageSourceTests
+	public class ProxyingPackageSourceTests
 	{
-		private void Test(Action<RemotePackageSource, Uri> method)
+		private void Test(Action<ProxyingPackageSource, Uri> method)
 		{
 			var settings = Substitute.For<ApplicationSettings>();
 			var client = Substitute.For<WebClient>();
@@ -15,7 +15,7 @@ namespace NuCache.Tests.PackageSources
 
 			settings.RemoteFeed.Returns(new Uri("http://localhost.fiddler:42174"));
 
-			var source = new RemotePackageSource(settings,client, transformer);
+			var source = new ProxyingPackageSource(settings,client, transformer);
 
 			method(source, new Uri("http://example.com/api/v2"));
 

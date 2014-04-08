@@ -10,7 +10,7 @@ namespace NuCache.App_Start
 		public InfrastructureRegistry()
 		{
 			For<UriHostTransformer>().Use<UriHostTransformer>();
-			For<IPackageSource>().Use<RemotePackageSource>();
+			For<IPackageSource>().Use<ProxyingPackageSource>();
 			For<ApplicationSettings>().Singleton().Use<ApplicationSettings>();
 			For<WebClient>().Use<WebClient>();
 		}
