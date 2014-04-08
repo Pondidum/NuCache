@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using NuCache.Infrastructure;
+using NuCache.Rewriters;
 
 namespace NuCache.PackageSources
 {
@@ -11,18 +14,20 @@ namespace NuCache.PackageSources
 	{
 		private readonly ApplicationSettings _settings;
 		private readonly WebClient _client;
-		private readonly UriHostTransformer _transformer;
+		private readonly XmlRewriter _xmlRewriter;
+		private readonly UriRewriter _transformer;
 
-		public ProxyingPackageSource(ApplicationSettings settings, WebClient client, UriHostTransformer transformer)
+		public ProxyingPackageSource(ApplicationSettings settings, WebClient client, XmlRewriter xmlRewriter, UriRewriter transformer)
 		{
 			_settings = settings;
 			_client = client;
+			_xmlRewriter = xmlRewriter;
 			_transformer = transformer;
 		}
 
 		private Uri GetTargetUrl(Uri request)
 		{
-			return _transformer.Transform(_settings.RemoteFeed, request);
+			return _transformer.TransformHost(_settings.RemoteFeed, request);
 		}
 
 		public async Task<HttpResponseMessage> Get(Uri request)
@@ -37,7 +42,20 @@ namespace NuCache.PackageSources
 
 		public async Task<HttpResponseMessage> List(Uri request)
 		{
-			return await _client.GetResponseAsync(GetTargetUrl(request));
+			var response = await _client.GetResponseAsync(GetTargetUrl(request));
+
+			var inputStream = await response.Content.ReadAsStreamAsync();
+			var pushContent = new PushStreamContent((outputStream, content, context) =>
+			{
+				_xmlRewriter.Rewrite(request, inputStream, outputStream);
+				outputStream.Close();
+				inputStream.Close();
+			});
+
+			pushContent.Headers.ContentType = response.Content.Headers.ContentType;
+			response.Content = pushContent;
+
+			return response;
 		}
 
 		public async Task<HttpResponseMessage> Search(Uri request)
