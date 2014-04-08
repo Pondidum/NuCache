@@ -12,7 +12,7 @@ namespace NuCache.Tests.PackageSources
 		{
 			var settings = Substitute.For<ApplicationSettings>();
 			var client = Substitute.For<WebClient>();
-			var transformer = new UriHostTransformer();
+			var transformer = new UriRewriter();
 			var xmlRewriter = new XmlRewriter(transformer);
 
 			settings.RemoteFeed.Returns(new Uri("http://localhost.fiddler:42174"));

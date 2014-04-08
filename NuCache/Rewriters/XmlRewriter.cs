@@ -9,9 +9,9 @@ namespace NuCache.Rewriters
 {
 	public class XmlRewriter
 	{
-		private readonly UriHostTransformer _uriRewriter;
+		private readonly UriRewriter _uriRewriter;
 
-		public XmlRewriter(UriHostTransformer uriRewriter)
+		public XmlRewriter(UriRewriter uriRewriter)
 		{
 			_uriRewriter = uriRewriter;
 		}
@@ -21,7 +21,7 @@ namespace NuCache.Rewriters
 			var doc = XDocument.Load(inputStream);
 			var ns = doc.Root.Name.Namespace;
 
-			Func<String, Uri> transform = url => _uriRewriter.Transform(targetUri, new Uri(url));
+			Func<String, Uri> transform = url => _uriRewriter.TransformHost(targetUri, new Uri(url));
 
 			var elements = doc.Root
 				.Elements(ns + "entry")

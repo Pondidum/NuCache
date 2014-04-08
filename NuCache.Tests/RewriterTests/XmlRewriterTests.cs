@@ -17,7 +17,7 @@ namespace NuCache.Tests.RewriterTests
 			var asm = GetType().Assembly;
 
 
-			var uriRewriter = new UriHostTransformer();
+			var uriRewriter = new UriRewriter();
 			var rewriter = new XmlRewriter(uriRewriter);
 			var targetUri = new Uri("http://localhost:42174/");
 

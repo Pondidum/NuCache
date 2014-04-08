@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace NuCache
+namespace NuCache.Rewriters
 {
-	public class UriHostTransformer
+	public class UriRewriter
 	{
-		public Uri Transform(Uri newHost, Uri input)
+		public Uri TransformHost(Uri newHost, Uri input)
 		{
 			var builder = new UriBuilder(input)
 			{

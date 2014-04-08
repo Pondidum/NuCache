@@ -15,9 +15,9 @@ namespace NuCache.PackageSources
 		private readonly ApplicationSettings _settings;
 		private readonly WebClient _client;
 		private readonly XmlRewriter _xmlRewriter;
-		private readonly UriHostTransformer _transformer;
+		private readonly UriRewriter _transformer;
 
-		public ProxyingPackageSource(ApplicationSettings settings, WebClient client, XmlRewriter xmlRewriter, UriHostTransformer transformer)
+		public ProxyingPackageSource(ApplicationSettings settings, WebClient client, XmlRewriter xmlRewriter, UriRewriter transformer)
 		{
 			_settings = settings;
 			_client = client;
@@ -27,7 +27,7 @@ namespace NuCache.PackageSources
 
 		private Uri GetTargetUrl(Uri request)
 		{
-			return _transformer.Transform(_settings.RemoteFeed, request);
+			return _transformer.TransformHost(_settings.RemoteFeed, request);
 		}
 
 		public async Task<HttpResponseMessage> Get(Uri request)

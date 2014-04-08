@@ -1,6 +1,7 @@
 ﻿using System;
 using NuCache.Infrastructure;
 using NuCache.PackageSources;
+using NuCache.Rewriters;
 using StructureMap.Configuration.DSL;
 
 namespace NuCache.App_Start
@@ -9,7 +10,7 @@ namespace NuCache.App_Start
 	{
 		public InfrastructureRegistry()
 		{
-			For<UriHostTransformer>().Use<UriHostTransformer>();
+			For<UriRewriter>().Use<UriRewriter>();
 			For<IPackageSource>().Use<ProxyingPackageSource>();
 			For<ApplicationSettings>().Singleton().Use<ApplicationSettings>();
 			For<WebClient>().Use<WebClient>();
