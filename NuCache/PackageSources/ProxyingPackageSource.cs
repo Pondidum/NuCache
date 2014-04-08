@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using NuCache.Infrastructure;
+using NuCache.Rewriters;
 
 namespace NuCache.PackageSources
 {
@@ -13,12 +14,14 @@ namespace NuCache.PackageSources
 	{
 		private readonly ApplicationSettings _settings;
 		private readonly WebClient _client;
+		private readonly XmlRewriter _xmlRewriter;
 		private readonly UriHostTransformer _transformer;
 
-		public ProxyingPackageSource(ApplicationSettings settings, WebClient client, UriHostTransformer transformer)
+		public ProxyingPackageSource(ApplicationSettings settings, WebClient client, XmlRewriter xmlRewriter, UriHostTransformer transformer)
 		{
 			_settings = settings;
 			_client = client;
+			_xmlRewriter = xmlRewriter;
 			_transformer = transformer;
 		}
 
@@ -41,30 +44,15 @@ namespace NuCache.PackageSources
 		{
 			var response = await _client.GetResponseAsync(GetTargetUrl(request));
 
-			using (var inputStream = await response.Content.ReadAsStreamAsync())
+			var inputStream = await response.Content.ReadAsStreamAsync();
+			var pushContent = new PushStreamContent((outputStream, content, context) =>
 			{
-				var doc = XDocument.Load(inputStream);
-				var ns = doc.Root.Name.Namespace;
+				_xmlRewriter.Rewrite(request, inputStream, outputStream);
+				outputStream.Close();
+				inputStream.Close();
+			}, response.Content.Headers.ContentType);
 
-				var attributes = doc.Root
-					.Elements(ns + "entry")
-					.SelectMany(e => e.Elements(ns + "content"))
-					.Select(e => e.Attribute("src"));
-
-				foreach (var attribute in attributes)
-				{
-					var url = new Uri(attribute.Value);
-					attribute.SetValue(_transformer.Transform(request, url));
-				}
-
-				var pushContent = new PushStreamContent((stream, content, context) =>
-				{
-					doc.Save(stream);
-					stream.Close();
-				}, response.Content.Headers.ContentType);
-
-				response.Content = pushContent;
-			}
+			response.Content = pushContent;
 
 			return response;
 		}
