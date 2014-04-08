@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using NuCache.Infrastructure;
 
 namespace NuCache.PackageSources
@@ -37,7 +39,34 @@ namespace NuCache.PackageSources
 
 		public async Task<HttpResponseMessage> List(Uri request)
 		{
-			return await _client.GetResponseAsync(GetTargetUrl(request));
+			var response = await _client.GetResponseAsync(GetTargetUrl(request));
+
+			using (var inputStream = await response.Content.ReadAsStreamAsync())
+			{
+				var doc = XDocument.Load(inputStream);
+				var ns = doc.Root.Name.Namespace;
+
+				var attributes = doc.Root
+					.Elements(ns + "entry")
+					.SelectMany(e => e.Elements(ns + "content"))
+					.Select(e => e.Attribute("src"));
+
+				foreach (var attribute in attributes)
+				{
+					var url = new Uri(attribute.Value);
+					attribute.SetValue(_transformer.Transform(request, url));
+				}
+
+				var pushContent = new PushStreamContent((stream, content, context) =>
+				{
+					doc.Save(stream);
+					stream.Close();
+				}, response.Content.Headers.ContentType);
+
+				response.Content = pushContent;
+			}
+
+			return response;
 		}
 
 		public async Task<HttpResponseMessage> Search(Uri request)
