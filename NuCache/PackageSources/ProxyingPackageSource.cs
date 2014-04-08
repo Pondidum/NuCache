@@ -50,8 +50,9 @@ namespace NuCache.PackageSources
 				_xmlRewriter.Rewrite(request, inputStream, outputStream);
 				outputStream.Close();
 				inputStream.Close();
-			}, response.Content.Headers.ContentType);
+			});
 
+			pushContent.Headers.ContentType = response.Content.Headers.ContentType;
 			response.Content = pushContent;
 
 			return response;
