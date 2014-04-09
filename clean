@@ -1,0 +1,2 @@
+git checkout -- AddPackageTest
+git clean -df AddPackageTest
