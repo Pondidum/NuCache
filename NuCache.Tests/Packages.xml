@@ -15,7 +15,7 @@
       <name>Jason Jarrett</name>
     </author>
     <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='_infrastructure.TypeScript.DefinitelyTyped',Version='0.0.1')/$value" />
-    <content type="application/zip" src="http://localhost:42174/api/v2/package/_infrastructure.TypeScript.DefinitelyTyped/0.0.1" />
+    <content type="application/zip" src="http://www.nuget.org/api/v2/package/_infrastructure.TypeScript.DefinitelyTyped/0.0.1" />
     <m:properties>
       <d:Version>0.0.1</d:Version>
       <d:NormalizedVersion>0.0.1</d:NormalizedVersion>
@@ -60,7 +60,7 @@
       <name>Jason Jarrett</name>
     </author>
     <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='_infrastructure.TypeScript.DefinitelyTyped',Version='0.0.2')/$value" />
-    <content type="application/zip" src="http://localhost:42174/api/v2/package/_infrastructure.TypeScript.DefinitelyTyped/0.0.2" />
+    <content type="application/zip" src="http://www.nuget.org/api/v2/package/_infrastructure.TypeScript.DefinitelyTyped/0.0.2" />
     <m:properties>
       <d:Version>0.0.2</d:Version>
       <d:NormalizedVersion>0.0.2</d:NormalizedVersion>
