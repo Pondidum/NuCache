@@ -61,6 +61,7 @@
     <Compile Include="Infrastructure\FileSystemTests\WriteFileTests.cs" />
     <Compile Include="PackageSources\ProxyingPackageSourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProxyBehaviour\ProxyBehaviourSetTests.cs" />
     <Compile Include="RewriterTests\XmlRewriterTests.cs" />
     <Compile Include="RewriterTests\UriRewriterTests.cs" />
   </ItemGroup>
