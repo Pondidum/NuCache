@@ -44,28 +44,33 @@ namespace NuCache.PackageSources
 		{
 			var response = await _client.GetResponseAsync(GetTargetUrl(request));
 
-			var inputStream = await response.Content.ReadAsStreamAsync();
-			var pushContent = new PushStreamContent((outputStream, content, context) =>
-			{
-				_xmlRewriter.Rewrite(request, inputStream, outputStream);
-				outputStream.Close();
-				inputStream.Close();
-			});
-
-			pushContent.Headers.ContentType = response.Content.Headers.ContentType;
-			response.Content = pushContent;
+			response.Content = await TransformContent(request, response.Content);
 
 			return response;
 		}
 
 		public async Task<HttpResponseMessage> Search(Uri request)
 		{
-			return await _client.GetResponseAsync(GetTargetUrl(request));
+			var response = await _client.GetResponseAsync(GetTargetUrl(request));
+
+			if (response.Content.Headers.ContentType.MediaType == "application/atom+xml")
+			{
+				response.Content = await TransformContent(request, response.Content);
+			}
+
+			return response;
 		}
 
 		public async Task<HttpResponseMessage> FindPackagesByID(Uri request)
 		{
-			return await _client.GetResponseAsync(GetTargetUrl(request));
+			var response = await _client.GetResponseAsync(GetTargetUrl(request));
+
+			if (response.Content.Headers.ContentType.MediaType == "application/atom+xml")
+			{
+				response.Content = await TransformContent(request, response.Content);
+			}
+
+			return response;
 		}
 
 		public async Task<HttpResponseMessage> GetPackageByID(Uri request)
@@ -77,6 +82,21 @@ namespace NuCache.PackageSources
 			result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = name };
 
 			return result;
+		}
+
+		private async Task<HttpContent> TransformContent(Uri request, HttpContent inputContent)
+		{
+			var inputStream = await inputContent.ReadAsStreamAsync();
+			var pushContent = new PushStreamContent((outputStream, content, context) =>
+			{
+				_xmlRewriter.Rewrite(request, inputStream, outputStream);
+				outputStream.Close();
+				inputStream.Close();
+			});
+
+			pushContent.Headers.ContentType = inputContent.Headers.ContentType;
+
+			return pushContent;
 		}
 	}
 }
