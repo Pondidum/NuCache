@@ -9,14 +9,15 @@ namespace NuCache.ProxyBehaviour
 	{
 		public void Execute(Uri request, HttpResponseMessage response)
 		{
-			if (response.Content.Headers.ContentType.MediaType != "application/zip")
-			{
-				return;
-			}
+			var headers = response.Content.Headers;
 
-			//not certain why this gets missed by the web client on a download
-			var name = Path.GetFileName(response.RequestMessage.RequestUri.AbsolutePath);
-			response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = name };
+			if (String.Equals(headers.ContentType.MediaType, "application/zip", StringComparison.OrdinalIgnoreCase))
+			{
+				//not certain why this gets missed by the web client on a download
+				var name = Path.GetFileName(response.RequestMessage.RequestUri.AbsolutePath);
+				headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = name };
+
+			}
 		}
 	}
 }
