@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using NSubstitute;
 using NuCache.Infrastructure;
 using NuCache.PackageSources;
+using NuCache.ProxyBehaviour;
 using NuCache.Rewriters;
 
 namespace NuCache.Tests.PackageSources
@@ -13,11 +15,11 @@ namespace NuCache.Tests.PackageSources
 			var settings = Substitute.For<ApplicationSettings>();
 			var client = Substitute.For<WebClient>();
 			var transformer = new UriRewriter();
-			var xmlRewriter = new XmlRewriter(transformer);
+			var behaviours = new ProxyBehaviourSet(new[] { new XmlRewriteBehaviour(new XmlRewriter(transformer)) });
 
 			settings.RemoteFeed.Returns(new Uri("http://localhost.fiddler:42174"));
 
-			var source = new ProxyingPackageSource(settings, client, xmlRewriter, transformer);
+			var source = new ProxyingPackageSource(settings, client, behaviours, transformer);
 
 			method(source, new Uri("http://example.com/api/v2"));
 

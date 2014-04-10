@@ -1,8 +1,10 @@
 ﻿using System;
 using NuCache.Infrastructure;
 using NuCache.PackageSources;
+using NuCache.ProxyBehaviour;
 using NuCache.Rewriters;
 using StructureMap.Configuration.DSL;
+using StructureMap.Graph;
 
 namespace NuCache.App_Start
 {
@@ -10,10 +12,15 @@ namespace NuCache.App_Start
 	{
 		public InfrastructureRegistry()
 		{
-			For<UriRewriter>().Use<UriRewriter>();
-			For<IPackageSource>().Use<ProxyingPackageSource>();
-			For<ApplicationSettings>().Singleton().Use<ApplicationSettings>();
-			For<WebClient>().Use<WebClient>();
+			Scan(a =>
+			{
+				a.TheCallingAssembly();
+				a.WithDefaultConventions();
+				a.AddAllTypesOf<IProxyBehaviour>();
+			
+				For<ProxyBehaviourSet>().Use(x => new ProxyBehaviourSet(x.GetAllInstances<IProxyBehaviour>()));
+				For<IPackageSource>().Use<ProxyingPackageSource>();
+			});
 		}
 	}
 }
