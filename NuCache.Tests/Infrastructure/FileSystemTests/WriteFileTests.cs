@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Should;
 
-namespace NuCache.Tests.FileSystemTests
+namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
 	public class WriteFileTests: BaseFileSystemFileTest
 	{

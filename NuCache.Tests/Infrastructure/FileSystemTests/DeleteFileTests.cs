@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Should;
 
-namespace NuCache.Tests.FileSystemTests
+namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
 	public class DeleteFileTests : BaseFileSystemFileTest
 	{

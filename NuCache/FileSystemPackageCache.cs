@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using NuCache.Infrastructure;
 
 namespace NuCache
 {

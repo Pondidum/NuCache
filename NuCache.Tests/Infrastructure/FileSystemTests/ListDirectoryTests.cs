@@ -4,7 +4,7 @@ using System.Linq;
 using Should;
 using Should.Core.Assertions;
 
-namespace NuCache.Tests.FileSystemTests
+namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
 	public class ListDirectoryTests : BaseFileSystemDirectoryTest
 	{

@@ -49,16 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileSystemTests\BaseFileSystemDirectoryTest.cs" />
-    <Compile Include="FileSystemTests\CreateDirectoryTests.cs" />
-    <Compile Include="FileSystemTests\DeleteDirectoryTests.cs" />
-    <Compile Include="FileSystemTests\DeleteFileTests.cs" />
-    <Compile Include="FileSystemTests\DirectoryExistsTests.cs" />
-    <Compile Include="FileSystemTests\FileExistsTests.cs" />
-    <Compile Include="FileSystemTests\BaseFileSystemFileTest.cs" />
-    <Compile Include="FileSystemTests\ListDirectoryTests.cs" />
-    <Compile Include="FileSystemTests\ReadFileTests.cs" />
-    <Compile Include="FileSystemTests\WriteFileTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\BaseFileSystemDirectoryTest.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\CreateDirectoryTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\DeleteDirectoryTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\DeleteFileTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\DirectoryExistsTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\FileExistsTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\BaseFileSystemFileTest.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\ListDirectoryTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\ReadFileTests.cs" />
+    <Compile Include="Infrastructure\FileSystemTests\WriteFileTests.cs" />
     <Compile Include="PackageSources\ProxyingPackageSourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RewriterTests\XmlRewriterTests.cs" />

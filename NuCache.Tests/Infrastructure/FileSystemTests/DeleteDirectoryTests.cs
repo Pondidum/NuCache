@@ -3,7 +3,7 @@ using System.IO;
 using Should;
 using Should.Core.Assertions;
 
-namespace NuCache.Tests.FileSystemTests
+namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
 	public class DeleteDirectoryTests : BaseFileSystemDirectoryTest
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace NuCache
+namespace NuCache.Infrastructure
 {
 	public interface IFileSystem
 	{

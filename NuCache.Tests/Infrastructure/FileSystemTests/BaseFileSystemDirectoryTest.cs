@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
+using NuCache.Infrastructure;
 
-namespace NuCache.Tests.FileSystemTests
+namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
 	public class BaseFileSystemDirectoryTest : IDisposable
 	{
