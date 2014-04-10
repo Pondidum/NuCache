@@ -16,10 +16,11 @@ namespace NuCache.Tests.PackageSources
 			var client = Substitute.For<WebClient>();
 			var transformer = new UriRewriter();
 			var behaviours = new ProxyBehaviourSet(new[] { new XmlRewriteBehaviour(new XmlRewriter(transformer)) });
+			var cache = Substitute.For<IPackageCache>();
 
 			settings.RemoteFeed.Returns(new Uri("http://localhost.fiddler:42174"));
 
-			var source = new ProxyingPackageSource(settings, client, behaviours, transformer);
+			var source = new ProxyingPackageSource(settings, client, behaviours, cache, transformer);
 
 			method(source, new Uri("http://example.com/api/v2"));
 

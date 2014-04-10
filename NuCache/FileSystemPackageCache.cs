@@ -18,7 +18,7 @@ namespace NuCache
 		{
 			return Path.Combine(
 				_settings.CachePath, 
-				string.Format("{0}.{1}", name, version)
+				string.Format("{0}.{1}.nupkg", name, version)
 			);
 		}
 
@@ -27,7 +27,7 @@ namespace NuCache
 			return _fileSystem.FileExists(GetPackagePath(name, version));
 		}
 
-		public void Write(string name, string version, Stream contents)
+		public void Store(string name, string version, Stream contents)
 		{
 			var path = GetPackagePath(name, version);
 
@@ -37,6 +37,13 @@ namespace NuCache
 			}
 
 			_fileSystem.WriteFile(path, contents);
+		}
+
+		public Stream Get(string name, string version)
+		{
+			var path = GetPackagePath(name, version);
+
+			return _fileSystem.ReadFile(path);
 		}
 
 		public void Remove(string name, string version)
@@ -56,5 +63,6 @@ namespace NuCache
 				_fileSystem.DeleteFile(path);
 			}
 		}
+
 	}
 }
