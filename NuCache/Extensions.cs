@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace NuCache.Infrastructure
+namespace NuCache
 {
 	public static class Extensions
 	{

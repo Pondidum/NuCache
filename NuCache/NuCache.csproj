@@ -85,7 +85,7 @@
     <Compile Include="IFileSystem.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Extensions.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="IPackageCache.cs" />
     <Compile Include="IPackageSource.cs" />
     <Compile Include="Controllers\PackageController.cs" />
