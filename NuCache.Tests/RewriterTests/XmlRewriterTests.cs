@@ -87,5 +87,29 @@ namespace NuCache.Tests.RewriterTests
 			}
 
 		}
+
+		public void When_rewriting_the_feed_base_url_should_be_repointed()
+		{
+			var url = _result.Root
+				.Attributes()
+				.Where(a => a.Name.LocalName == "base")
+				.Select(a => new Uri(a.Value))
+				.First();
+
+			ValidateUri(url);
+		}
+
+		public void When_rewriting_the_feed_id_url_should_be_repointed()
+		{
+			var urls = _result.Root
+				.Elements("id")
+				.Select(a => new Uri(a.Value));
+
+			foreach (var url in urls)
+			{
+				ValidateUri(url);
+			}
+		}
+
 	}
 }

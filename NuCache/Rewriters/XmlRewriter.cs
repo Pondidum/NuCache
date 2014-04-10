@@ -19,27 +19,39 @@ namespace NuCache.Rewriters
 		public void Rewrite(Uri targetUri, Stream inputStream, Stream outputStream)
 		{
 			var doc = XDocument.Load(inputStream);
-			var ns = doc.Root.Name.Namespace;
+
+			var root = doc.Root;
+			var ns = root.Name.Namespace;
 
 			Func<String, Uri> transform = url => _uriRewriter.TransformHost(targetUri, new Uri(url));
 
-			var elements = doc.Root
+			root
+				.Elements(ns + "link")
+				.Where(e => e.Attribute("rel").Value == "next")
+				.Attributes("href")
+				.ForEach(a => a.SetValue(transform(a.Value)));
+
+			root
+				.Attributes()
+				.Where(a => a.Name.LocalName == "base")
+				.ForEach(a => a.SetValue(transform(a.Value)));
+
+			root
+				.Elements("id")
+				.ForEach(a => a.SetValue(transform(a.Value)));
+
+
+			var entries = root
 				.Elements(ns + "entry")
 				.ToList();
 
-			elements
+			entries
 				.Elements(ns + "content")
 				.Attributes("src")
 				.ForEach(a => a.SetValue(transform(a.Value)));
 
-			elements
+			entries
 				.Elements(ns + "id")
-				.ForEach(a => a.SetValue(transform(a.Value)));
-
-			doc.Root
-				.Elements(ns + "link")
-				.Where(e => e.Attribute("rel").Value == "next")
-				.Attributes("href")
 				.ForEach(a => a.SetValue(transform(a.Value)));
 
 			doc.Save(outputStream);
