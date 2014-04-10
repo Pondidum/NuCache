@@ -47,7 +47,7 @@ namespace NuCache.PackageSources
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> GetPackageByID(Uri request)
+		public async Task<HttpResponseMessage> GetPackageByID(Uri request, string packageID, string version)
 		{
 			return await HandleRequest(request);
 		}
