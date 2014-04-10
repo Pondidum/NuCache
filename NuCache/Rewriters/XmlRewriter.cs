@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using NuCache.Infrastructure;
 
 namespace NuCache.Rewriters
 {
@@ -16,7 +14,7 @@ namespace NuCache.Rewriters
 			_uriRewriter = uriRewriter;
 		}
 
-		public void Rewrite(Uri targetUri, Stream inputStream, Stream outputStream)
+		public virtual void Rewrite(Uri targetUri, Stream inputStream, Stream outputStream)
 		{
 			var doc = XDocument.Load(inputStream);
 
