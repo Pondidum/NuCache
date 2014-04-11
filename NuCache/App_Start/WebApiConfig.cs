@@ -56,6 +56,11 @@ namespace NuCache
 				defaults: new { controller = "Packages", action = "GetPackageByID", packageID = UrlParameter.Optional, version = UrlParameter.Optional}
 			);
 
+			config.Routes.MapHttpRoute(
+				name: "package-ids",
+				routeTemplate: "api/v2/package-ids",
+				defaults: new { controller = "Packages", action = "GetPackageIDs" }
+			);
 		}
 
 	}

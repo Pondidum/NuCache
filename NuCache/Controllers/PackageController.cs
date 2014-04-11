@@ -48,5 +48,11 @@ namespace NuCache.Controllers
 		{
 			return await _packageSource.GetPackageByID(Request.RequestUri, packageID, version);
 		}
+
+		[HttpGet]
+		public async Task<HttpResponseMessage> GetPackageIDs()
+		{
+			return await _packageSource.GetPackageIDs(Request.RequestUri);
+		}
 	}
 }

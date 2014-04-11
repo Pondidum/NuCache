@@ -73,6 +73,11 @@ namespace NuCache.PackageSources
 			return response;
 		}
 
+		public async Task<HttpResponseMessage> GetPackageIDs(Uri request)
+		{
+			return await HandleRequest(request);
+		}
+
 		private async Task<HttpResponseMessage> HandleRequest(Uri request)
 		{
 			var targetUri = _transformer.TransformHost(_settings.RemoteFeed, request);

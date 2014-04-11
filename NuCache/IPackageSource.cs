@@ -12,5 +12,6 @@ namespace NuCache
 		Task<HttpResponseMessage> Search(Uri request);
 		Task<HttpResponseMessage> FindPackagesByID(Uri request);
 		Task<HttpResponseMessage> GetPackageByID(Uri request, string packageID, string version);
+		Task<HttpResponseMessage> GetPackageIDs(Uri request);
 	}
 }
