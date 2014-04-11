@@ -15,8 +15,11 @@ namespace NuCache.ProxyBehaviour
 			{
 				//not certain why this gets missed by the web client on a download
 				var name = Path.GetFileName(response.RequestMessage.RequestUri.AbsolutePath);
-				headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = name };
 
+				if (headers.ContentDisposition == null)
+				{
+					headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = name };
+				}
 			}
 		}
 	}

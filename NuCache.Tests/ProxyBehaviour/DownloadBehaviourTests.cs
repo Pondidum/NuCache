@@ -62,5 +62,19 @@ namespace NuCache.Tests.ProxyBehaviour
 
 			response.Content.Headers.ContentDisposition.ShouldBeNull();
 		}
+
+		public void When_the_response_has_a_content_disposition_already()
+		{
+			var url = new Uri("http://example.com");
+			var response = BuildContent("text/plain");
+			response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("application")
+			{
+				FileName = "original.1.0.0.nupkg"
+			};
+
+			ExecuteFor(url, response);
+
+			response.Content.Headers.ContentDisposition.FileName.ShouldEqual("original.1.0.0.nupkg");
+		}
 	}
 }
