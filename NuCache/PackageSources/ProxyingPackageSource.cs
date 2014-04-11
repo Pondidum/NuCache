@@ -57,16 +57,10 @@ namespace NuCache.PackageSources
 
 			if (_cache.Contains(packageID, version))
 			{
-				response = new HttpResponseMessage(HttpStatusCode.OK);
-				response.Content = new PushStreamContent((stream, content, context) =>
-				{
-					using (var cacheStream = _cache.Get(packageID, version))
-					{
-						cacheStream.CopyTo(stream);
-						stream.Close();
-					}
-				});
-				response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+				var name = String.Format("{0}.{1}.nupkg", packageID, version);
+				var stream = _cache.Get(packageID, version);
+
+				response = _client.BuildDownloadResponse(request, stream, name);
 			}
 			else
 			{
