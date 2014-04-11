@@ -22,6 +22,11 @@ namespace NuCache
 			);
 		}
 
+		public void Initialise()
+		{
+			_fileSystem.CreateDirectory(_settings.CachePath);
+		}
+
 		public bool Contains(string name, string version)
 		{
 			return _fileSystem.FileExists(GetPackagePath(name, version));

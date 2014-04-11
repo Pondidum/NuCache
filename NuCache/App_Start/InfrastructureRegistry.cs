@@ -20,7 +20,7 @@ namespace NuCache.App_Start
 			
 				For<ProxyBehaviourSet>().Use(x => new ProxyBehaviourSet(x.GetAllInstances<IProxyBehaviour>()));
 				For<IPackageSource>().Use<ProxyingPackageSource>();
-				For<IPackageCache>().Use<FileSystemPackageCache>();
+				For<IPackageCache>().Use<FileSystemPackageCache>().OnCreation(c => c.Initialise()).Singleton();
 			});
 		}
 	}

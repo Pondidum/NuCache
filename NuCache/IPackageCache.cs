@@ -5,6 +5,8 @@ namespace NuCache
 {
 	public interface IPackageCache
 	{
+		void Initialise();
+
 		bool Contains(string name, string version);
 		void Store(string name, string version, Stream contents);
 		Stream Get(string name, string version);
