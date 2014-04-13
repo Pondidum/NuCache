@@ -10,3 +10,4 @@ _ReSharper.*
 *.DotSettings
 *.DotSettings.user
 packages
+PackageCache/
