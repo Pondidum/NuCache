@@ -42,6 +42,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Spark">
+      <HintPath>..\packages\Spark.1.7.5.3\lib\NET45\Spark.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.3.0.0.108\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -80,6 +83,7 @@
     <Compile Include="App_Start\StructureMapDependencyResolver.cs" />
     <Compile Include="App_Start\StructureMapDependencyScope.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Infrastructure\FileSystem.cs" />
     <Compile Include="FileSystemPackageCache.cs" />
     <Compile Include="Infrastructure\IFileSystem.cs">
@@ -89,6 +93,7 @@
     <Compile Include="IPackageCache.cs" />
     <Compile Include="IPackageSource.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="PackageSources\ProxyingPackageSource.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -112,7 +117,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Views\Home.spark" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

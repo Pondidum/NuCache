@@ -1,0 +1,7 @@
+﻿<viewdata model="NuCache.Models.HomeViewModel" />
+<html>
+	<head></head>
+	<body>
+		<h1>Hello !{Model.Name}</h1>
+	</body>
+</html>
