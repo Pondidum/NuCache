@@ -1,5 +1,7 @@
 ﻿using System;
+using NuCache.Controllers;
 using NuCache.Infrastructure;
+using NuCache.Infrastructure.Spark;
 using NuCache.PackageSources;
 using NuCache.ProxyBehaviour;
 using NuCache.Rewriters;
@@ -21,6 +23,9 @@ namespace NuCache.App_Start
 				For<ProxyBehaviourSet>().Use(x => new ProxyBehaviourSet(x.GetAllInstances<IProxyBehaviour>()));
 				For<IPackageSource>().Use<ProxyingPackageSource>();
 				For<IPackageCache>().Use<FileSystemPackageCache>().OnCreation(c => c.Initialise()).Singleton();
+
+
+				For<SparkEngine>().Use<SparkEngine>().Singleton();
 			});
 		}
 	}
