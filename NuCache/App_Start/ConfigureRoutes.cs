@@ -1,25 +1,13 @@
 ﻿using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using NuCache.App_Start;
-using StructureMap;
-using StructureMap.Graph;
 
 namespace NuCache
 {
-	public static class WebApiConfig
+	public static class ConfigureRoutes
 	{
 		public static void Register(HttpConfiguration config)
 		{
-			var container = new Container(c =>
-				c.Scan(a =>
-				{
-					a.TheCallingAssembly();
-					a.LookForRegistries();
-				}));
-
-			config.DependencyResolver = new StructureMapDependencyResolver(container);
-
 			config.Routes.MapHttpRoute(
 				name: "Root",
 				routeTemplate: "api/v2/",
