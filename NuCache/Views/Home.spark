@@ -6,5 +6,16 @@
     <ul if="Model.Routes.Any()">
       <li each="var r in Model.Routes">${r.RouteTemplate}</li>
     </ul>
+
+    <h1>Package Cache Statistics:</h1>
+
+    <ul>
+      <li>Total Cached Packages: !{Model.Packages.Count()}</li>
+      <li>
+        <ul if="Model.Packages.Any()">
+          <li each="var p in Model.Packages">${p.Name}, Version ${p.Version}</li>
+        </ul>
+      </li>
+    </ul>
   </body>
 </html>
