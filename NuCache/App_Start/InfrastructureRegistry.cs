@@ -9,17 +9,8 @@ namespace NuCache.App_Start
 	{
 		public InfrastructureRegistry()
 		{
-			Scan(a =>
-			{
-				a.TheCallingAssembly();
-				a.WithDefaultConventions();
-				a.AddAllTypesOf<IProxyBehaviour>();
-			
-				For<ProxyBehaviourSet>().Use(x => new ProxyBehaviourSet(x.GetAllInstances<IProxyBehaviour>()));
-				For<IPackageSource>().Use<ProxyingPackageSource>();
-				For<IPackageCache>().Use<FileSystemPackageCache>().OnCreation(c => c.Initialise()).Singleton();
-
-			});
+			For<IPackageSource>().Use<ProxyingPackageSource>();
+			For<IPackageCache>().Use<FileSystemPackageCache>().OnCreation(c => c.Initialise()).Singleton();
 		}
 	}
 }
