@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.Web.Http.Routing;
 
 namespace NuCache.Models
 {
 	public class HomeViewModel
 	{
-		public string Name { get; set; }
+		public List<IHttpRoute> Routes { get; set; }
+
+		public HomeViewModel()
+		{
+			Routes = new List<IHttpRoute>();
+		}
 	}
 }

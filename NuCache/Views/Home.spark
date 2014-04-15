@@ -1,7 +1,10 @@
 ﻿<viewdata model="NuCache.Models.HomeViewModel" />
 <html>
-	<head></head>
-	<body>
-		<h1>Hello !{Model.Name}</h1>
-	</body>
+  <head></head>
+  <body>
+    <h1>Available Endpoints:</h1>
+    <ul if="Model.Routes.Any()">
+      <li each="var r in Model.Routes">${r.RouteTemplate}</li>
+    </ul>
+  </body>
 </html>
