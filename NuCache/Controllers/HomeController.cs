@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using NuCache.Infrastructure.Spark;
@@ -22,7 +23,12 @@ namespace NuCache.Controllers
 		{
 			var model = new HomeViewModel();
 
+			var builder = new UriBuilder(Request.RequestUri);
+			builder.Path = "api/v2";
+
 			model.Packages.AddRange(_packageCache.GetAllPackages().ToList());
+			model.ApiUrl = builder.Uri;
+
 
 			// HttpRouteCollection throws exceptions if you call .ToList() or .ToArray() etc
 			// ReSharper disable once LoopCanBeConvertedToQuery

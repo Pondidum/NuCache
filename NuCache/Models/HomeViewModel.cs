@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http.Routing;
 
 namespace NuCache.Models
@@ -7,6 +8,7 @@ namespace NuCache.Models
 	{
 		public List<IHttpRoute> Routes { get; private set; }
 		public List<PackageID> Packages { get; private set; }
+		public Uri ApiUrl { get; set; }
 
 		public HomeViewModel()
 		{
