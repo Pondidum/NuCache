@@ -76,6 +76,7 @@
     <Reference Include="System.Web.Providers">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
@@ -85,6 +86,8 @@
     <Compile Include="App_Start\StructureMapDependencyScope.cs" />
     <Compile Include="App_Start\ConfigureRoutes.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Infrastructure\NuGet\Manifest.cs" />
+    <Compile Include="Infrastructure\NuGet\Package.cs" />
     <Compile Include="Infrastructure\Spark\ISettableModel.cs" />
     <Compile Include="Infrastructure\Spark\NuCacheView.cs" />
     <Compile Include="Infrastructure\Spark\SparkEngine.cs" />
@@ -100,7 +103,7 @@
     <Compile Include="IPackageSource.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
-    <Compile Include="PackageID.cs" />
+    <Compile Include="Infrastructure\NuGet\PackageID.cs" />
     <Compile Include="PackageSources\ProxyingPackageSource.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
