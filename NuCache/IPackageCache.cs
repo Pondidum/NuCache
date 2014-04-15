@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace NuCache
 {
@@ -7,10 +6,11 @@ namespace NuCache
 	{
 		void Initialise();
 
-		bool Contains(string name, string version);
-		void Store(string name, string version, Stream contents);
-		Stream Get(string name, string version);
-		void Remove(string name, string version);
+		bool Contains(PackageID packageID);
+		void Store(PackageID packageID, Stream contents);
+		Stream Get(PackageID packageID);
+		void Remove(PackageID packageID);
 		void RemoveAll();
+
 	}
 }

@@ -14,12 +14,9 @@ namespace NuCache
 			_settings = settings;
 		}
 
-		private string GetPackagePath(string name, string version)
+		private string GetPackagePath(PackageID packageID)
 		{
-			return Path.Combine(
-				_settings.CachePath, 
-				string.Format("{0}.{1}.nupkg", name, version)
-			);
+			return Path.Combine(_settings.CachePath, packageID.GetFileName());
 		}
 
 		public void Initialise()
@@ -27,14 +24,14 @@ namespace NuCache
 			_fileSystem.CreateDirectory(_settings.CachePath);
 		}
 
-		public bool Contains(string name, string version)
+		public bool Contains(PackageID packageID)
 		{
-			return _fileSystem.FileExists(GetPackagePath(name, version));
+			return _fileSystem.FileExists(GetPackagePath(packageID));
 		}
 
-		public void Store(string name, string version, Stream contents)
+		public void Store(PackageID packageID, Stream contents)
 		{
-			var path = GetPackagePath(name, version);
+			var path = GetPackagePath(packageID);
 
 			if (_fileSystem.FileExists(path))
 			{
@@ -44,16 +41,16 @@ namespace NuCache
 			_fileSystem.WriteFile(path, contents);
 		}
 
-		public Stream Get(string name, string version)
+		public Stream Get(PackageID packageID)
 		{
-			var path = GetPackagePath(name, version);
+			var path = GetPackagePath(packageID);
 
 			return _fileSystem.ReadFile(path);
 		}
 
-		public void Remove(string name, string version)
+		public void Remove(PackageID packageID)
 		{
-			var path = GetPackagePath(name, version);
+			var path = GetPackagePath(packageID);
 
 			if (_fileSystem.FileExists(path))
 			{

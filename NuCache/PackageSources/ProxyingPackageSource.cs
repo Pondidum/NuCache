@@ -51,21 +51,22 @@ namespace NuCache.PackageSources
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> GetPackageByID(Uri request, string packageID, string version)
+		public async Task<HttpResponseMessage> GetPackageByID(Uri request, string name, string version)
 		{
 			HttpResponseMessage response;
 
-			if (_cache.Contains(packageID, version))
-			{
-				var name = String.Format("{0}.{1}.nupkg", packageID, version);
-				var stream = _cache.Get(packageID, version);
+			var packageID = new PackageID(name, version);
 
-				response = _client.BuildDownloadResponse(request, stream, name);
+			if (_cache.Contains(packageID))
+			{
+				var stream = _cache.Get(packageID);
+
+				response = _client.BuildDownloadResponse(request, stream, packageID.GetFileName());
 			}
 			else
 			{
 				response = await HandleRequest(request);
-				_cache.Store(packageID, version, await response.Content.ReadAsStreamAsync());	
+				_cache.Store(packageID, await response.Content.ReadAsStreamAsync());	
 			}
 
 			_behaviours.Execute(request, response);

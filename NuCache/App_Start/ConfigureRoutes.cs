@@ -40,8 +40,8 @@ namespace NuCache
 
 			config.Routes.MapHttpRoute(
 				name: "Download",
-				routeTemplate: "api/v2/package/{packageID}/{version}",
-				defaults: new { controller = "Packages", action = "GetPackageByID", packageID = UrlParameter.Optional, version = UrlParameter.Optional}
+				routeTemplate: "api/v2/package/{name}/{version}",
+				defaults: new { controller = "Packages", action = "GetPackageByID", name = UrlParameter.Optional, version = UrlParameter.Optional}
 			);
 
 			config.Routes.MapHttpRoute(
