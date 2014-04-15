@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace NuCache
 {
@@ -12,5 +13,6 @@ namespace NuCache
 		void Remove(PackageID packageID);
 		void RemoveAll();
 
+		IEnumerable<PackageID> GetAllPackages();
 	}
 }

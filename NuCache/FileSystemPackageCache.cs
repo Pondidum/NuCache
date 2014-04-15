@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using NuCache.Infrastructure;
+using NuCache.Infrastructure.NuGet;
 
 namespace NuCache
 {
@@ -66,5 +68,21 @@ namespace NuCache
 			}
 		}
 
+		public IEnumerable<PackageID> GetAllPackages()
+		{
+			var packages = new List<PackageID>();
+
+			foreach (var path in _fileSystem.ListDirectory(_settings.CachePath))
+			{
+				using (var stream = _fileSystem.ReadFile(path))
+				{
+					var package = new Package(stream);
+
+					packages.Add(package.Metadata.ID);
+				}
+			}
+
+			return packages;
+		}
 	}
 }
