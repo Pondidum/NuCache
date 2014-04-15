@@ -1,21 +1,72 @@
 ﻿<viewdata model="NuCache.Models.HomeViewModel" />
 <html>
-  <head></head>
+  <head>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/sticky-footer-navbar.css" rel="stylesheet" />
+  
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+  </head>
   <body>
-    <h1>Available Endpoints:</h1>
-    <ul if="Model.Routes.Any()">
-      <li each="var r in Model.Routes">${r.RouteTemplate}</li>
-    </ul>
 
-    <h1>Package Cache Statistics:</h1>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">NuCache</a>
+        </div>
+      </div>
+    </div>
 
-    <ul>
-      <li>Total Cached Packages: !{Model.Packages.Count()}</li>
-      <li>
-        <ul if="Model.Packages.Any()">
-          <li each="var p in Model.Packages">${p.Name}, Version ${p.Version}</li>
-        </ul>
-      </li>
-    </ul>
+    <div class="jumbotron">
+      <div class="container">
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+
+        <div class="col-md-4">
+          <h2>Available Endpoints</h2>
+          <ul if="Model.Routes.Any()">
+            <li each="var r in Model.Routes">${r.RouteTemplate}</li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Packages Cached</h2>
+          <p>!{Model.Packages.Count()} Packages in the cache.</p>
+          <ul if="Model.Packages.Any()">
+            <li each="var p in Model.Packages.Take(5)">${p.Name}, Version ${p.Version}</li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Available Actions</h2>
+          <p>
+            <a class="btn btn-default" href="#" role="button">Clear Cache</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <!-- /container -->
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">
+          Written by Andy Dote.  <a href="https://github.com/pondidum/nucache">Github Project</a>
+        </p>
+      </div>
+    </div>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
   </body>
 </html>
