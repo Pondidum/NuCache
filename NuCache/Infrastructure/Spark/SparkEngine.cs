@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Spark;
 
 namespace NuCache.Infrastructure.Spark
@@ -16,6 +17,7 @@ namespace NuCache.Infrastructure.Spark
 			var settings = new SparkSettings();
 			settings.AddNamespace("System.Linq");
 			settings.PageBaseType = typeof(NuCacheView).FullName;
+
 
 			_engine = new SparkViewEngine(settings);
 		}
@@ -40,6 +42,7 @@ namespace NuCache.Infrastructure.Spark
 
 			var descriptor = new SparkViewDescriptor();
 			descriptor.AddTemplate(viewName);
+			descriptor.AddTemplate(Path.Combine("Shared", "Application.spark"));
 
 			var entry = _engine.CreateEntry(descriptor);
 			var instance = (ISettableModel)entry.CreateInstance();
