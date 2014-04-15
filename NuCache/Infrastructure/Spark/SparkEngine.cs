@@ -12,10 +12,12 @@ namespace NuCache.Infrastructure.Spark
 		public SparkEngine()
 		{
 			_viewCache = new Dictionary<Type, ISettableModel>();
-			_engine = new SparkViewEngine();
 
-			_engine.DefaultPageBaseType = typeof(NuCacheView).FullName;
+			var settings = new SparkSettings();
+			settings.AddNamespace("System.Linq");
+			settings.PageBaseType = typeof(NuCacheView).FullName;
 
+			_engine = new SparkViewEngine(settings);
 		}
 
 		public SparkViewBase CreateView<TModel>(TModel model) where TModel : class
