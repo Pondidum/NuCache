@@ -147,7 +147,7 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Shared\Application.spark" />
-    <None Include="Views\Home.spark" />
+    <Content Include="Views\Home.spark" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
