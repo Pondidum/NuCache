@@ -30,9 +30,9 @@ namespace NuCache.Infrastructure.Spark
 			content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
 
 			return new HttpResponseMessage(HttpStatusCode.OK)
-			       {
-				       Content = content
-			       };
+			{
+				Content = content
+			};
 		}
 
 	}
