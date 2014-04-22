@@ -15,6 +15,7 @@ namespace NuCache
 
 			ConfigureContainer.Register(GlobalConfiguration.Configuration);
 			ConfigureRoutes.Register(GlobalConfiguration.Configuration);
+			ConfigureErrorHandling.Register(GlobalConfiguration.Configuration);
 		}
 	}
 }
