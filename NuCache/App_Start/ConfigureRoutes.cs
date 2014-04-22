@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Routing;
 using System.Web.Mvc;
 
 namespace NuCache
@@ -55,6 +57,13 @@ namespace NuCache
 				routeTemplate: "",
 				defaults: new {controller = "Home", action = "GetIndex"}
 			);
+
+			config.Routes.MapHttpRoute(
+				name: "Error404",
+				routeTemplate: "{*url}",
+				defaults: new { controller = "Error", action = "Handle404" }
+			);
+
 		}
 
 	}
