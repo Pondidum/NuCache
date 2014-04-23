@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace NuCache
 {
@@ -11,8 +10,6 @@ namespace NuCache
 	{
 		protected void Application_Start()
 		{
-			AreaRegistration.RegisterAllAreas();
-
 			ConfigureContainer.Register(GlobalConfiguration.Configuration);
 			ConfigureRoutes.Register(GlobalConfiguration.Configuration);
 			ConfigureErrorHandling.Register(GlobalConfiguration.Configuration);
