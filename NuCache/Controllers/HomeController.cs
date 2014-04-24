@@ -18,8 +18,7 @@ namespace NuCache.Controllers
 			_packageCache = packageCache;
 		}
 
-		[HttpGet]
-		public HttpResponseMessage GetIndex()
+		public HttpResponseMessage Get()
 		{
 			var model = new HomeViewModel();
 

@@ -52,7 +52,7 @@ namespace NuCache
 			config.Routes.MapHttpRoute(
 				name: "Home",
 				routeTemplate: "",
-				defaults: new {controller = "Home", action = "GetIndex"}
+				defaults: new {controller = "Home"}
 			);
 
 			config.Routes.MapHttpRoute(
