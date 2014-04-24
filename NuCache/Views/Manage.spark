@@ -1,0 +1,13 @@
+﻿<viewdata model="NuCache.Models.ManageViewModel" />
+
+<div class="row">
+
+  <div class="container-fluid">
+    <h2>Packages</h2>
+    <div class="row package">
+      <div class="col-md-8">Package Name</div>
+      <div class="col-md-4">Actions</div>
+    </div>
+  </div>
+</div>
+
