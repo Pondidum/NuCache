@@ -2,24 +2,10 @@
 
 <div class="row">
 
-  <div class="col-md-4">
-    <div class="panel panel-default">
+  <div class="col-md-8">
+    <div class="panel panel-default segment">
       <div class="panel-heading">
-        <h2 class="panel-title">Available Endpoints</h2>
-      </div>
-      <div class="panel-body">
-        <ul if="Model.Routes.Any()">
-          <li each="var r in Model.Routes">${r.RouteTemplate}</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2 class="panel-title">Packages Cached</h2>
+        Packages Cached<a class="pull-right" href="#">Manage</a>
       </div>
       <div class="panel-body">
         <p>!{Model.Packages.Count()} Packages in the cache.</p>
@@ -31,13 +17,13 @@
   </div>
 
   <div class="col-md-4">
-    <div class="panel panel-default">
+    <div class="panel panel-default segment">
       <div class="panel-heading">
-        <h2 class="panel-title">Available Actions</h2>
+        Information
       </div>
       <div class="panel-body">
         <p>
-          <a class="btn btn-default" href="#" role="button">Clear Cache</a>
+          Api Url: <a href="!{Model.ApiUrl}">!{Model.ApiUrl}</a>
         </p>
       </div>
     </div>
