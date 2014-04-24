@@ -9,15 +9,23 @@ namespace NuCache.Controllers
 	public class ManageController : ApiController
 	{
 		private readonly SparkResponseFactory _responseFactory;
+		private readonly IPackageCache _packageCache;
 
-		public ManageController(SparkResponseFactory responseFactory)
+		public ManageController(SparkResponseFactory responseFactory, IPackageCache packageCache)
 		{
 			_responseFactory = responseFactory;
+			_packageCache = packageCache;
 		}
 
 		public HttpResponseMessage GetIndex()
 		{
-			return _responseFactory.From(new ManageViewModel());
+			var model = new ManageViewModel
+			{
+				Packages = _packageCache.GetAllPackages()
+			};
+
+			return _responseFactory.From(model);
+
 		}
 	}
 }

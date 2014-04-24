@@ -1,13 +1,26 @@
 ﻿<viewdata model="NuCache.Models.ManageViewModel" />
 
 <div class="row">
-
-  <div class="container-fluid">
-    <h2>Packages</h2>
-    <div class="row package">
-      <div class="col-md-8">Package Name</div>
-      <div class="col-md-4">Actions</div>
-    </div>
-  </div>
+  
+  <h2>Cache Contents</h2>
+  
+  <table class="table table-condensed">
+    <thead class="package">
+      <tr>
+        <th>Name</th>
+        <th>Version</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody if="Model.Packages.Any()">
+      <tr each="var p in Model.Packages">
+        <td>${p.Name}</td>
+        <td>${p.Version}</td>
+        <td>
+          <a href="#">Remove</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
