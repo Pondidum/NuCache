@@ -56,6 +56,12 @@ namespace NuCache
 			);
 
 			config.Routes.MapHttpRoute(
+				name: "Standard",
+				routeTemplate: "{controller}/{id}",
+				defaults: new { id = UrlParameter.Optional }
+			);
+
+			config.Routes.MapHttpRoute(
 				name: "Error404",
 				routeTemplate: "{*url}",
 				defaults: new { controller = "Error", action = "Handle404" }
