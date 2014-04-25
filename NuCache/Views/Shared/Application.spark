@@ -1,11 +1,11 @@
 ﻿<html>
   <head>
 
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Content/sticky-footer-navbar.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/sticky-footer-navbar.css" rel="stylesheet" />
 
-    <link href="/Content/bootstrap-theme.css" rel="stylesheet" />
-  <link href="/Content/custom.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="/Content/css/custom.css" rel="stylesheet" />
   </head>
   <body>
 
