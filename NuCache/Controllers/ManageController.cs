@@ -27,5 +27,15 @@ namespace NuCache.Controllers
 			return _responseFactory.From(model);
 
 		}
+
+		public HttpResponseMessage DeletePacakge(string name, string version)
+		{
+			_packageCache.Remove(new PackageID(name, version));
+
+			return new HttpResponseMessage(HttpStatusCode.OK)
+			{
+				Content = new StringContent(string.Format("Deleted {0}, v{1}", name, version))
+			};
+		}
 	}
 }

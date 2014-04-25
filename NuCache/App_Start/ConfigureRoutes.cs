@@ -57,8 +57,8 @@ namespace NuCache
 
 			config.Routes.MapHttpRoute(
 				name: "Standard",
-				routeTemplate: "{controller}/{id}",
-				defaults: new { id = UrlParameter.Optional }
+				routeTemplate: "{controller}/{name}/{version}",
+				defaults: new { name = UrlParameter.Optional, version = UrlParameter.Optional }
 			);
 
 			config.Routes.MapHttpRoute(
