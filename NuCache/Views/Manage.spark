@@ -14,13 +14,36 @@
     </thead>
     <tbody if="Model.Packages.Any()">
       <tr each="var p in Model.Packages">
-        <td>${p.Name}</td>
-        <td>${p.Version}</td>
+        <td class="packageName">${p.Name}</td>
+        <td class="packageVersion">${p.Version}</td>
         <td>
-          <a href="#">Remove</a>
+          <a class="removePackage" href="#">Remove</a>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
+<content:scripts>
+<script>
+  $(document).ready(function(){
+    $("a.removePackage").click(function(e) {
+      e.preventDefault();
+      var col = $(this).parent();
+      var name = col.siblings(".packageName").html();
+      var version = col.siblings(".packageVersion").html();
+      
+      $.ajax({
+        url: '/manage/' + name + '/' + version,
+        type: 'DELETE'
+      })
+      .done(function(result) {
+        col.parent().remove();
+      })
+      .fail(function(data, textStatus) {
+        alert(data.responseText);
+      });
+    });
+  });
+</script>
+</content:scripts> 
