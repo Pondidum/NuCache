@@ -1,33 +1,22 @@
 ﻿<viewdata model="NuCache.Models.HomeViewModel" />
 
-<div class="row">
 
-  <div class="col-md-8">
-    <div class="panel panel-default segment">
-      <div class="panel-heading">
-        Packages Cached<a class="pull-right" href="/Manage">Manage</a>
-      </div>
-      <div class="panel-body">
-        <p>!{Model.Packages.Count()} Packages in the cache.</p>
-        <ul if="Model.Packages.Any()">
-          <li each="var p in Model.Packages.Take(5)">${p.Name}, Version ${p.Version}</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="panel panel-default segment">
-      <div class="panel-heading">
-        Information
-      </div>
-      <div class="panel-body">
-        <p>
-          Api Url: <a href="!{Model.ApiUrl}">!{Model.ApiUrl}</a>
-        </p>
-      </div>
-    </div>
-  </div>
-
+<div class="panel-heading">
+    Packages Cached<a class="pull-right" href="/Manage">Manage</a>
+</div>
+<div class="panel-body">
+    <p>!{Model.Packages.Count()} Packages in the cache.</p>
+    <ul if="Model.Packages.Any()">
+        <li each="var p in Model.Packages.Take(5)">${p.Name}, Version ${p.Version}</li>
+    </ul>
 </div>
 
+<content:sidebox-heading>
+    Information
+</content:sidebox-heading>
+
+<content:sidebox-content>
+    <p>
+        Api Url: <a href="!{Model.ApiUrl}">!{Model.ApiUrl}</a>
+    </p>
+</content:sidebox-content>

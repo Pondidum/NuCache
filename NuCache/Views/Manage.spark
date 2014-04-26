@@ -1,28 +1,39 @@
 ﻿<viewdata model="NuCache.Models.ManageViewModel" />
 
-<div class="row">
-  
-  <h2>Cache Contents</h2>
-  
-  <table class="table table-condensed">
-    <thead class="package">
-      <tr>
-        <th>Name</th>
-        <th>Version</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody if="Model.Packages.Any()">
-      <tr each="var p in Model.Packages">
-        <td class="packageName">${p.Name}</td>
-        <td class="packageVersion">${p.Version}</td>
-        <td>
-          <a class="removePackage" href="#">Remove</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+<div class="panel-heading">
+    Cache Contents
 </div>
+<div class="panel-body">
+    <table class="table table-condensed">
+        <thead class="package">
+            <tr>
+                <th>Name</th>
+                <th>Version</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody if="Model.Packages.Any()">
+            <tr each="var p in Model.Packages">
+                <td class="packageName">${p.Name}</td>
+                <td class="packageVersion">${p.Version}</td>
+                <td>
+                    <a class="removePackage" href="#">Remove</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<content:sidebox-heading>
+    Other Actions
+</content:sidebox-heading>
+
+<content:sidebox-content>
+    <ul>
+        <li><a class="text-danger" href="#">Clear Entire Cache</a></li>
+    </ul>
+</content:sidebox-content>
 
 <content:scripts>
 <script>
