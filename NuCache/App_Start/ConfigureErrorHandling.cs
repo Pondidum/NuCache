@@ -7,6 +7,7 @@ namespace NuCache
 	{
 		public static void Register(HttpConfiguration config)
 		{
+			config.MessageHandlers.Add(new LoggingMessageHandler());
 			config.Filters.Add(new ElmahErrorHandler());
 		}
 	}
