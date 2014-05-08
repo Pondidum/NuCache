@@ -6,7 +6,11 @@ namespace NuCache.Infrastructure.Spark
 	{
 		public SparkRegistry()
 		{
-			For<SparkEngine>().Use<SparkEngine>().Singleton();
+#if DEBUG
+			For<ISparkEngine>().Use<SparkEngine>().Singleton();
+#else
+			For<ISparkEngine>().Use(() => new CachingSparkEngine(new SparkEngine())).Singleton();
+#endif
 		}
 	}
 }

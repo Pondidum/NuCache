@@ -7,9 +7,9 @@ namespace NuCache.Infrastructure.Spark
 {
 	public class SparkResponseFactory
 	{
-		private readonly SparkEngine _engine;
+		private readonly ISparkEngine _engine;
 
-		public SparkResponseFactory(SparkEngine engine)
+		public SparkResponseFactory(ISparkEngine engine)
 		{
 			_engine = engine;
 		}

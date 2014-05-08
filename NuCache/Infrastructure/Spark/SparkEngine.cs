@@ -1,23 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Spark;
 
 namespace NuCache.Infrastructure.Spark
 {
-	public class SparkEngine
+	public class SparkEngine : ISparkEngine
 	{
 		private readonly SparkViewEngine _engine;
-		private readonly Dictionary<Type, ISettableModel> _viewCache;
 
 		public SparkEngine()
 		{
-			_viewCache = new Dictionary<Type, ISettableModel>();
-
 			var settings = new SparkSettings();
 			settings.AddNamespace("System.Linq");
 			settings.PageBaseType = typeof(NuCacheView).FullName;
-
 
 			_engine = new SparkViewEngine(settings);
 		}
@@ -32,11 +27,6 @@ namespace NuCache.Infrastructure.Spark
 
 		private ISettableModel GetView(Type modelType)
 		{
-			if (_viewCache.ContainsKey(modelType))
-			{
-				return _viewCache[modelType];
-			}
-
 			var modelName = modelType.Name;
 			var viewName = String.Format("{0}.spark", modelName.Replace("ViewModel", ""));
 
@@ -45,11 +35,8 @@ namespace NuCache.Infrastructure.Spark
 			descriptor.AddTemplate(Path.Combine("Shared", "Application.spark"));
 
 			var entry = _engine.CreateEntry(descriptor);
-			var instance = (ISettableModel)entry.CreateInstance();
 
-			_viewCache[modelType] = instance;
-
-			return instance;
+			return (ISettableModel)entry.CreateInstance();
 		}
 	}
 }
