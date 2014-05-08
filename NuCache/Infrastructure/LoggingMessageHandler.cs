@@ -1,7 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,6 +7,13 @@ namespace NuCache.Infrastructure
 {
 	public class LoggingMessageHandler : DelegatingHandler
 	{
+		private readonly IRequestLogger _logger;
+
+		public LoggingMessageHandler(IRequestLogger logger)
+		{
+			_logger = logger;
+		}
+
 		protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
 			var sw = new Stopwatch();
@@ -18,15 +23,9 @@ namespace NuCache.Infrastructure
 
 			sw.Stop();
 
-			Log(request, response, sw.Elapsed);
+			_logger.Log(request, response, sw.Elapsed);
 
 			return response;
 		}
-
-		protected virtual void Log(HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed)
-		{
-			Debug.WriteLine("{0} {1} ({2} ms)", request.Method, request.RequestUri, elapsed.TotalMilliseconds);
-		}
-
 	}
 }
