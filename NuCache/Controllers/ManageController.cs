@@ -28,7 +28,7 @@ namespace NuCache.Controllers
 
 		}
 
-		public HttpResponseMessage DeletePacakge(string name, string version)
+		public HttpResponseMessage DeletePackage(string name, string version)
 		{
 			_packageCache.Remove(new PackageID(name, version));
 
