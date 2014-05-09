@@ -37,5 +37,12 @@ namespace NuCache.Controllers
 				Content = new StringContent(string.Format("Deleted {0}, v{1}", name, version))
 			};
 		}
+
+		[AcceptVerbs("CLEAR")] // I dont really like this
+		public HttpResponseMessage DeleteAllPackages()
+		{
+			_packageCache.RemoveAll();
+			return new HttpResponseMessage(HttpStatusCode.OK);
+		}
 	}
 }

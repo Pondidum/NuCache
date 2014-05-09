@@ -31,7 +31,7 @@
 
 <content:sidebox-content>
     <ul>
-        <li><a class="text-danger" href="#">Clear Entire Cache</a></li>
+        <li><a id="clearCache" class="text-danger" href="#">Clear Entire Cache</a></li>
     </ul>
 </content:sidebox-content>
 
@@ -54,6 +54,18 @@
       .fail(function(data, textStatus) {
         alert(data.responseText);
       });
+    });
+
+    $("a#clearCache").click(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '/manage/DeleteAllPackages',
+            type: 'CLEAR'
+        })
+        .done(function (result) {
+
+        });
     });
   });
 </script>
