@@ -14,12 +14,14 @@ namespace NuCache.Tests.ProxyBehaviour
 	public class XmlRewriteBehaviourTests
 	{
 
-		private static void ExecuteFor(Uri request, HttpResponseMessage response)
+		private static void ExecuteFor(Uri requestUrl, HttpResponseMessage response)
 		{
 			var container = new Container(new RewriterRegistry());
 
 			var transformer = container.GetInstance<XmlRewriter>();
 			var action = new XmlRewriteBehaviour(transformer);
+
+			var request = requestUrl.AsRequest();
 
 			action.Execute(request, response);
 		}

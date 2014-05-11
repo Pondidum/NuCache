@@ -16,43 +16,43 @@ namespace NuCache.Controllers
 		[HttpGet]
 		public async Task<HttpResponseMessage> Get()
 		{
-			return await _packageSource.Get(Request.RequestUri);
+			return await _packageSource.Get(Request);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Metadata()
 		{
-			return await _packageSource.Metadata(Request.RequestUri);
+			return await _packageSource.Metadata(Request);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> List()
 		{
-			return await _packageSource.List(Request.RequestUri);
+			return await _packageSource.List(Request);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> Search()
 		{
-			return await _packageSource.Search(Request.RequestUri);
+			return await _packageSource.Search(Request);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> FindPackagesByID()
 		{
-			return await _packageSource.FindPackagesByID(Request.RequestUri);
+			return await _packageSource.FindPackagesByID(Request);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> GetPackageByID(string name, string version)
 		{
-			return await _packageSource.GetPackageByID(Request.RequestUri, name, version);
+			return await _packageSource.GetPackageByID(Request, name, version);
 		}
 
 		[HttpGet]
 		public async Task<HttpResponseMessage> GetPackageIDs()
 		{
-			return await _packageSource.GetPackageIDs(Request.RequestUri);
+			return await _packageSource.GetPackageIDs(Request);
 		}
 	}
 }

@@ -5,6 +5,6 @@ namespace NuCache.ProxyBehaviour
 {
 	public interface IProxyBehaviour
 	{
-		void Execute(Uri request, HttpResponseMessage response);
+		void Execute(HttpRequestMessage request, HttpResponseMessage response);
 	}
 }

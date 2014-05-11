@@ -14,8 +14,9 @@ namespace NuCache.Tests.ProxyBehaviour
 		public void When_there_are_no_behaviours()
 		{
 			var set = new ProxyBehaviourSet(Enumerable.Empty<IProxyBehaviour>());
+			var request = new Uri("http://example.com").AsRequest();
 
-			Assert.DoesNotThrow(() => set.Execute(new Uri("http://example.com"), new HttpResponseMessage()));
+			Assert.DoesNotThrow(() => set.Execute(request, new HttpResponseMessage()));
 		}
 
 		[Fact]
@@ -27,12 +28,12 @@ namespace NuCache.Tests.ProxyBehaviour
 			var set = new ProxyBehaviourSet(new[] { b1, b2 });
 
 			var message = Substitute.For<HttpResponseMessage>();
-			var url = new Uri("http://example.com");
+			var request = new Uri("http://example.com").AsRequest();
 
-			set.Execute(url, message);
+			set.Execute(request, message);
 
-			b1.Received().Execute(url, message);
-			b2.Received().Execute(url, message);
+			b1.Received().Execute(request, message);
+			b2.Received().Execute(request, message);
 		}
 
 	}

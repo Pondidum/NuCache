@@ -14,7 +14,7 @@ namespace NuCache.ProxyBehaviour
 			_behaviours = behaviours.ToList();
 		}
 
-		public void Execute(Uri request, HttpResponseMessage response)
+		public void Execute(HttpRequestMessage request, HttpResponseMessage response)
 		{
 			_behaviours.ForEach(b => b.Execute(request, response));
 		}

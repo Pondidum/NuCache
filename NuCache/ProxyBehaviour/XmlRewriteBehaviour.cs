@@ -14,7 +14,7 @@ namespace NuCache.ProxyBehaviour
 			_xmlRewriter = xmlRewriter;
 		}
 
-		public async void Execute(Uri request, HttpResponseMessage response)
+		public async void Execute(HttpRequestMessage request, HttpResponseMessage response)
 		{
 			if (response.Content.Headers.ContentType.MediaType == "application/atom+xml")
 			{
@@ -22,12 +22,12 @@ namespace NuCache.ProxyBehaviour
 			}
 		}
 
-		private async Task<HttpContent> TransformContent(Uri request, HttpContent inputContent)
+		private async Task<HttpContent> TransformContent(HttpRequestMessage request, HttpContent inputContent)
 		{
 			var inputStream = await inputContent.ReadAsStreamAsync();
 			var pushContent = new PushStreamContent((outputStream, content, context) =>
 			{
-				_xmlRewriter.Rewrite(request, inputStream, outputStream);
+				_xmlRewriter.Rewrite(request.RequestUri, inputStream, outputStream);
 				outputStream.Close();
 				inputStream.Close();
 			});

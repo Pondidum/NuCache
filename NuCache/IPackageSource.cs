@@ -6,12 +6,12 @@ namespace NuCache
 {
 	public interface IPackageSource
 	{
-		Task<HttpResponseMessage> Get(Uri request);
-		Task<HttpResponseMessage> Metadata(Uri request);
-		Task<HttpResponseMessage> List(Uri request);
-		Task<HttpResponseMessage> Search(Uri request);
-		Task<HttpResponseMessage> FindPackagesByID(Uri request);
-		Task<HttpResponseMessage> GetPackageByID(Uri request, string name, string version);
-		Task<HttpResponseMessage> GetPackageIDs(Uri request);
+		Task<HttpResponseMessage> Get(HttpRequestMessage request);
+		Task<HttpResponseMessage> Metadata(HttpRequestMessage request);
+		Task<HttpResponseMessage> List(HttpRequestMessage request);
+		Task<HttpResponseMessage> Search(HttpRequestMessage request);
+		Task<HttpResponseMessage> FindPackagesByID(HttpRequestMessage request);
+		Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request, string name, string version);
+		Task<HttpResponseMessage> GetPackageIDs(HttpRequestMessage request);
 	}
 }

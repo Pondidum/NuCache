@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 using NSubstitute;
 using NuCache.Infrastructure;
 using NuCache.PackageSources;
@@ -11,7 +12,7 @@ namespace NuCache.Tests.PackageSources
 {
 	public class ProxyingPackageSourceTests
 	{
-		private void Test(Action<ProxyingPackageSource, Uri> method)
+		private void Test(Action<ProxyingPackageSource, HttpRequestMessage> method)
 		{
 			var settings = Substitute.For<ApplicationSettings>();
 			var client = Substitute.For<WebClient>();
@@ -23,7 +24,7 @@ namespace NuCache.Tests.PackageSources
 
 			var source = new ProxyingPackageSource(settings, client, behaviours, cache, transformer);
 
-			method(source, new Uri("http://example.com/api/v2"));
+			method(source, new Uri("http://example.com/api/v2").AsRequest());
 
 			client.Received().GetResponseAsync(new Uri("http://localhost.fiddler:42174/api/v2"));
 		}

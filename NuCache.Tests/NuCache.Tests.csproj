@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="Infrastructure\FileSystemTests\BaseFileSystemDirectoryTest.cs" />
     <Compile Include="Infrastructure\FileSystemTests\CreateDirectoryTests.cs" />
     <Compile Include="Infrastructure\FileSystemTests\DeleteDirectoryTests.cs" />

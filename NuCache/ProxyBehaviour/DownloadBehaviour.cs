@@ -7,7 +7,7 @@ namespace NuCache.ProxyBehaviour
 {
 	public class DownloadBehaviour : IProxyBehaviour
 	{
-		public void Execute(Uri request, HttpResponseMessage response)
+		public void Execute(HttpRequestMessage request, HttpResponseMessage response)
 		{
 			var headers = response.Content.Headers;
 

@@ -24,32 +24,32 @@ namespace NuCache.PackageSources
 			_transformer = transformer;
 		}
 
-		public async Task<HttpResponseMessage> Get(Uri request)
+		public async Task<HttpResponseMessage> Get(HttpRequestMessage request)
 		{
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> Metadata(Uri request)
+		public async Task<HttpResponseMessage> Metadata(HttpRequestMessage request)
 		{
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> List(Uri request)
+		public async Task<HttpResponseMessage> List(HttpRequestMessage request)
 		{
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> Search(Uri request)
+		public async Task<HttpResponseMessage> Search(HttpRequestMessage request)
 		{
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> FindPackagesByID(Uri request)
+		public async Task<HttpResponseMessage> FindPackagesByID(HttpRequestMessage request)
 		{
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> GetPackageByID(Uri request, string name, string version)
+		public async Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request, string name, string version)
 		{
 			HttpResponseMessage response;
 
@@ -59,7 +59,7 @@ namespace NuCache.PackageSources
 			{
 				var stream = _cache.Get(packageID);
 
-				response = _client.BuildDownloadResponse(request, stream, packageID.GetFileName());
+				response = _client.BuildDownloadResponse(request.RequestUri, stream, packageID.GetFileName());
 			}
 			else
 			{
@@ -72,14 +72,14 @@ namespace NuCache.PackageSources
 			return response;
 		}
 
-		public async Task<HttpResponseMessage> GetPackageIDs(Uri request)
+		public async Task<HttpResponseMessage> GetPackageIDs(HttpRequestMessage request)
 		{
 			return await HandleRequest(request);
 		}
 
-		private async Task<HttpResponseMessage> HandleRequest(Uri request)
+		private async Task<HttpResponseMessage> HandleRequest(HttpRequestMessage request)
 		{
-			var targetUri = _transformer.TransformHost(_settings.RemoteFeed, request);
+			var targetUri = _transformer.TransformHost(_settings.RemoteFeed, request.RequestUri);
 			var response = await _client.GetResponseAsync(targetUri);
 
 			_behaviours.Execute(request, response);

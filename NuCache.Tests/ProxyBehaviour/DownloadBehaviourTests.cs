@@ -15,7 +15,8 @@ namespace NuCache.Tests.ProxyBehaviour
 		private static void ExecuteFor(Uri request, HttpResponseMessage response)
 		{
 			var action = new DownloadBehaviour();
-			action.Execute(request, response);
+
+			action.Execute(request.AsRequest(), response);
 		}
 
 		private static HttpResponseMessage BuildContent(string contentType)
