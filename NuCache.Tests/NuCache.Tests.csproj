@@ -68,6 +68,7 @@
     <Compile Include="Infrastructure\FileSystemTests\ListDirectoryTests.cs" />
     <Compile Include="Infrastructure\FileSystemTests\ReadFileTests.cs" />
     <Compile Include="Infrastructure\FileSystemTests\WriteFileTests.cs" />
+    <Compile Include="Infrastructure\NuGet\PackageIDTests.cs" />
     <Compile Include="PackageSources\ProxyingPackageSourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyBehaviour\ProxyBehaviourSetTests.cs" />
@@ -89,6 +90,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Packages.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
