@@ -17,12 +17,12 @@ namespace NuCache.Infrastructure.Spark
 			_engine = new SparkViewEngine(settings);
 		}
 
-		public SparkViewBase CreateView<TModel>(TModel model) where TModel : class
+		public ISettableModel CreateView<TModel>(TModel model) where TModel : class
 		{
 			var view = GetView(typeof(TModel));
 			view.SetModel(model);
 
-			return (SparkViewBase)view;
+			return view;
 		}
 
 		private ISettableModel GetView(Type modelType)
