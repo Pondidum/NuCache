@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Should;
+using Xunit;
 
 namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
@@ -19,6 +20,7 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 			return ms;
 		}
 
+		[Fact]
 		public void When_writing_to_an_existing_file()
 		{
 			using (var stream = StreamFromString(Contents))
@@ -29,6 +31,7 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 			File.ReadAllText(Filename).ShouldEqual(Contents);
 		}
 
+		[Fact]
 		public void When_writing_a_non_existing_file()
 		{
 			File.Delete(Filename);

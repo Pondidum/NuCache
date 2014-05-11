@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Should;
-using Should.Core.Assertions;
+using Xunit;
+using Assert = Should.Core.Assertions.Assert;
 
 namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
@@ -16,6 +17,7 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 			}
 		}
 
+		[Fact]
 		public void When_reading_from_an_existing_file()
 		{
 			File.WriteAllText(Filename, Contents);
@@ -23,6 +25,7 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 			StringFromStream(FileSystem.ReadFile(Filename)).ShouldEqual(Contents);
 		}
 
+		[Fact]
 		public void When_reading_from_a_non_existing_file()
 		{
 			File.Delete(Filename);

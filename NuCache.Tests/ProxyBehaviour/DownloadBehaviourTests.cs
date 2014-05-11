@@ -6,6 +6,7 @@ using NSubstitute;
 using NuCache.ProxyBehaviour;
 using NuCache.Rewriters;
 using Should;
+using Xunit;
 
 namespace NuCache.Tests.ProxyBehaviour
 {
@@ -32,7 +33,7 @@ namespace NuCache.Tests.ProxyBehaviour
 			return response;
 		}
 
-
+		[Fact]
 		public void When_the_response_has_the_correct_headers()
 		{
 			var url = new Uri("http://example.com");
@@ -43,6 +44,7 @@ namespace NuCache.Tests.ProxyBehaviour
 			response.Content.Headers.ContentDisposition.FileName.ShouldEqual("testpackage.1.0.0.nupkg");
 		}
 
+		[Fact]
 		public void When_the_response_has_different_cased_headers()
 		{
 			var url = new Uri("http://example.com");
@@ -53,6 +55,7 @@ namespace NuCache.Tests.ProxyBehaviour
 			response.Content.Headers.ContentDisposition.FileName.ShouldEqual("testpackage.1.0.0.nupkg");
 		}
 
+		[Fact]
 		public void When_the_response_has_non_matching_headers()
 		{
 			var url = new Uri("http://example.com");
@@ -63,6 +66,7 @@ namespace NuCache.Tests.ProxyBehaviour
 			response.Content.Headers.ContentDisposition.ShouldBeNull();
 		}
 
+		[Fact]
 		public void When_the_response_has_a_content_disposition_already()
 		{
 			var url = new Uri("http://example.com");

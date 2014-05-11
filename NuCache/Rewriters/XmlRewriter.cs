@@ -1,58 +1,84 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace NuCache.Rewriters
 {
 	public class XmlRewriter
 	{
+		private readonly IEnumerable<IXElementTransform> _transforms;
 		private readonly UriRewriter _uriRewriter;
 
-		public XmlRewriter(UriRewriter uriRewriter)
+		public XmlRewriter(IEnumerable<IXElementTransform> transforms, UriRewriter uriRewriter)
 		{
+			_transforms = transforms;
 			_uriRewriter = uriRewriter;
+		}
+
+		private void ProcessReplacement(XElement node, Func<string, Uri> transform)
+		{
+			_transforms.ForEach(t => t.Transform(node, transform));
 		}
 
 		public virtual void Rewrite(Uri targetUri, Stream inputStream, Stream outputStream)
 		{
-			var doc = XDocument.Load(inputStream);
-
-			var root = doc.Root;
-			var ns = root.Name.Namespace;
-
 			Func<String, Uri> transform = url => _uriRewriter.TransformHost(targetUri, new Uri(url));
 
-			root
-				.Elements(ns + "link")
-				.Where(e => e.Attribute("rel").Value == "next")
-				.Attributes("href")
-				.ForEach(a => a.SetValue(transform(a.Value)));
+			using (var reader = XmlReader.Create(inputStream))
+			using (var writer = XmlWriter.Create(outputStream))
+			{
 
-			root
-				.Attributes()
-				.Where(a => a.Name.LocalName == "base")
-				.ForEach(a => a.SetValue(transform(a.Value)));
+				writer.WriteStartDocument();
+				reader.MoveToContent();
 
-			root
-				.Elements("id")
-				.ForEach(a => a.SetValue(transform(a.Value)));
+				writer.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
 
+				ProcessFeedAttributes(reader, writer, transform);
 
-			var entries = root
-				.Elements(ns + "entry")
-				.ToList();
+				while (reader.Read())
+				{
+					if (reader.NodeType == XmlNodeType.Element)
+					{
+						var element = (XElement)XNode.ReadFrom(reader);
+						ProcessReplacement(element, transform);
 
-			entries
-				.Elements(ns + "content")
-				.Attributes("src")
-				.ForEach(a => a.SetValue(transform(a.Value)));
+						element.WriteTo(writer);
+					}
+				}
 
-			entries
-				.Elements(ns + "id")
-				.ForEach(a => a.SetValue(transform(a.Value)));
+				writer.WriteEndElement();
+			}
+		}
 
-			doc.Save(outputStream);
+		private void ProcessFeedAttributes(XmlReader reader, XmlWriter writer, Func<string, Uri> transform)
+		{
+			var xEle = new XElement(reader.LocalName);
+			var map = new Dictionary<XAttribute, string>();
+
+			do
+			{
+				var xAttribute =
+					new XAttribute(
+						XNamespace.Get((reader.Prefix.Length == 0) ? string.Empty : reader.NamespaceURI).GetName(reader.LocalName),
+						reader.Value);
+				xEle.Add(xAttribute);
+				map.Add(xAttribute, reader.Prefix);
+			} while (reader.MoveToNextAttribute());
+
+			ProcessReplacement(xEle, transform);
+
+			foreach (var pair in map)
+			{
+				var xAttribute = pair.Key;
+				var prefix = pair.Value;
+
+				writer.WriteStartAttribute(prefix, xAttribute.Name.LocalName, xAttribute.Name.NamespaceName);
+				writer.WriteString(xAttribute.Value);
+				writer.WriteEndAttribute();
+			}
 		}
 	}
 }

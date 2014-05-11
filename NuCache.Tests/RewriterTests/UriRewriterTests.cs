@@ -1,11 +1,13 @@
 ﻿using System;
 using NuCache.Rewriters;
 using Should;
+using Xunit;
 
 namespace NuCache.Tests
 {
 	public class UriRewriterTests
 	{
+		[Fact]
 		public void When_changing_a_secure_host_to_a_non_secure_host()
 		{
 			var transformer = new UriRewriter();
@@ -15,6 +17,7 @@ namespace NuCache.Tests
 				.ShouldEqual(new Uri("http://example.com"));
 		}
 
+		[Fact]
 		public void When_changing_a_non_secure_host_to_a_secure_host()
 		{
 			var transformer = new UriRewriter();
@@ -24,6 +27,7 @@ namespace NuCache.Tests
 				.ShouldEqual(new Uri("https://example.com"));
 		}
 
+		[Fact]
 		public void When_changing_a_host_path_and_query_should_not_be_effected()
 		{
 			var transformer = new UriRewriter();
@@ -33,6 +37,7 @@ namespace NuCache.Tests
 				.ShouldEqual(new Uri("http://nuget.org/api/v2/search()/$count?offset=23"));
 		}
 
+		[Fact]
 		public void When_changing_to_a_host_with_a_port()
 		{
 			var transformer = new UriRewriter();
