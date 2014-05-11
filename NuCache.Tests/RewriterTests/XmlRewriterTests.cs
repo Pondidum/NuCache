@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using NuCache.Rewriters;
 using Should;
 using StructureMap;
+using Xunit;
 
 namespace NuCache.Tests.RewriterTests
 {
@@ -39,6 +40,7 @@ namespace NuCache.Tests.RewriterTests
 			url.Port.ShouldEqual(42174);
 		}
 
+		[Fact]
 		public void When_rewriting_all_entry_content_elements_should_be_repointed()
 		{
 			var urls = _result.Root
@@ -56,6 +58,7 @@ namespace NuCache.Tests.RewriterTests
 			}
 		}
 
+		[Fact]
 		public void When_rewriting_any_link_elements_should_be_repointed()
 		{
 			var urls = _result.Root
@@ -71,6 +74,7 @@ namespace NuCache.Tests.RewriterTests
 			}
 		}
 
+		[Fact]
 		public void When_rewriting_all_entry_content_ids_should_be_repointed()
 		{
 			var urls = _result.Root
@@ -88,6 +92,7 @@ namespace NuCache.Tests.RewriterTests
 
 		}
 
+		[Fact]
 		public void When_rewriting_the_feed_base_url_should_be_repointed()
 		{
 			var url = _result.Root
@@ -99,6 +104,7 @@ namespace NuCache.Tests.RewriterTests
 			ValidateUri(url);
 		}
 
+		[Fact]
 		public void When_rewriting_the_feed_id_url_should_be_repointed()
 		{
 			var urls = _result.Root

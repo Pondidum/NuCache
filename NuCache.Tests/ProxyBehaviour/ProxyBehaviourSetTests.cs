@@ -3,13 +3,14 @@ using System.Linq;
 using System.Net.Http;
 using NSubstitute;
 using NuCache.ProxyBehaviour;
-using Should.Core.Assertions;
+using Xunit;
+using Assert = Should.Core.Assertions.Assert;
 
 namespace NuCache.Tests.ProxyBehaviour
 {
 	public class ProxyBehaviourSetTests
 	{
-
+		[Fact]
 		public void When_there_are_no_behaviours()
 		{
 			var set = new ProxyBehaviourSet(Enumerable.Empty<IProxyBehaviour>());
@@ -17,6 +18,7 @@ namespace NuCache.Tests.ProxyBehaviour
 			Assert.DoesNotThrow(() => set.Execute(new Uri("http://example.com"), new HttpResponseMessage()));
 		}
 
+		[Fact]
 		public void When_there_are_behaviours()
 		{
 			var b1 = Substitute.For<IProxyBehaviour>();

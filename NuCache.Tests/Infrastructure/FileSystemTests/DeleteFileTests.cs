@@ -1,10 +1,12 @@
 ﻿using System.IO;
 using Should;
+using Xunit;
 
 namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
 	public class DeleteFileTests : BaseFileSystemFileTest
 	{
+		[Fact]
 		public void When_deleting_an_existing_file_by_relative_path()
 		{
 			FileSystem.DeleteFile(Filename);
@@ -12,6 +14,7 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 			File.Exists(Filename).ShouldBeFalse();
 		}
 
+		[Fact]
 		public void When_deleting_an_existing_file_by_absolute_path()
 		{
 			var absolute = Path.GetFullPath(Filename);
@@ -20,6 +23,7 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 			File.Exists(Filename).ShouldBeFalse();
 		}
 
+		[Fact]
 		public void When_deleting_a_non_existing_file_by_relative_path()
 		{
 			File.Delete(Filename);
@@ -28,6 +32,7 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 			File.Exists(Filename).ShouldBeFalse();
 		}
 
+		[Fact]
 		public void When_deleting_a_non_existing_file_by_absolute_path()
 		{
 			File.Delete(Filename);
