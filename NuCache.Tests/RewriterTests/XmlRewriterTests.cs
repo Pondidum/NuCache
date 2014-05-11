@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using NuCache.Rewriters;
 using Should;
+using StructureMap;
 
 namespace NuCache.Tests.RewriterTests
 {
@@ -14,14 +15,13 @@ namespace NuCache.Tests.RewriterTests
 
 		public XmlRewriterTests()
 		{
-			var asm = GetType().Assembly;
-
+			var container = new Container(new RewriterRegistry());
 
 			var uriRewriter = new UriRewriter();
-			var rewriter = new XmlRewriter(uriRewriter);
+			var rewriter = container.GetInstance<XmlRewriter>();
 			var targetUri = new Uri("http://localhost:42174/");
 
-			using (var inputStream = asm.GetManifestResourceStream("NuCache.Tests.Packages.xml"))
+			using (var inputStream = GetType().Assembly.GetManifestResourceStream("NuCache.Tests.Packages.xml"))
 			using (var outputStream = new MemoryStream())
 			{
 				rewriter.Rewrite(targetUri, inputStream, outputStream);
