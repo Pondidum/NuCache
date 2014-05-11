@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using NuCache.Infrastructure;
+using NuCache.Infrastructure.NuGet;
 using NuCache.ProxyBehaviour;
 using NuCache.Rewriters;
 

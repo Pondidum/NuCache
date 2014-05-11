@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NuCache.Infrastructure.NuGet;
 
 namespace NuCache.Models
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http.Routing;
+using NuCache.Infrastructure.NuGet;
 
 namespace NuCache.Models
 {

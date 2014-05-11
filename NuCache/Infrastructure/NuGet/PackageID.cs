@@ -1,4 +1,4 @@
-﻿namespace NuCache
+﻿namespace NuCache.Infrastructure.NuGet
 {
 	public class PackageID
 	{
