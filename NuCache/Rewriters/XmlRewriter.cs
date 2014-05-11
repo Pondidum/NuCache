@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -25,18 +24,10 @@ namespace NuCache.Rewriters
 				attribute.SetValue(transform(attribute.Value));
 			}
 
-			/* on FEED root.
-			
 			node
 				.Attributes()
 				.Where(a => a.Name.LocalName == "base")
 				.ForEach(a => a.SetValue(transform(a.Value)));
-			//root
-			//	.Attributes()
-			//	.Where(a => a.Name.LocalName == "base")
-			//	.ForEach(a => a.SetValue(transform(a.Value)));
-			
-			*/
 
 			if (node.Name.LocalName == "entry")
 			{
@@ -70,7 +61,8 @@ namespace NuCache.Rewriters
 				reader.MoveToContent();
 
 				writer.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-				writer.WriteAttributes(reader, false);
+
+				ProcessFeedAttributes(reader, writer, transform);
 
 				while (reader.Read())
 				{
@@ -85,46 +77,34 @@ namespace NuCache.Rewriters
 
 				writer.WriteEndElement();
 			}
+		}
 
-		
+		private void ProcessFeedAttributes(XmlReader reader, XmlWriter writer, Func<string, Uri> transform)
+		{
+			var xEle = new XElement(reader.LocalName);
+			var map = new Dictionary<XAttribute, string>();
 
-			//var doc = XDocument.Load(inputStream);
+			do
+			{
+				var xAttribute =
+					new XAttribute(
+						XNamespace.Get((reader.Prefix.Length == 0) ? string.Empty : reader.NamespaceURI).GetName(reader.LocalName),
+						reader.Value);
+				xEle.Add(xAttribute);
+				map.Add(xAttribute, reader.Prefix);
+			} while (reader.MoveToNextAttribute());
 
-			//var root = doc.Root;
-			//var ns = root.Name.Namespace;
+			ProcessReplacement(xEle, transform);
 
-			
+			foreach (var pair in map)
+			{
+				var xAttribute = pair.Key;
+				var prefix = pair.Value;
 
-			//root
-			//	.Elements(ns + "link")
-			//	.Where(e => e.Attribute("rel").Value == "next")
-			//	.Attributes("href")
-			//	.ForEach(a => a.SetValue(transform(a.Value)));
-
-			//root
-			//	.Attributes()
-			//	.Where(a => a.Name.LocalName == "base")
-			//	.ForEach(a => a.SetValue(transform(a.Value)));
-
-			//root
-			//	.Elements("id")
-			//	.ForEach(a => a.SetValue(transform(a.Value)));
-
-
-			//var entries = root
-			//	.Elements(ns + "entry")
-			//	.ToList();
-
-			//entries
-			//	.Elements(ns + "content")
-			//	.Attributes("src")
-			//	.ForEach(a => a.SetValue(transform(a.Value)));
-
-			//entries
-			//	.Elements(ns + "id")
-			//	.ForEach(a => a.SetValue(transform(a.Value)));
-
-			//doc.Save(outputStream);
+				writer.WriteStartAttribute(prefix, xAttribute.Name.LocalName, xAttribute.Name.NamespaceName);
+				writer.WriteString(xAttribute.Value);
+				writer.WriteEndAttribute();
+			}
 		}
 	}
 }
