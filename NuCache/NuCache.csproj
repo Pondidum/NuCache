@@ -134,6 +134,13 @@
     <Compile Include="ProxyBehaviour\DownloadBehaviour.cs" />
     <Compile Include="ProxyBehaviour\IProxyBehaviour.cs" />
     <Compile Include="ProxyBehaviour\XmlRewriteBehaviour.cs" />
+    <Compile Include="Rewriters\IXElementTransform.cs" />
+    <Compile Include="Rewriters\RewriterRegistry.cs" />
+    <Compile Include="Rewriters\Transforms\EntryContentTransform.cs" />
+    <Compile Include="Rewriters\Transforms\EntryIDTransform.cs" />
+    <Compile Include="Rewriters\Transforms\FeedBaseTransform.cs" />
+    <Compile Include="Rewriters\Transforms\IDTransform.cs" />
+    <Compile Include="Rewriters\Transforms\LinkNextTransform.cs" />
     <Compile Include="Rewriters\XmlRewriter.cs" />
     <Compile Include="Rewriters\UriRewriter.cs" />
   </ItemGroup>
@@ -174,6 +181,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
