@@ -1,0 +1,21 @@
+﻿<viewdata model="NuCache.Models.StatisticsViewModel" />
+
+
+<div class="panel-heading">
+    Statistics
+</div>
+<div class="panel-body">
+    
+</div>
+
+<content:sidebox-heading>
+    Summary
+</content:sidebox-heading>
+
+<content:sidebox-content>
+    
+</content:sidebox-content>
+
+<content:scripts>
+
+</content:scripts> 

@@ -99,6 +99,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Infrastructure\DebugLogger.cs" />
     <Compile Include="Infrastructure\ElmahErrorHandler.cs" />
     <Compile Include="Infrastructure\IRequestLogger.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Infrastructure\NuGet\PackageID.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
+    <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="PackageSources\ProxyingPackageSource.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -173,6 +175,7 @@
     </Content>
     <Content Include="Views\Error.spark" />
     <Content Include="Views\Manage.spark" />
+    <Content Include="Views\Statistics.spark" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\js\jquery-1.9.0.min.map" />
