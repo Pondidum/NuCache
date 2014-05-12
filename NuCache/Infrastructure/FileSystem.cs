@@ -18,6 +18,14 @@ namespace NuCache.Infrastructure
 			}
 		}
 
+		public void AppendFile(string path, Stream contents)
+		{
+			using (var fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+			{
+				contents.CopyTo(fs);
+			}
+		}
+
 		public Stream ReadFile(string path)
 		{
 			return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);

@@ -7,6 +7,7 @@ namespace NuCache.Infrastructure
 	{
 		bool FileExists(string path);
 		void WriteFile(string path, Stream contents);
+		void AppendFile(string path, Stream contents);
 		Stream ReadFile(string path);
 		void DeleteFile(string path);
 
