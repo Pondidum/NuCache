@@ -8,25 +8,29 @@ namespace NuCache
 	public class ApplicationSettings
 	{
 		private readonly Lazy<String> _cachePath;
+		private readonly Lazy<String> _statisticsPath;
 
 		public ApplicationSettings()
 		{
-			_cachePath = new Lazy<string>(() =>
-			{
-				var path = ConfigurationManager.AppSettings["CachePath"];
 
-				if (Path.IsPathRooted(path) == false)
-				{
-					path = Path.Combine(HttpRuntime.AppDomainAppPath, path);
-				}
+			var rootPath = new Func<string, string>(path =>
+				Path.IsPathRooted(path) 
+					? path 
+					: Path.Combine(HttpRuntime.AppDomainAppPath, path)
+			);
 
-				return path;
-			});
+			_cachePath = new Lazy<string>(() => rootPath(ConfigurationManager.AppSettings["CachePath"]));
+			_statisticsPath = new Lazy<string>(() => rootPath(ConfigurationManager.AppSettings["StatisticsPath"]));
 		}
-
+		
 		public virtual string CachePath
 		{
 			get { return _cachePath.Value; }
+		}
+
+		public virtual String StatisticsPath
+		{
+			get { return _statisticsPath.Value; }
 		}
 
 		public virtual Uri RemoteFeed
