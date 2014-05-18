@@ -18,7 +18,6 @@ namespace NuCache.Tests.RewriterTests
 		{
 			var container = new Container(new RewriterRegistry());
 
-			var uriRewriter = new UriRewriter();
 			var rewriter = container.GetInstance<XmlRewriter>();
 			var targetUri = new Uri("http://localhost:42174/");
 
