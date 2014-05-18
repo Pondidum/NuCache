@@ -120,6 +120,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Infrastructure\Statistics\HttpStatistic.cs" />
+    <Compile Include="Infrastructure\Statistics\IStatistic.cs" />
+    <Compile Include="Infrastructure\Statistics\Processors\PackageDownloads.cs" />
+    <Compile Include="Infrastructure\Statistics\SatisticsStore.cs" />
+    <Compile Include="Infrastructure\Statistics\StatisticsCollector.cs" />
     <Compile Include="IPackageCache.cs" />
     <Compile Include="IPackageSource.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
