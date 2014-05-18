@@ -5,7 +5,9 @@
     Statistics
 </div>
 <div class="panel-body">
-    
+  <ul if="Model.DownloadCounts.Any()">
+    <li each="var p in Model.DownloadCounts">${p.Key.Name}, Version ${p.Key.Version} : ${p.Value} times</li>
+  </ul>
 </div>
 
 <content:sidebox-heading>
