@@ -92,7 +92,7 @@
     <Compile Include="ApplicationSettings.cs" />
     <Compile Include="App_Start\ConfigureContainer.cs" />
     <Compile Include="App_Start\ConfigureErrorHandling.cs" />
-    <Compile Include="App_Start\InfrastructureRegistry.cs" />
+    <Compile Include="Infrastructure\InfrastructureRegistry.cs" />
     <Compile Include="App_Start\StructureMapDependencyResolver.cs" />
     <Compile Include="App_Start\StructureMapDependencyScope.cs" />
     <Compile Include="App_Start\ConfigureRoutes.cs" />
@@ -134,6 +134,7 @@
     <Compile Include="Infrastructure\NuGet\PackageID.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
+    <Compile Include="PackageSources\PackageSourceRegistry.cs" />
     <Compile Include="PackageSources\ProxyingPackageSource.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

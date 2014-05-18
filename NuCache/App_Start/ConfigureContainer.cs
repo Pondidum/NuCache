@@ -13,6 +13,7 @@ namespace NuCache
 				c.Scan(a =>
 				{
 					a.TheCallingAssembly();
+					a.WithDefaultConventions();
 					a.LookForRegistries();
 				}));
 

@@ -10,8 +10,6 @@ namespace NuCache.Rewriters
 			Scan(s =>
 			{
 				s.TheCallingAssembly();
-				s.WithDefaultConventions();
-
 				s.AddAllTypesOf<IXElementTransform>();
 			});
 		}

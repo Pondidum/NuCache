@@ -13,8 +13,9 @@ namespace NuCache.Infrastructure.Statistics
 				s.AddAllTypesOf<IStatistic<HttpStatistic>>();
 			});
 
-			
-			
+			For<StatisticsCollector>()
+				.Use<StatisticsCollector>()
+				.Singleton();
 		}
 	}
 }
