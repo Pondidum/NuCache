@@ -125,6 +125,7 @@
     <Compile Include="Infrastructure\Statistics\Processors\PackageDownloads.cs" />
     <Compile Include="Infrastructure\Statistics\SatisticsStore.cs" />
     <Compile Include="Infrastructure\Statistics\StatisticsCollector.cs" />
+    <Compile Include="Infrastructure\Statistics\StatisticsRegistry.cs" />
     <Compile Include="IPackageCache.cs" />
     <Compile Include="IPackageSource.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
