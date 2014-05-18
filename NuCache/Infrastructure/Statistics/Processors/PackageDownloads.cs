@@ -14,6 +14,11 @@ namespace NuCache.Infrastructure.Statistics.Processors
 			_results = new Dictionary<PackageID, int>();
 		}
 
+		public IEnumerable<KeyValuePair<PackageID, int>> PackageCounts
+		{
+			get { return _results; }
+		}
+
 		public void Process(HttpStatistic input)
 		{
 			var id = new PackageID(input.PackageName, input.PackageVersion);
