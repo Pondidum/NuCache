@@ -27,5 +27,15 @@ namespace NuCache.Infrastructure.NuGet
 
 			return true;
 		}
+
+		public override int GetHashCode()
+		{
+			return GetFileName().GetHashCode();
+		}
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as PackageID);
+		}
 	}
 }

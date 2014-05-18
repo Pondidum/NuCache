@@ -1,4 +1,5 @@
-﻿using NuCache.Infrastructure.NuGet;
+﻿using System.Collections.Generic;
+using NuCache.Infrastructure.NuGet;
 using Should;
 using Xunit;
 
@@ -31,7 +32,19 @@ namespace NuCache.Tests.Infrastructure.NuGet
 			var second = new PackageID("NoMatch", "1.2.3");
 
 			first.ShouldNotEqual(second);
+		}
 
+		[Fact]
+		public void When_used_as_a_dictionary_key()
+		{
+			var first = new PackageID("Testing", "1.2.3");
+			var second = new PackageID("Testing", "1.2.3");
+
+			var dic = new Dictionary<PackageID, int>();
+			dic[first] = 1;
+
+			dic.ContainsKey(first).ShouldBeTrue();
+			dic.ContainsKey(second).ShouldBeTrue();
 		}
 	}
 }
