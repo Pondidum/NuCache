@@ -8,45 +8,9 @@ namespace NuCache
 		public static void Register(HttpConfiguration config)
 		{
 			config.Routes.MapHttpRoute(
-				name: "Root",
-				routeTemplate: "api/v2/",
-				defaults: new { controller = "Packages", action = "Get"}
-			);
-
-			config.Routes.MapHttpRoute(
-				name: "Metadata",
-				routeTemplate: "api/v2/$metadata",
-				defaults: new { controller = "Packages", action = "Metadata" }
-			);
-
-			config.Routes.MapHttpRoute(
-				name: "Packages",
-				routeTemplate: "api/v2/packages",
-				defaults: new { controller = "Packages", action = "List"}
-			);
-
-			config.Routes.MapHttpRoute(
-				name: "FindByID",
-				routeTemplate: "api/v2/FindPackagesByID()",
-				defaults: new { controller = "Packages", action = "FindPackagesByID" }
-			);
-
-			config.Routes.MapHttpRoute(
-				name: "Search",
-				routeTemplate: "api/v2/search()/{method}",
-				defaults: new {controller = "Packages", action = "Search", method = UrlParameter.Optional}
-			);
-
-			config.Routes.MapHttpRoute(
-				name: "Download",
-				routeTemplate: "api/v2/package/{name}/{version}",
-				defaults: new { controller = "Packages", action = "GetPackageByID", name = UrlParameter.Optional, version = UrlParameter.Optional}
-			);
-
-			config.Routes.MapHttpRoute(
-				name: "package-ids",
-				routeTemplate: "api/v2/package-ids",
-				defaults: new { controller = "Packages", action = "GetPackageIDs" }
+				name: "Api",
+				routeTemplate: "api/v2/{*url}",
+				defaults: new { controller = "Packages", action = "Dispatch", url = UrlParameter.Optional }
 			);
 
 			config.Routes.MapHttpRoute(
@@ -66,8 +30,6 @@ namespace NuCache
 				routeTemplate: "{*url}",
 				defaults: new { controller = "Error", action = "Handle404" }
 			);
-
 		}
-
 	}
 }

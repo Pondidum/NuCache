@@ -10,11 +10,8 @@ namespace NuCache.ProxyBehaviour
 			Scan(a =>
 			{
 				a.TheCallingAssembly();
-				//a.WithDefaultConventions();
 				a.AddAllTypesOf<IProxyBehaviour>();
 			});
-
-			For<ProxyBehaviourSet>().Use(x => new ProxyBehaviourSet(x.GetAllInstances<IProxyBehaviour>()));
 		}
 	}
 }
