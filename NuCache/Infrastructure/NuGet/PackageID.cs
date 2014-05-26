@@ -49,10 +49,34 @@ namespace NuCache.Infrastructure.NuGet
 				.Reverse()
 				.ToList();
 
-			var version = segments.FirstOrDefault();
-			var name = segments.Skip(1).FirstOrDefault();
+			if (segments.First().Contains("("))
+			{
+				return FromQuery(segments.First());
+			}
+			else
+			{
+				var version = segments.FirstOrDefault();
+				var name = segments.Skip(1).FirstOrDefault();
 
-			return new PackageID(name, version);
+				return new PackageID(name, version);
+			}
+		}
+
+		private static PackageID FromQuery(string query)
+		{
+			query = query
+				.Substring(query.IndexOf("(", StringComparison.OrdinalIgnoreCase))
+				.Trim('(', ')');
+
+			var parts = query
+				.Split(',')
+				.Select(s => s.Split('='))
+				.ToDictionary(p => p.First(), p => p.Last());
+
+			var name = parts.FirstOrDefault(p => p.Key.Equals("id", StringComparison.OrdinalIgnoreCase)).Value;
+			var version = parts.FirstOrDefault(p => p.Key.Equals("version", StringComparison.OrdinalIgnoreCase)).Value;
+
+			return new PackageID(name.Trim('\''), version.Trim('\''));
 		}
 	}
 }

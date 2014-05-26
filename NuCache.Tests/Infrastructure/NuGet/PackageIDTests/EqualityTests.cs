@@ -3,9 +3,9 @@ using NuCache.Infrastructure.NuGet;
 using Should;
 using Xunit;
 
-namespace NuCache.Tests.Infrastructure.NuGet
+namespace NuCache.Tests.Infrastructure.NuGet.PackageIDTests
 {
-	public class PackageIDTests
+	public class EqualityTests
 	{
 		[Fact]
 		public void When_two_instances_are_compared_and_name_and_version_match()
