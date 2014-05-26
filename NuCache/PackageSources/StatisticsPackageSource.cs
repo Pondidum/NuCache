@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using NuCache.Infrastructure.NuGet;
 using NuCache.Infrastructure.Statistics;
 
 namespace NuCache.PackageSources
@@ -41,11 +42,11 @@ namespace NuCache.PackageSources
 			return await _inner.FindPackagesByID(request);
 		}
 
-		public async Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request, string name, string version)
+		public async Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request)
 		{
-			var response = await _inner.GetPackageByID(request, name, version);
+			var response = await _inner.GetPackageByID(request);
 
-			_statisticsCollector.Log(request, response, name, version);
+			_statisticsCollector.Log(request, response, PackageID.FromPackageIDRequest(request.RequestUri));
 
 			return response;
 		}

@@ -44,9 +44,9 @@ namespace NuCache.Controllers
 		}
 
 		[HttpGet]
-		public async Task<HttpResponseMessage> GetPackageByID(string name, string version)
+		public async Task<HttpResponseMessage> GetPackageByID()
 		{
-			return await _packageSource.GetPackageByID(Request, name, version);
+			return await _packageSource.GetPackageByID(Request);
 		}
 
 		[HttpGet]

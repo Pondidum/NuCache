@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using NuCache.Infrastructure.NuGet;
 
 namespace NuCache.Infrastructure.Statistics
 {
@@ -17,9 +18,9 @@ namespace NuCache.Infrastructure.Statistics
 			_store.BeginLoadFromDisk(container => _statisticProcessors.ForEach(sp => sp.Process(container)));
 		}
 
-		public void Log(HttpRequestMessage request, HttpResponseMessage response, string name, string version)
+		public void Log(HttpRequestMessage request, HttpResponseMessage response, PackageID packageID)
 		{
-			var container = new HttpStatistic(request.RequestUri, response.StatusCode, name, version);
+			var container = new HttpStatistic(request.RequestUri, response.StatusCode, packageID.Name, packageID.Version);
 
 			_store.Append(container);
 			_statisticProcessors.ForEach(sp => sp.Process(container));

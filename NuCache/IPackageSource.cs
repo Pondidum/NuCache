@@ -11,7 +11,7 @@ namespace NuCache
 		Task<HttpResponseMessage> List(HttpRequestMessage request);
 		Task<HttpResponseMessage> Search(HttpRequestMessage request);
 		Task<HttpResponseMessage> FindPackagesByID(HttpRequestMessage request);
-		Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request, string name, string version);
+		Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request);
 		Task<HttpResponseMessage> GetPackageIDs(HttpRequestMessage request);
 	}
 }

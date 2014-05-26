@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NuCache.Infrastructure;
@@ -50,11 +51,11 @@ namespace NuCache.PackageSources
 			return await HandleRequest(request);
 		}
 
-		public async Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request, string name, string version)
+		public async Task<HttpResponseMessage> GetPackageByID(HttpRequestMessage request)
 		{
 			HttpResponseMessage response;
-
-			var packageID = new PackageID(name, version);
+			
+			var packageID = PackageID.FromPackageIDRequest(request.RequestUri);
 
 			if (_cache.Contains(packageID))
 			{

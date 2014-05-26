@@ -62,7 +62,7 @@ namespace NuCache.Tests.PackageSources
 		[Fact]
 		public void When_calling_getPackageByID()
 		{
-			Test((s, u) => s.GetPackageByID(u, "elmah", "1.0.0"));
+			Test((s, u) => s.GetPackageByID(u));//, "elmah", "1.0.0"
 		}
 
 		[Fact]
