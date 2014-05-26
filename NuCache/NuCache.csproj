@@ -106,6 +106,7 @@
     <Compile Include="Infrastructure\IRequestLogger.cs" />
     <Compile Include="Infrastructure\JsonSerializer.cs" />
     <Compile Include="Infrastructure\LoggingMessageHandler.cs" />
+    <Compile Include="Infrastructure\LoadStatus.cs" />
     <Compile Include="Infrastructure\NuGet\Manifest.cs" />
     <Compile Include="Infrastructure\NuGet\Package.cs" />
     <Compile Include="Infrastructure\Spark\ISettableModel.cs" />

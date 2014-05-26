@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Packaging = System.IO.Packaging.Package;
 
@@ -22,6 +23,18 @@ namespace NuCache.Infrastructure.NuGet
 			using (var manifestStream = manifestPart.GetStream())
 			{
 				Metadata = new Manifest(manifestStream);
+			}
+		}
+
+		public static LoadStatus<Package> TryLoadPackage(Stream stream)
+		{
+			try
+			{
+				return new LoadStatus<Package>(new Package(stream), true);
+			}
+			catch (Exception)
+			{
+				return new LoadStatus<Package>(null, false);
 			}
 		}
 	}

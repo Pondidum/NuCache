@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using NuCache.Infrastructure;
 using NuCache.Infrastructure.NuGet;
 
@@ -71,15 +73,28 @@ namespace NuCache
 		public IEnumerable<PackageID> GetAllPackages()
 		{
 			var packages = new List<PackageID>();
+			var removals = new List<string>();
 
-			foreach (var path in _fileSystem.ListDirectory(_settings.CachePath))
+			foreach (var path in _fileSystem.ListDirectory(_settings.CachePath).ToList())
 			{
 				using (var stream = _fileSystem.ReadFile(path))
 				{
-					var package = new Package(stream);
+					var status = Package.TryLoadPackage(stream);
 
-					packages.Add(package.Metadata.ID);
+					if (status.Success)
+					{
+						packages.Add(status.Target.Metadata.ID);
+					}
+					else
+					{
+						removals.Add(path);
+					}
 				}
+			}
+
+			if (removals.Any())
+			{
+				Task.Run(() => removals.ForEach(path => _fileSystem.DeleteFile(path)));
 			}
 
 			return packages;
