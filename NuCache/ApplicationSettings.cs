@@ -37,5 +37,10 @@ namespace NuCache
 		{
 			get { return new Uri(ConfigurationManager.AppSettings["RemoteFeed"]); }
 		}
+
+		public virtual Uri ApiEndpoint
+		{
+			get { return new Uri("api/v2", UriKind.Relative); }
+		}
 	}
 }

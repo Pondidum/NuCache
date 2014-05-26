@@ -9,11 +9,13 @@ namespace NuCache.Controllers
 {
 	public class HomeController : ApiController
 	{
+		private readonly ApplicationSettings _settings;
 		private readonly SparkResponseFactory _responseFactory;
 		private readonly IPackageCache _packageCache;
 
-		public HomeController(SparkResponseFactory responseFactory, IPackageCache packageCache)
+		public HomeController(ApplicationSettings settings, SparkResponseFactory responseFactory, IPackageCache packageCache)
 		{
+			_settings = settings;
 			_responseFactory = responseFactory;
 			_packageCache = packageCache;
 		}
@@ -21,12 +23,10 @@ namespace NuCache.Controllers
 		public HttpResponseMessage Get()
 		{
 			var model = new HomeViewModel();
-
-			var builder = new UriBuilder(Request.RequestUri);
-			builder.Path = "api/v2";
+			var api = new Uri(Request.RequestUri, _settings.ApiEndpoint);
 
 			model.Packages.AddRange(_packageCache.GetAllPackages().ToList());
-			model.ApiUrl = builder.Uri;
+			model.ApiUrl = api;
 
 
 			// HttpRouteCollection throws exceptions if you call .ToList() or .ToArray() etc
