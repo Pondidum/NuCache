@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace NuCache.Infrastructure.NuGet
 {
@@ -36,6 +37,22 @@ namespace NuCache.Infrastructure.NuGet
 		public override bool Equals(object obj)
 		{
 			return Equals(obj as PackageID);
+		}
+
+
+		public static PackageID FromPackageIDRequest(Uri url)
+		{
+			var segments = url
+				.Segments
+				.Where(s => s != "/")
+				.Select(s => s.Trim('/'))
+				.Reverse()
+				.ToList();
+
+			var version = segments.FirstOrDefault();
+			var name = segments.Skip(1).FirstOrDefault();
+
+			return new PackageID(name, version);
 		}
 	}
 }
