@@ -31,7 +31,7 @@ namespace NuCache.Controllers
 				r => _packageSource.Metadata(r));
 
 			_dispatchers.Add(
-				u => equals(u, "packages"),
+				u => u.StartsWith("packages", ignore),
 				r => _packageSource.List(r));
 
 			_dispatchers.Add(
