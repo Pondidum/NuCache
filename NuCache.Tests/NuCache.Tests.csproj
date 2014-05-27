@@ -75,7 +75,9 @@
     <Compile Include="ProxyBehaviour\ProxyBehaviourSetTests.cs" />
     <Compile Include="ProxyBehaviour\XmlRewriteBehaviourTests.cs" />
     <Compile Include="ProxyBehaviour\DownloadBehaviourTests.cs" />
-    <Compile Include="RewriterTests\XmlRewriterTests.cs" />
+    <Compile Include="RewriterTests\EntryXmlRewriterTests.cs" />
+    <Compile Include="RewriterTests\XmlRewriterTestBase.cs" />
+    <Compile Include="RewriterTests\PackagesXmlRewriterTests.cs" />
     <Compile Include="RewriterTests\UriRewriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +93,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Packages.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Entry.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Entry.Expected.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

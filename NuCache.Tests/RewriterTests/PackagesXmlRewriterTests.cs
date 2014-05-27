@@ -1,42 +1,16 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using NuCache.Rewriters;
 using Should;
-using StructureMap;
 using Xunit;
 
 namespace NuCache.Tests.RewriterTests
 {
-	public class XmlRewriterTests
+	public class PackagesXmlRewriterTests : XmlRewriterTestBase
 	{
-		private readonly XDocument _result;
-		private readonly XNamespace _namespace;
-
-		public XmlRewriterTests()
+		public PackagesXmlRewriterTests()
+			: base("NuCache.Tests.Packages.xml")
 		{
-			var container = new Container(new RewriterRegistry());
-
-			var rewriter = container.GetInstance<XmlRewriter>();
-			var targetUri = new Uri("http://localhost:42174/");
-
-			using (var inputStream = GetType().Assembly.GetManifestResourceStream("NuCache.Tests.Packages.xml"))
-			using (var outputStream = new MemoryStream())
-			{
-				rewriter.Rewrite(targetUri, inputStream, outputStream);
-				outputStream.Position = 0;
-
-				_result = XDocument.Load(outputStream);
-				_namespace = _result.Root.Name.Namespace;
-			}
-
-		}
-
-		private void ValidateUri(Uri url)
-		{
-			url.Host.ShouldEqual("localhost");
-			url.Port.ShouldEqual(42174);
 		}
 
 		[Fact]
@@ -115,6 +89,5 @@ namespace NuCache.Tests.RewriterTests
 				ValidateUri(url);
 			}
 		}
-
 	}
 }
