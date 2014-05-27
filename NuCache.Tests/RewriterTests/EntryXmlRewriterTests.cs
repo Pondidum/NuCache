@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Xml.Linq;
+using Should;
 using Xunit;
 
 namespace NuCache.Tests.RewriterTests
@@ -20,7 +23,17 @@ namespace NuCache.Tests.RewriterTests
 		[Fact]
 		public void When_processing_query_entry_xml()
 		{
-
+			var urls = _result
+				.Descendants(_namespace + "entry")
+				.Elements(_namespace + "content")
+				.Attributes("src")
+				.Select(a => new Uri(a.Value))
+				.ToList();
+			
+			foreach (var url in urls)
+			{
+				ValidateUri(url);
+			}
 		}
 	}
 }
