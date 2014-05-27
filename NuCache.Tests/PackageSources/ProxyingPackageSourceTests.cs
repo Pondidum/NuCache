@@ -17,7 +17,7 @@ namespace NuCache.Tests.PackageSources
 			var settings = Substitute.For<ApplicationSettings>();
 			var client = Substitute.For<WebClient>();
 			var transformer = new UriRewriter();
-			var behaviours = new ProxyBehaviourSet(new[] { new XmlRewriteBehaviour(new XmlRewriter(Enumerable.Empty<IXElementTransform>(), transformer)) });
+			var behaviours = new ProxyBehaviourSet(new[] { new XmlRewriteBehaviour(new XmlRewriter(transformer)) });
 			var cache = Substitute.For<IPackageCache>();
 
 			settings.RemoteFeed.Returns(new Uri("http://localhost.fiddler:42174"));
@@ -68,7 +68,7 @@ namespace NuCache.Tests.PackageSources
 		[Fact]
 		public void When_calling_get_packageIDs()
 		{
-			Test((s,u) => s.GetPackageIDs(u));
+			Test((s, u) => s.GetPackageIDs(u));
 		}
 	}
 }

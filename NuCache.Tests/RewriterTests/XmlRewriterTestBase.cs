@@ -14,9 +14,8 @@ namespace NuCache.Tests.RewriterTests
 
 		public XmlRewriterTestBase(string resourceName)
 		{
-			var container = new Container(new RewriterRegistry());
 
-			var rewriter = container.GetInstance<XmlRewriter>();
+			var rewriter = new XmlRewriter(new UriRewriter());
 			var targetUri = new Uri("http://localhost:42174/");
 
 			using (var inputStream = GetType().Assembly.GetManifestResourceStream(resourceName))

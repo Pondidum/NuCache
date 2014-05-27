@@ -21,7 +21,7 @@ namespace NuCache.Tests.RewriterTests
 		}
 
 		[Fact]
-		public void When_processing_query_entry_xml()
+		public void When_processing_query_entry_xml_content()
 		{
 			var urls = _result
 				.Descendants(_namespace + "entry")
@@ -30,6 +30,21 @@ namespace NuCache.Tests.RewriterTests
 				.Select(a => new Uri(a.Value))
 				.ToList();
 			
+			foreach (var url in urls)
+			{
+				ValidateUri(url);
+			}
+		}
+
+		[Fact]
+		public void When_processing_query_entry_xml_id()
+		{
+			var urls = _result
+				.Descendants(_namespace + "entry")
+				.Elements(_namespace + "id")
+				.Select(a => new Uri(a.Value))
+				.ToList();
+
 			foreach (var url in urls)
 			{
 				ValidateUri(url);

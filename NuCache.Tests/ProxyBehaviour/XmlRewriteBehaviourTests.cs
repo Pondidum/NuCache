@@ -16,9 +16,7 @@ namespace NuCache.Tests.ProxyBehaviour
 
 		private static void ExecuteFor(Uri requestUrl, HttpResponseMessage response)
 		{
-			var container = new Container(new RewriterRegistry());
-
-			var transformer = container.GetInstance<XmlRewriter>();
+			var transformer = new XmlRewriter(new UriRewriter());
 			var action = new XmlRewriteBehaviour(transformer);
 
 			var request = requestUrl.AsRequest();
