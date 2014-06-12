@@ -20,14 +20,13 @@ namespace NuCache.Controllers
 			_dispatchers = new Dictionary<Func<string, bool>, Func<HttpRequestMessage, Task<HttpResponseMessage>>>();
 
 			var ignore = StringComparison.OrdinalIgnoreCase;
-			Func<string, string, bool> equals = (one, two) => string.Equals(one, two, ignore);
 
 			_dispatchers.Add(
 				u => string.IsNullOrWhiteSpace(u), 
 				r => _packageSource.Get(r));
 
 			_dispatchers.Add(
-				u => equals(u, "$metadata"),
+				u => string.Equals(u, "$metadata", ignore),
 				r => _packageSource.Metadata(r));
 
 			_dispatchers.Add(
@@ -35,7 +34,7 @@ namespace NuCache.Controllers
 				r => _packageSource.List(r));
 
 			_dispatchers.Add(
-				u => u.StartsWith("FindPackagesByID()"),
+				u => u.StartsWith("FindPackagesByID()", ignore),
 				r => _packageSource.FindPackagesByID(r));
 
 			_dispatchers.Add(
@@ -47,7 +46,7 @@ namespace NuCache.Controllers
 				r => _packageSource.GetPackageByID(r));
 
 			_dispatchers.Add(
-				u => equals(u, "package-ids"),
+				u => string.Equals(u, "package-ids", ignore),
 				r => _packageSource.GetPackageIDs(r));
 		}
 
