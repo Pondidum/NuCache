@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using System.Web.Mvc;
 
 namespace NuCache
 {
@@ -10,7 +9,7 @@ namespace NuCache
 			config.Routes.MapHttpRoute(
 				name: "Api",
 				routeTemplate: "api/v2/{*url}",
-				defaults: new { controller = "Packages", action = "Dispatch", url = UrlParameter.Optional }
+				defaults: new { controller = "Packages", action = "Dispatch", url = RouteParameter.Optional }
 			);
 
 			config.Routes.MapHttpRoute(
@@ -22,7 +21,7 @@ namespace NuCache
 			config.Routes.MapHttpRoute(
 				name: "Standard",
 				routeTemplate: "{controller}/{name}/{version}",
-				defaults: new { name = UrlParameter.Optional, version = UrlParameter.Optional }
+				defaults: new { name = RouteParameter.Optional, version = RouteParameter.Optional }
 			);
 
 			config.Routes.MapHttpRoute(

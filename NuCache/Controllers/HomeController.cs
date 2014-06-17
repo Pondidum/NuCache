@@ -28,17 +28,6 @@ namespace NuCache.Controllers
 			model.Packages.AddRange(_packageCache.GetAllPackages().ToList());
 			model.ApiUrl = api;
 
-
-			// HttpRouteCollection throws exceptions if you call .ToList() or .ToArray() etc
-			// ReSharper disable once LoopCanBeConvertedToQuery
-			foreach (var route in GlobalConfiguration.Configuration.Routes)
-			{
-				if (string.IsNullOrWhiteSpace(route.RouteTemplate) == false)
-				{
-					model.Routes.Add(route);
-				}
-			}
-
 			return _responseFactory.From(model);
 		}
 	}
