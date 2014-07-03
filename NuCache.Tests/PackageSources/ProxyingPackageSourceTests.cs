@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using NSubstitute;
 using NuCache.Infrastructure;
 using NuCache.PackageSources;
@@ -12,63 +13,79 @@ namespace NuCache.Tests.PackageSources
 {
 	public class ProxyingPackageSourceTests
 	{
-		private void Test(Action<ProxyingPackageSource, HttpRequestMessage> method)
+		private readonly HttpRequestMessage _request;
+		private readonly WebClient _client;
+		private readonly ProxyingPackageSource _source;
+
+		public ProxyingPackageSourceTests()
 		{
+			_request = new Uri("http://example.com/api/v2").AsRequest();
+			_client = Substitute.For<WebClient>();
+			_client.GetResponseAsync(Arg.Any<Uri>()).Returns(new Task<HttpResponseMessage>(() => new HttpResponseMessage()));
+
 			var settings = Substitute.For<ApplicationSettings>();
-			var client = Substitute.For<WebClient>();
+
 			var transformer = new UriRewriter();
 			var behaviours = new ProxyBehaviourSet(new[] { new XmlRewriteBehaviour(new XmlRewriter(transformer)) });
 			var cache = Substitute.For<IPackageCache>();
 
 			settings.RemoteFeed.Returns(new Uri("http://localhost.fiddler:42174"));
 
-			var source = new ProxyingPackageSource(settings, client, behaviours, cache, transformer);
+			_source = new ProxyingPackageSource(settings, _client, behaviours, cache, transformer);
+		}
 
-			method(source, new Uri("http://example.com/api/v2").AsRequest());
-
-			client.Received().GetResponseAsync(new Uri("http://localhost.fiddler:42174/api/v2"));
+		private void Validate()
+		{
+			_client.Received().GetResponseAsync(new Uri("http://localhost.fiddler:42174/api/v2"));
 		}
 
 		[Fact]
 		public void When_calling_get()
 		{
-			Test((s, u) => s.Get(u));
+			_source.Get(_request);
+			Validate();
 		}
 
 		[Fact]
 		public void When_calling_metadata()
 		{
-			Test((s, u) => s.Metadata(u));
+			_source.Metadata(_request);
+			Validate();
 		}
 
 		[Fact]
 		public void When_calling_list()
 		{
-			Test((s, u) => s.List(u));
+			_source.List(_request);
+			Validate();
 		}
 
 		[Fact]
 		public void When_calling_search()
 		{
-			Test((s, u) => s.Search(u));
+			_source.Search(_request);
+			Validate();
 		}
 
 		[Fact]
 		public void When_calling_findPackagesByID()
 		{
-			Test((s, u) => s.FindPackagesByID(u));
+			_source.FindPackagesByID(_request);
+			Validate();
 		}
 
 		[Fact]
 		public void When_calling_getPackageByID()
 		{
-			Test((s, u) => s.GetPackageByID(u));//, "elmah", "1.0.0"
+			_source.GetPackageByID(_request);//, "elmah", "1.0.0"
+			Validate();
 		}
 
 		[Fact]
 		public void When_calling_get_packageIDs()
 		{
-			Test((s, u) => s.GetPackageIDs(u));
+			_source.GetPackageIDs(_request);
+			Validate();
 		}
 	}
 }
