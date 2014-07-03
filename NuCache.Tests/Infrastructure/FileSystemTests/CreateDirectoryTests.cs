@@ -8,14 +8,14 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 		[Fact]
 		public void When_creating_an_existing_directory()
 		{
-			FileSystem.CreateDirectory(DirectoryName);
+			FileSystem.CreateDirectory(DirectoryPath);
 		}
 
 		[Fact]
 		public void When_creating_a_non_existing_directory()
 		{
-			Directory.Delete(DirectoryName);
-			FileSystem.CreateDirectory(DirectoryName);
+			Directory.Delete(DirectoryPath);
+			FileSystem.CreateDirectory(DirectoryPath);
 		} 
 	}
 }

@@ -12,24 +12,24 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 		[Fact]
 		public void When_listing_a_non_existing_directory()
 		{
-			Directory.Delete(DirectoryName);
+			Directory.Delete(DirectoryPath);
 
-			Assert.Throws<DirectoryNotFoundException>(() => FileSystem.ListDirectory(DirectoryName));
+			Assert.Throws<DirectoryNotFoundException>(() => FileSystem.ListDirectory(DirectoryPath));
 		}
 
 		[Fact]
 		public void When_listing_an_empty_directory()
 		{
-			FileSystem.ListDirectory(DirectoryName).ShouldBeEmpty();
+			FileSystem.ListDirectory(DirectoryPath).ShouldBeEmpty();
 		}
 
 		[Fact]
 		public void When_listing_a_directory_with_2_items()
 		{
-			File.Create(Path.Combine(DirectoryName, Guid.NewGuid().ToString() + ".tmp")).Close();
-			File.Create(Path.Combine(DirectoryName, Guid.NewGuid().ToString() + ".tmp")).Close();
+			File.Create(Path.Combine(DirectoryPath, Guid.NewGuid().ToString() + ".tmp")).Close();
+			File.Create(Path.Combine(DirectoryPath, Guid.NewGuid().ToString() + ".tmp")).Close();
 
-			FileSystem.ListDirectory(DirectoryName).Count().ShouldEqual(2);
+			FileSystem.ListDirectory(DirectoryPath).Count().ShouldEqual(2);
 		}
 	}
 }

@@ -11,27 +11,27 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 		[Fact]
 		public void When_deleting_a_non_existing_directory()
 		{
-			Directory.Delete(DirectoryName);
+			Directory.Delete(DirectoryPath);
 
-			Assert.Throws<DirectoryNotFoundException>(() => FileSystem.DeleteDirectory(DirectoryName));
+			Assert.Throws<DirectoryNotFoundException>(() => FileSystem.DeleteDirectory(DirectoryPath));
 		}
 
 		[Fact]
 		public void When_deleting_an_empty_directory()
 		{
-			FileSystem.DeleteDirectory(DirectoryName);
+			FileSystem.DeleteDirectory(DirectoryPath);
 
-			Directory.Exists(DirectoryName).ShouldBeFalse();
+			Directory.Exists(DirectoryPath).ShouldBeFalse();
 			
 		}
 
 		[Fact]
 		public void When_deleting_a_directory_with_contents()
 		{
-			File.Create(Path.Combine(DirectoryName, Guid.NewGuid().ToString() + ".tmp")).Close();
-			FileSystem.DeleteDirectory(DirectoryName);
+			File.Create(Path.Combine(DirectoryPath, Guid.NewGuid().ToString() + ".tmp")).Close();
+			FileSystem.DeleteDirectory(DirectoryPath);
 
-			Directory.Exists(DirectoryName).ShouldBeFalse();
+			Directory.Exists(DirectoryPath).ShouldBeFalse();
 		}
 	}
 }

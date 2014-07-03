@@ -6,30 +6,30 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 {
 	public class BaseFileSystemDirectoryTest : IDisposable
 	{
-		protected string DirectoryName;
+		protected string DirectoryPath;
 		protected FileSystem FileSystem;
 
 		public BaseFileSystemDirectoryTest()
 		{
 			FileSystem = new FileSystem();
 
-			DirectoryName = Guid.NewGuid().ToString();
+			DirectoryPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 
-			Directory.CreateDirectory(DirectoryName);
+			Directory.CreateDirectory(DirectoryPath);
 		}
 
 		public void Dispose()
 		{
 			try
 			{
-				if (Directory.Exists(DirectoryName))
+				if (Directory.Exists(DirectoryPath))
 				{
-					Directory.Delete(DirectoryName, true);
+					Directory.Delete(DirectoryPath, true);
 				}
 			}
 			catch (Exception)
 			{
-				Console.WriteLine("Enable to delete '{0}'", DirectoryName);
+				Console.WriteLine("Enable to delete '{0}'", DirectoryPath);
 			}
 
 		}

@@ -15,30 +15,30 @@ namespace NuCache.Tests.Infrastructure.FileSystemTests
 		[Fact]
 		public void When_passed_a_relative_directory_path_and_the_directory_doesnt_exist()
 		{
-			Directory.Delete(DirectoryName);
+			Directory.Delete(DirectoryPath);
 
-			FileSystem.DirectoryExists(DirectoryName).ShouldBeFalse();
+			FileSystem.DirectoryExists(DirectoryPath).ShouldBeFalse();
 		}
 
 		[Fact]
 		public void When_passed_a_relative_directory_path_and_the_directory_exists()
 		{
-			FileSystem.DirectoryExists(DirectoryName).ShouldBeTrue();
+			FileSystem.DirectoryExists(DirectoryPath).ShouldBeTrue();
 		}
 
 		[Fact]
 		public void When_passed_an_absolute_directory_path_and_the_directory_doesnt_exist()
 		{
-			Directory.Delete(DirectoryName);
+			Directory.Delete(DirectoryPath);
 
-			var absolute = Path.GetFullPath(DirectoryName);
+			var absolute = Path.GetFullPath(DirectoryPath);
 			FileSystem.DirectoryExists(absolute).ShouldBeFalse();
 		}
 
 		[Fact]
 		public void When_passed_an_absolute_directory_path_and_the_directory_exists()
 		{
-			var absolute = Path.GetFullPath(DirectoryName);
+			var absolute = Path.GetFullPath(DirectoryPath);
 			FileSystem.DirectoryExists(absolute).ShouldBeTrue();
 		}
 	}
