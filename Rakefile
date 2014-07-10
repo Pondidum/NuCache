@@ -20,4 +20,14 @@ test_runner :test do |xunit|
 	xunit.add_parameter '/silent'
 end
 
+task :deploy, [ :destination ] do |t, args|
+
+	destination = args.destination
+
+	FileUtils.rm_rf(Dir.glob(File.join(destination, "*")))
+
+	FileUtils.cp_r("build/.", destination)
+
+end
+
 task :default => [ :restore, :compile, :test ]
