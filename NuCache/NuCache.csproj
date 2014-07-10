@@ -171,6 +171,7 @@
     <Content Include="Views\Error.spark" />
     <Content Include="Views\Manage.spark" />
     <Content Include="Views\Statistics.spark" />
+    <None Include="Properties\PublishProfiles\Build.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\js\jquery-1.9.0.min.map" />

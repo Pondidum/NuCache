@@ -3,6 +3,7 @@ bin
 *.ReSharper.user
 _ReSharper.*
 *.resharper
+*.pubxml.user
 *.csproj.user
 *.vbproj.user
 *.suo
@@ -12,5 +13,5 @@ _ReSharper.*
 packages
 
 PackageCache/
-NuCache/Properties/PublishProfiles/
+build/
 statistics.log
