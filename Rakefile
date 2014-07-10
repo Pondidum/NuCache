@@ -9,6 +9,9 @@ end
 build :compile do |msb|
 	msb.target = [ :clean, :rebuild ]
 	msb.sln = 'NuCache.sln'
+
+	msb.add_parameter "/p:DeployOnBuild=true"
+	msb.add_parameter "/p:PublishProfile=build"
 end
 
 test_runner :test do |xunit|
