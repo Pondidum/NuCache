@@ -1,1 +1,0 @@
-tools/nuget.exe list -verbosity d -source http://localhost.fiddler:42174/api/v2

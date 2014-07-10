@@ -1,1 +1,0 @@
-tools/nuget.exe list -verbosity d -source http://nuget.org/api/v2
