@@ -51,7 +51,7 @@ namespace NuCache.Controllers
 		}
 
 		[HttpGet]
-		public async Task<HttpResponseMessage> Dispatch(string url)
+		public async Task<HttpResponseMessage> Dispatch(string url = "")
 		{
 			var dispatcher = _dispatchers.FirstOrDefault(d => d.Key(url)).Value;
 
