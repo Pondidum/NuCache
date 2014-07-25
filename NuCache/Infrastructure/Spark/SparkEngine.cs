@@ -1,15 +1,18 @@
 using System;
 using System.IO;
+using NuCache.Models;
 using Spark;
 
 namespace NuCache.Infrastructure.Spark
 {
 	public class SparkEngine : ISparkEngine
 	{
+		private readonly ApplicationViewModel _sharedModel;
 		private readonly SparkViewEngine _engine;
 
-		public SparkEngine()
+		public SparkEngine(ApplicationViewModel sharedModel)
 		{
+			_sharedModel = sharedModel;
 			var settings = new SparkSettings();
 			settings.AddNamespace("System.Linq");
 			settings.PageBaseType = typeof(NuCacheView).FullName;
@@ -21,6 +24,7 @@ namespace NuCache.Infrastructure.Spark
 		{
 			var view = GetView(typeof(TModel));
 			view.SetModel(model);
+			view.SetSharedModel(_sharedModel);
 
 			return view;
 		}

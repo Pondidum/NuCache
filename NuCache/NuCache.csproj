@@ -121,6 +121,7 @@
     <Compile Include="IPackageCache.cs" />
     <Compile Include="IPackageSource.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
+    <Compile Include="Models\ApplicationViewModel.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Infrastructure\NuGet\PackageID.cs" />
