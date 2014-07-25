@@ -7,6 +7,17 @@ nugets_restore :restore do |n|
 	n.out = 'packages'
 end
 
+desc 'Set the assembly version number'
+asmver :version do |v|
+
+	version_num = ENV['APPVEYOR_BUILD_VERSION'] ||= "1.0.local"
+
+	v.file_path = "NuCache/Properties/AssemblyVersion.cs"
+	v.attributes assembly_version: version_num,
+				 assembly_file_version: version_num
+
+end
+
 desc 'Compile all projects'
 build :compile do |msb|
 	msb.target = [ :clean, :rebuild ]
@@ -34,4 +45,4 @@ task :deploy, [ :destination ] do |t, args|
 
 end
 
-task :default => [ :restore, :compile, :test ]
+task :default => [ :restore, :version, :compile, :test ]

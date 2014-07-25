@@ -15,5 +15,6 @@ packages
 PackageCache/
 build/
 statistics.log
+AssemblyVersion.cs
 
 *.sublime-workspace
