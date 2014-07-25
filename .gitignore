@@ -15,3 +15,5 @@ packages
 PackageCache/
 build/
 statistics.log
+
+*.sublime-workspace
