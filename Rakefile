@@ -10,7 +10,7 @@ end
 desc 'Set the assembly version number'
 asmver :version do |v|
 
-	version_num = ENV['APPVEYOR_BUILD_VERSION'] ||= "1.0.local"
+	version_num = ENV['APPVEYOR_BUILD_VERSION'] ||= "1.0.0"
 
 	v.file_path = "NuCache/Properties/AssemblyVersion.cs"
 	v.attributes assembly_version: version_num,
