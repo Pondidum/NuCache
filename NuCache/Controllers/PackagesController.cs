@@ -38,16 +38,16 @@ namespace NuCache.Controllers
 				r => _packageSource.FindPackagesByID(r));
 
 			_dispatchers.Add(
-				u => u.StartsWith( "search()", ignore),
+				u => u.StartsWith("search()", ignore),
 				r => _packageSource.Search(r));
+
+			_dispatchers.Add(
+				u => u.StartsWith("package-ids", ignore),
+				r => _packageSource.GetPackageIDs(r));
 
 			_dispatchers.Add(
 				u => u.StartsWith("package", ignore),
 				r => _packageSource.GetPackageByID(r));
-
-			_dispatchers.Add(
-				u => string.Equals(u, "package-ids", ignore),
-				r => _packageSource.GetPackageIDs(r));
 		}
 
 		[HttpGet]
