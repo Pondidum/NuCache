@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using NSubstitute;
 using NuCache.ProxyBehaviour;
 using NuCache.Rewriters;
-using StructureMap;
 using Xunit;
 
 namespace NuCache.Tests.ProxyBehaviour

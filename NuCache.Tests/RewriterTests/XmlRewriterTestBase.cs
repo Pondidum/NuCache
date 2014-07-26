@@ -3,7 +3,6 @@ using System.IO;
 using System.Xml.Linq;
 using NuCache.Rewriters;
 using Should;
-using StructureMap;
 
 namespace NuCache.Tests.RewriterTests
 {
