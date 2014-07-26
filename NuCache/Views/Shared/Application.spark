@@ -55,9 +55,14 @@
 
     <div id="footer">
         <div class="container">
-            <p class="text-muted">
-                Written by Andy Dote.  <a href="https://github.com/pondidum/nucache">Github Project</a> - Version !{SharedModel.Version}
-            </p>
+            <div class="row">
+                <div class="col-md-8">
+                    <p class="text-muted"><a href="https://github.com/pondidum/nucache">Github Project</a></p>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-muted">Written by Andy Dote, Version !{SharedModel.Version}.
+                </div>
+            </div>
         </div>
     </div>
 
