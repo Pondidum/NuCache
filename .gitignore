@@ -9,15 +9,10 @@ _ReSharper.*
 *.cache
 *.DotSettings
 *.DotSettings.user
-.vs/
-
-Gemfile.lock
 
 AssemblyVersion.cs
 
-packages
-build
-
-*.sublime-workspace
-NuCache/cache/
-node_modules
+/packages
+/node_modules
+/NuCache/cache/
+/.vs/
