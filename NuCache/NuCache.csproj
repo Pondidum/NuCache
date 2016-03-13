@@ -107,6 +107,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
     <Compile Include="PackageCache.cs" />
     <Compile Include="Middlewares\PackageCachingMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

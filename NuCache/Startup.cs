@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using NuCache;
@@ -14,6 +15,14 @@ namespace NuCache
 	{
 		public void Configuration(IAppBuilder app)
 		{
+			var config = new Configuration
+			{
+				SourceNugetFeed = new Uri("https://api.nuget.org"),
+				CacheDirectory = "cache"
+			};
+
+			var packageCache = new PackageCache(config.CacheDirectory);
+
 			Log.Logger = new LoggerConfiguration()
 				.MinimumLevel.Debug()
 				.Enrich.FromLogContext()
@@ -21,8 +30,8 @@ namespace NuCache
 				.CreateLogger();
 
 			app.Use<SerilogMiddleware>();
-			app.Use<PackageCachingMiddleware>(new PackageCache("cache"));
-			app.Use<UrlRewriteMiddlware>();
+			app.Use<PackageCachingMiddleware>(config, packageCache);
+			app.Use<UrlRewriteMiddlware>(config);
 
 			app.Run(context =>
 			{

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Serilog;
@@ -11,8 +12,11 @@ namespace NuCache.Middlewares
 	{
 		private static readonly ILogger Log = Serilog.Log.ForContext<UrlRewriteMiddlware>();
 
-		public UrlRewriteMiddlware(OwinMiddleware next) : base(next)
+		private readonly Configuration _config;
+
+		public UrlRewriteMiddlware(OwinMiddleware next, Configuration config) : base(next)
 		{
+			_config = config;
 		}
 
 		public override Task Invoke(IOwinContext context)
@@ -28,7 +32,7 @@ namespace NuCache.Middlewares
 
 			var client = new HttpClient()
 			{
-				BaseAddress = new Uri("http://api.nuget.org")
+				BaseAddress = _config.SourceNugetFeed
 			};
 
 			var response = client.GetAsync(requestPath).Result;
@@ -38,10 +42,14 @@ namespace NuCache.Middlewares
 			using (var sr = new StreamReader(response.Content.ReadAsStreamAsync().Result))
 			using (var sw = new StreamWriter(context.Response.Body))
 			{
+				var self = context.Request.Uri;
+				var replacement = new UriBuilder(self.Scheme, self.Host, self.Port).ToString();
+				var source = _config.SourceNugetFeed.ToString();
+
 				string line;
 				while ((line = sr.ReadLine()) != null)
 				{
-					sw.WriteLine(line.Replace("https://api.nuget.org/", "http://localhost:55628/"));
+					sw.WriteLine(line.Replace(source, replacement));
 				}
 			}
 

@@ -9,12 +9,14 @@ namespace NuCache.Middlewares
 {
 	public class PackageCachingMiddleware : OwinMiddleware
 	{
-		private readonly PackageCache _cache;
 		private static readonly ILogger Log = Serilog.Log.ForContext<UrlRewriteMiddlware>();
-		
 
-		public PackageCachingMiddleware(OwinMiddleware next, PackageCache cache) : base(next)
+		private readonly Configuration _config;
+		private readonly PackageCache _cache;
+
+		public PackageCachingMiddleware(OwinMiddleware next, Configuration config, PackageCache cache) : base(next)
 		{
+			_config = config;
 			_cache = cache;
 		}
 
@@ -39,9 +41,9 @@ namespace NuCache.Middlewares
 				return Task.Delay(0);
 			}
 
-			var client = new HttpClient()
+			var client = new HttpClient
 			{
-				BaseAddress = new Uri("http://api.nuget.org")
+				BaseAddress = _config.SourceNugetFeed
 			};
 
 			var response = client.GetAsync(requestPath).Result;
