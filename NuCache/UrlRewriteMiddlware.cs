@@ -7,11 +7,11 @@ using Serilog;
 
 namespace NuCache
 {
-	public class ProxyingMiddlware : OwinMiddleware
+	public class UrlRewriteMiddlware : OwinMiddleware
 	{
-		private static readonly ILogger Log = Serilog.Log.ForContext<ProxyingMiddlware>();
+		private static readonly ILogger Log = Serilog.Log.ForContext<UrlRewriteMiddlware>();
 
-		public ProxyingMiddlware(OwinMiddleware next) : base(next)
+		public UrlRewriteMiddlware(OwinMiddleware next) : base(next)
 		{
 		}
 

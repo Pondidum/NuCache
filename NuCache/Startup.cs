@@ -20,7 +20,7 @@ namespace NuCache
 				.CreateLogger();
 
 
-			app.Use(typeof(ProxyingMiddlware));
+			app.Use(typeof(UrlRewriteMiddlware));
 
 			app.Run(context =>
 			{
