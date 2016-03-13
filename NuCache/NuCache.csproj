@@ -68,10 +68,6 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Owin.Routing, Version=0.8.1.0, Culture=neutral, PublicKeyToken=7b6af180c664a5de, processorArchitecture=MSIL">
-      <HintPath>..\packages\Owin.Routing.0.8.1.0\lib\net45\Owin.Routing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
