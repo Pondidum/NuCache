@@ -3,18 +3,25 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Owin;
+using Serilog;
 
 namespace NuCache
 {
 	public class ProxyingMiddlware : OwinMiddleware
 	{
+		private static readonly ILogger Log = Serilog.Log.ForContext<ProxyingMiddlware>();
+
 		public ProxyingMiddlware(OwinMiddleware next) : base(next)
 		{
 		}
 
 		public override Task Invoke(IOwinContext context)
 		{
-			if (context.Request.Path.ToString().StartsWith("/v3") == false)
+			var requestPath = context.Request.Path.ToString();
+
+			Log.Debug("{path}", requestPath);
+
+			if (requestPath.StartsWith("/v3") == false)
 			{
 				return Next.Invoke(context);
 			}
@@ -24,7 +31,7 @@ namespace NuCache
 				BaseAddress = new Uri("http://api.nuget.org")
 			};
 
-			var response = client.GetAsync(context.Request.Path.ToString()).Result;
+			var response = client.GetAsync(requestPath).Result;
 
 			context.Response.ContentType = response.Content.Headers.ContentType.MediaType;
 
@@ -34,7 +41,7 @@ namespace NuCache
 				string line;
 				while ((line = sr.ReadLine()) != null)
 				{
-					sw.WriteLine(line);
+					sw.WriteLine(line.Replace("https://api.nuget.org/", "http://localhost:55628/"));
 				}
 			}
 
