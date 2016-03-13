@@ -9,11 +9,13 @@ namespace NuCache
 {
 	public class PackageCachingMiddleware : OwinMiddleware
 	{
+		private readonly PackageCache _cache;
 		private static readonly ILogger Log = Serilog.Log.ForContext<UrlRewriteMiddlware>();
 		
 
-		public PackageCachingMiddleware(OwinMiddleware next) : base(next)
+		public PackageCachingMiddleware(OwinMiddleware next, PackageCache cache) : base(next)
 		{
+			_cache = cache;
 		}
 
 		public override Task Invoke(IOwinContext context)
@@ -27,7 +29,7 @@ namespace NuCache
 				return Next.Invoke(context);
 			}
 
-			//var packageName = Path.GetFileName(requestPath);
+			var packageName = Path.GetFileName(requestPath);
 			//_cache.Contains(packageName);
 
 			var client = new HttpClient()
@@ -45,10 +47,5 @@ namespace NuCache
 
 			return Task.Delay(0);
 		}
-	}
-
-	public interface IPackageCache
-	{
-
 	}
 }
