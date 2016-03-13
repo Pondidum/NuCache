@@ -21,7 +21,7 @@ namespace NuCache
 
 			Log.Debug("{path}", requestPath);
 
-			if (requestPath.StartsWith("/v3") == false)
+			if (requestPath.StartsWith("/v3", StringComparison.OrdinalIgnoreCase) == false)
 			{
 				return Next.Invoke(context);
 			}
