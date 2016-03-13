@@ -62,3 +62,4 @@ _NCrunch_*
 AssemblyVersion.cs
 
 App_Data
+.vs/
