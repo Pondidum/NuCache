@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Microsoft.Owin.Testing;
 using NuCache.Properties;
-using Owin;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
@@ -35,9 +34,8 @@ namespace NuCache.Tests
 			var host = TestServer.Create(api.Configuration);
 
 
-			//https://api.nuget.org/
+			//https://api.nuget.org/v3/registration1/finite/index.json
 			var result = await host.CreateRequest("v3/registration1/finite/index.json").GetAsync();
-			//var result = await host.CreateRequest("v3/index.json").GetAsync();
 
 			result.IsSuccessStatusCode.ShouldBe(true);
 
