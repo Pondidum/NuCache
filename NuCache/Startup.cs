@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using NuCache;
+using NuCache.Middlewares;
 using Owin;
 using Serilog;
 

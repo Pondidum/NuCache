@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Serilog;
 
-namespace NuCache
+namespace NuCache.Middlewares
 {
 	public class UrlRewriteMiddlware : OwinMiddleware
 	{

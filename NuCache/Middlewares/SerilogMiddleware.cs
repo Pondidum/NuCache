@@ -4,7 +4,7 @@ using Microsoft.Owin;
 using Serilog;
 using Serilog.Context;
 
-namespace NuCache
+namespace NuCache.Middlewares
 {
 	public class SerilogMiddleware : OwinMiddleware
 	{

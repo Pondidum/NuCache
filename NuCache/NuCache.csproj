@@ -108,10 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PackageCache.cs" />
-    <Compile Include="PackageCachingMiddleware.cs" />
+    <Compile Include="Middlewares\PackageCachingMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerilogMiddleware.cs" />
-    <Compile Include="UrlRewriteMiddlware.cs" />
+    <Compile Include="Middlewares\SerilogMiddleware.cs" />
+    <Compile Include="Middlewares\UrlRewriteMiddlware.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <PropertyGroup>
