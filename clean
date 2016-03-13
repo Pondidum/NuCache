@@ -1,3 +1,0 @@
-git checkout -- AddPackageTest
-git clean -df AddPackageTest
-rm -rf packages/jQuery.1.8.1/
