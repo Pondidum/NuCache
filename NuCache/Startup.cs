@@ -19,8 +19,8 @@ namespace NuCache
 				.WriteTo.Trace()
 				.CreateLogger();
 
-
-			app.Use(typeof(UrlRewriteMiddlware));
+			app.Use<SerilogMiddleware>();
+			app.Use<UrlRewriteMiddlware>();
 
 			app.Run(context =>
 			{
