@@ -20,6 +20,7 @@ namespace NuCache
 				.CreateLogger();
 
 			app.Use<SerilogMiddleware>();
+			app.Use<PackageCachingMiddleware>();
 			app.Use<UrlRewriteMiddlware>();
 
 			app.Run(context =>
