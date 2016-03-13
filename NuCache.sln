@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuCache", "NuCache\NuCache.csproj", "{0DC4A7A6-FE3A-4E07-929F-FA43C8E78F45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuCache.Tests", "NuCache.Tests\NuCache.Tests.csproj", "{7A573566-84C1-4187-8852-9E9F32817CC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0DC4A7A6-FE3A-4E07-929F-FA43C8E78F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DC4A7A6-FE3A-4E07-929F-FA43C8E78F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DC4A7A6-FE3A-4E07-929F-FA43C8E78F45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A573566-84C1-4187-8852-9E9F32817CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A573566-84C1-4187-8852-9E9F32817CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A573566-84C1-4187-8852-9E9F32817CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A573566-84C1-4187-8852-9E9F32817CC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
