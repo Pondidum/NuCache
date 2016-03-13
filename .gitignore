@@ -20,3 +20,4 @@ build
 
 *.sublime-workspace
 NuCache/cache/
+node_modules
