@@ -26,6 +26,12 @@ namespace NuCache.Properties
 
 			app.Use(async (context, next) =>
 			{
+				if (context.Request.Path.ToString().StartsWith("/v3") == false)
+				{
+					await next();
+					return;
+				}
+
 				var client = new HttpClient()
 				{
 					BaseAddress = rootUrl
