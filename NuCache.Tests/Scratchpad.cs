@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Microsoft.Owin.Testing;
-using NuCache.Properties;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;

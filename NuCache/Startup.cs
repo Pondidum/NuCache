@@ -1,10 +1,10 @@
 ﻿using Microsoft.Owin;
-using NuCache.Properties;
+using NuCache;
 using Owin;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace NuCache.Properties
+namespace NuCache
 {
 	public class Startup
 	{

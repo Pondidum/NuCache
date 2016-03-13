@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 
-namespace NuCache.Properties
+namespace NuCache
 {
 	public class ProxyingMiddlware : OwinMiddleware
 	{
