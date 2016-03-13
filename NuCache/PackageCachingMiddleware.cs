@@ -30,7 +30,14 @@ namespace NuCache
 			}
 
 			var packageName = Path.GetFileName(requestPath);
-			//_cache.Contains(packageName);
+
+			if (_cache.Contains(packageName))
+			{
+				context.Response.ContentType = "binary/octet-stream";
+				context.Response.Write(_cache.GetPackage(packageName));
+
+				return Task.Delay(0);
+			}
 
 			var client = new HttpClient()
 			{
@@ -39,11 +46,18 @@ namespace NuCache
 
 			var response = client.GetAsync(requestPath).Result;
 
+			if (response.IsSuccessStatusCode == false)
+			{
+				context.Response.StatusCode = (int) response.StatusCode;
+				return Task.Delay(0);
+			}
+
 			var bytes = response.Content.ReadAsByteArrayAsync().Result;
+
+			_cache.StorePackage(packageName, bytes);
 
 			context.Response.ContentType = response.Content.Headers.ContentType.MediaType;
 			context.Response.Write(bytes);
-			
 
 			return Task.Delay(0);
 		}
