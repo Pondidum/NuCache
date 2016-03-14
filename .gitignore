@@ -15,4 +15,5 @@ AssemblyVersion.cs
 /packages
 /node_modules
 /NuCache/cache/
+/NuCache/logs/
 /.vs/

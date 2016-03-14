@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Serilog;
@@ -23,12 +22,12 @@ namespace NuCache.Middlewares
 		{
 			var requestPath = context.Request.Path.ToString();
 
-			Log.Debug("{path}", requestPath);
-
 			if (requestPath.StartsWith("/v3", StringComparison.OrdinalIgnoreCase) == false)
 			{
 				return Next.Invoke(context);
 			}
+
+			Log.Debug("{path}", requestPath);
 
 			var client = new HttpClient()
 			{

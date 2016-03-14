@@ -1,5 +1,4 @@
 using System.IO;
-using System.Web;
 
 namespace NuCache
 {
@@ -10,7 +9,6 @@ namespace NuCache
 		public PackageCache(string directory)
 		{
 			_directory = directory;
-			Directory.CreateDirectory(_directory);
 		}
 
 		public bool Contains(string packageName)

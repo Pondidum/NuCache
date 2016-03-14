@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Owin;
@@ -15,13 +15,20 @@ namespace NuCache
 	{
 		public void Configuration(IAppBuilder app)
 		{
+			var config = new Configuration();
+
+			Directory.CreateDirectory(config.LogDirectory);
+			Directory.CreateDirectory(config.CacheDirectory);
+		
 			Log.Logger = new LoggerConfiguration()
 				.MinimumLevel.Debug()
 				.Enrich.FromLogContext()
 				.WriteTo.Trace()
+				.WriteTo.RollingFile(Path.Combine(config.LogDirectory, "{Date}.log"))
 				.CreateLogger();
 
-			var config = new Configuration();
+			Log.Information("Started with {@config}", config);
+
 			var packageCache = new PackageCache(config.CacheDirectory);
 
 			app.Use<SerilogMiddleware>();

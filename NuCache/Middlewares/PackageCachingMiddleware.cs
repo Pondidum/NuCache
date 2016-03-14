@@ -24,17 +24,18 @@ namespace NuCache.Middlewares
 		{
 			var requestPath = context.Request.Path.ToString();
 
-			Log.Debug("{path}", requestPath);
-
 			if (requestPath.EndsWith(".nupkg", StringComparison.OrdinalIgnoreCase) == false)
 			{
 				return Next.Invoke(context);
 			}
 
+			Log.Debug("{path}", requestPath);
+
 			var packageName = Path.GetFileName(requestPath);
 
 			if (_cache.Contains(packageName))
 			{
+				Log.Information("Got {packageName} from the cache", packageName);
 				context.Response.ContentType = "binary/octet-stream";
 				context.Response.Write(_cache.GetPackage(packageName));
 
@@ -50,9 +51,12 @@ namespace NuCache.Middlewares
 
 			if (response.IsSuccessStatusCode == false)
 			{
+				Log.Information("Unable to find {packageName} in the source feed", packageName);
 				context.Response.StatusCode = (int) response.StatusCode;
 				return Task.Delay(0);
 			}
+
+			Log.Information("Got {packageName} from the source feed", packageName);
 
 			var bytes = response.Content.ReadAsByteArrayAsync().Result;
 
