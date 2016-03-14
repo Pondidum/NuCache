@@ -15,19 +15,14 @@ namespace NuCache
 	{
 		public void Configuration(IAppBuilder app)
 		{
-			var config = new Configuration
-			{
-				SourceNugetFeed = new Uri("https://api.nuget.org"),
-				CacheDirectory = "cache"
-			};
-
-			var packageCache = new PackageCache(config.CacheDirectory);
-
 			Log.Logger = new LoggerConfiguration()
 				.MinimumLevel.Debug()
 				.Enrich.FromLogContext()
 				.WriteTo.Trace()
 				.CreateLogger();
+
+			var config = new Configuration();
+			var packageCache = new PackageCache(config.CacheDirectory);
 
 			app.Use<SerilogMiddleware>();
 			app.Use<PackageCachingMiddleware>(config, packageCache);

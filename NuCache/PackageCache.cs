@@ -9,10 +9,7 @@ namespace NuCache
 
 		public PackageCache(string directory)
 		{
-			_directory = Path.IsPathRooted(directory)
-					? directory
-					: Path.Combine(HttpRuntime.AppDomainAppPath, directory);
-
+			_directory = directory;
 			Directory.CreateDirectory(_directory);
 		}
 
