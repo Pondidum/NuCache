@@ -5,6 +5,7 @@ var fs = require("fs");
 var assemblyInfo = require('gulp-dotnet-assembly-info');
 var rename = require('gulp-rename');
 var msbuild = require('gulp-msbuild');
+var webpack = require("webpack-stream");
 var bump = require('gulp-bump');
 var debug = require('gulp-debug');
 
@@ -39,7 +40,14 @@ gulp.task('version', function() {
     .pipe(gulp.dest('./' + config.name + '/Properties'));
 });
 
-gulp.task('compile', [ "restore", "version" ], function() {
+gulp.task('transform', function() {
+  return gulp
+    .src('./Magistrate/client/index.js')
+    .pipe(webpack(require('./webpack.config.js')))
+    .pipe(gulp.dest('./Magistrate/client/static/'));
+})
+
+gulp.task('compile', [ "transform", "restore", "version" ], function() {
   return gulp
     .src(config.name + ".sln")
     .pipe(msbuild({
