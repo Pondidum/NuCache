@@ -1,4 +1,5 @@
 import React from 'react'
+import { Input } from 'react-bootstrap'
 
 const PackageTile = () => (
   <div className="list-group col-xs-4">
@@ -28,9 +29,18 @@ const PackageList = () => (
   </div>
 );
 
+const Filter = () => (
+  <div className="row" style={{ marginBottom: "1em" }}>
+    <div className="col-md-4 col-md-offset-8">
+      <Input type="text" placeholder="filter..." standalone />
+    </div>
+  </div>
+);
+
 const App = () => (
   <div>
-    <h1>NuCache</h1>
+    <h1 className="text-center">NuCache</h1>
+    <Filter />
     <PackageList />
   </div>
 );
