@@ -7,7 +7,7 @@ const PackageTile = () => (
         <i className="material-icons">folder</i>
       </div>
       <div className="row-content">
-        <div className="least-content">20</div>
+        <div className="least-content">20 <i className="material-icons" style={{ verticalAlign: "middle" }}>file_download</i></div>
         <h4 className="list-group-item-heading">Package Name Here</h4>
         <p className="list-group-item-text">Package description perhaps could go here? Or date added?</p>
       </div>
