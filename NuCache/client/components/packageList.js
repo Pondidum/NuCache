@@ -1,16 +1,10 @@
 import React from 'react'
+
 import PackageTile from './PackageTile'
 
-const PackageList = () => (
+const PackageList = ({ packages }) => (
   <div className="row">
-    <PackageTile />
-    <PackageTile />
-    <PackageTile />
-    <PackageTile />
-    <PackageTile />
-    <PackageTile />
-    <PackageTile />
-    <PackageTile />
+  { packages.map((p, i) => <PackageTile key={i} />) }
   </div>
 );
 
