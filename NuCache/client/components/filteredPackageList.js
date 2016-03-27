@@ -27,7 +27,6 @@ class FilteredPackageList extends Component {
         return isName || isDesc;
       });
 
-    console.log(packages);
     return (
       <div>
         <Filter onChange={ value => this.setState({ filter: value }) } />
