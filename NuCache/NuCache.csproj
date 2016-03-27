@@ -107,6 +107,7 @@
     <Compile Include="Middlewares\UrlRewriteMiddlware.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Statistics.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

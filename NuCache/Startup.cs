@@ -19,7 +19,11 @@ namespace NuCache
 
 			Directory.CreateDirectory(config.LogDirectory);
 			Directory.CreateDirectory(config.CacheDirectory);
-		
+			Directory.CreateDirectory(Path.GetDirectoryName(config.StatsFile));
+
+			var stats = new Statistics(config);
+			stats.LoadAsync();
+
 			Log.Logger = new LoggerConfiguration()
 				.MinimumLevel.Debug()
 				.Enrich.FromLogContext()
@@ -32,7 +36,7 @@ namespace NuCache
 			var packageCache = new PackageCache(config.CacheDirectory);
 
 			app.Use<SerilogMiddleware>();
-			app.Use<PackageCachingMiddleware>(config, packageCache);
+			app.Use<PackageCachingMiddleware>(config, packageCache, stats);
 			app.Use<UrlRewriteMiddlware>(config);
 
 			app.Run(context =>

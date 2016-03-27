@@ -13,11 +13,13 @@ namespace NuCache.Middlewares
 
 		private readonly Configuration _config;
 		private readonly PackageCache _cache;
+		private readonly Statistics _stats;
 
-		public PackageCachingMiddleware(OwinMiddleware next, Configuration config, PackageCache cache) : base(next)
+		public PackageCachingMiddleware(OwinMiddleware next, Configuration config, PackageCache cache, Statistics stats) : base(next)
 		{
 			_config = config;
 			_cache = cache;
+			_stats = stats;
 		}
 
 		public override Task Invoke(IOwinContext context)
@@ -35,6 +37,8 @@ namespace NuCache.Middlewares
 
 			if (_cache.Contains(packageName))
 			{
+				_stats.Add(packageName, context.Request.RemoteIpAddress);
+
 				Log.Information("Got {packageName} from the cache", packageName);
 				context.Response.ContentType = "binary/octet-stream";
 				context.Response.Write(_cache.GetPackage(packageName));
