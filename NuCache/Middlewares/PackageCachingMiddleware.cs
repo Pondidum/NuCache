@@ -11,11 +11,11 @@ namespace NuCache.Middlewares
 	{
 		private static readonly ILogger Log = Serilog.Log.ForContext<UrlRewriteMiddlware>();
 
-		private readonly Configuration _config;
+		private readonly IConfiguration _config;
 		private readonly PackageCache _cache;
 		private readonly Statistics _stats;
 
-		public PackageCachingMiddleware(OwinMiddleware next, Configuration config, PackageCache cache, Statistics stats) : base(next)
+		public PackageCachingMiddleware(OwinMiddleware next, IConfiguration config, PackageCache cache, Statistics stats) : base(next)
 		{
 			_config = config;
 			_cache = cache;
