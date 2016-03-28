@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using Newtonsoft.Json;
+using Shouldly;
 using Xunit;
 
 namespace NuCache.Tests
@@ -33,6 +34,33 @@ namespace NuCache.Tests
 			package.Name.ShouldBe("finite");
 			package.Version.ShouldBe("4.1.0");
 			package.ToString().ShouldBe("finite.4.1.0.nupkg");
+		}
+
+		[Fact]
+		public void When_serialized()
+		{
+			var dto = new Dto
+			{
+				Name = PackageName.Parse("finite.4.1.0.nupkg")
+			};
+
+			var json = JsonConvert.SerializeObject(dto);
+
+			json.ShouldBe("{\"Name\":\"finite.4.1.0.nupkg\"}");
+		}
+
+		[Fact]
+		public void When_deserialized()
+		{
+			var json = "{\"Name\":\"finite.4.1.0.nupkg\"}";
+			var dto = JsonConvert.DeserializeObject<Dto>(json);
+
+			dto.Name.ToString().ShouldBe("finite.4.1.0.nupkg");
+		}
+
+		private class Dto
+		{
+			public PackageName Name { get; set; }
 		}
 	}
 }

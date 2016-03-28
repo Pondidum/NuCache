@@ -1,7 +1,9 @@
 ﻿using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace NuCache
 {
+	[JsonConverter(typeof(PackageNameConverter))]
 	public class PackageName
 	{
 		public string Name { get; }

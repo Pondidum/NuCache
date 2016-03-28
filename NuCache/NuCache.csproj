@@ -103,6 +103,7 @@
     <Compile Include="PackageCache.cs" />
     <Compile Include="Middlewares\PackageCachingMiddleware.cs" />
     <Compile Include="PackageName.cs" />
+    <Compile Include="PackageNameConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Middlewares\SerilogMiddleware.cs" />
     <Compile Include="Middlewares\UrlRewriteMiddlware.cs" />
