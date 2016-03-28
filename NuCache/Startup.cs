@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using NuCache;
+using NuCache.Infrastructure;
 using NuCache.Middlewares;
 using Owin;
 using Serilog;
@@ -15,13 +16,14 @@ namespace NuCache
 	{
 		public void Configuration(IAppBuilder app)
 		{
+			var fs = new PhysicalFileSystem();
 			var config = new Configuration();
 
 			Directory.CreateDirectory(config.LogDirectory);
 			Directory.CreateDirectory(config.CacheDirectory);
 			Directory.CreateDirectory(Path.GetDirectoryName(config.StatsFile));
 
-			var stats = new Statistics(config);
+			var stats = new Statistics(fs, config);
 			stats.LoadAsync();
 
 			Log.Logger = new LoggerConfiguration()
@@ -38,6 +40,9 @@ namespace NuCache
 			app.Use<SerilogMiddleware>();
 			app.Use<PackageCachingMiddleware>(config, packageCache, stats);
 			app.Use<UrlRewriteMiddlware>(config);
+			
+			var middleware = new InterfaceMiddleware(stats);
+			middleware.Configuration(app);
 
 			app.Run(context =>
 			{

@@ -4,38 +4,45 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NuCache.Infrastructure;
 
 namespace NuCache
 {
 	public class Statistics
 	{
+		private readonly IFileSystem _fileSystem;
 		private readonly Configuration _config;
 		private List<Dto> _stats;
 
-		public Statistics(Configuration config)
+		public Statistics(IFileSystem fileSystem, Configuration config)
 		{
+			_fileSystem = fileSystem;
 			_config = config;
 			_stats = new List<Dto>();
 		}
 
 		public void Add(string packageName, string host)
 		{
-			var dto = new Dto { Package = packageName, Timestamp = DateTime.UtcNow, Host = host };
+			var dto = new Dto
+			{
+				Package = PackageName.Parse(packageName),
+				Timestamp = DateTime.UtcNow,
+				Host = host
+			};
 
 			_stats.Add(dto);
-
-			File.AppendAllLines(_config.StatsFile, new[] { JsonConvert.SerializeObject(dto) });
+			_fileSystem.AppendToFile(_config.StatsFile, JsonConvert.SerializeObject(dto));
 		}
 
 		public async void LoadAsync()
 		{
-			if (File.Exists(_config.StatsFile) == false)
+			if (_fileSystem.FileExists(_config.StatsFile) == false)
 				return;
 
 			await Task.Run(() =>
 			{
-				var lines = File
-					.ReadAllLines(_config.StatsFile)
+				var lines = _fileSystem
+					.ReadFileLines(_config.StatsFile)
 					.Select(JsonConvert.DeserializeObject<Dto>)
 					.ToList();
 
@@ -45,9 +52,10 @@ namespace NuCache
 
 		private class Dto
 		{
-			public string Package { get; set; }
+			public PackageName Package { get; set; }
 			public DateTime Timestamp { get; set; }
 			public string Host { get; set; }
 		}
 	}
 }
+
