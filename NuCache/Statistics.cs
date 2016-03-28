@@ -50,6 +50,27 @@ namespace NuCache
 			});
 		}
 
+		public IEnumerable<PackageAggregation> ForAll()
+		{
+			return _stats
+				.GroupBy(s => s.Package.ToString(), StringComparer.OrdinalIgnoreCase)
+				.Select(g => new PackageAggregation
+				{
+					Name = g.First().Package.Name,
+					Version = g.First().Package.Version,
+					Added = g.Min(e => e.Timestamp),
+					Downloads = g.Count()
+				});
+		}
+
+		public class PackageAggregation
+		{
+			public string Name { get; set; }
+			public string Version { get; set; }
+			public int Downloads { get; set; }
+			public DateTime Added { get; set; }
+		}
+
 		private class Dto
 		{
 			public PackageName Package { get; set; }
