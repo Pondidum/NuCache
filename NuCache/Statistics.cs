@@ -11,10 +11,10 @@ namespace NuCache
 	public class Statistics
 	{
 		private readonly IFileSystem _fileSystem;
-		private readonly Configuration _config;
+		private readonly IConfiguration _config;
 		private List<Dto> _stats;
 
-		public Statistics(IFileSystem fileSystem, Configuration config)
+		public Statistics(IFileSystem fileSystem, IConfiguration config)
 		{
 			_fileSystem = fileSystem;
 			_config = config;
@@ -58,4 +58,3 @@ namespace NuCache
 		}
 	}
 }
-

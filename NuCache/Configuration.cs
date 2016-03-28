@@ -5,7 +5,7 @@ using System.Web;
 
 namespace NuCache
 {
-	public class Configuration
+	public class Configuration : IConfiguration
 	{
 		public Uri SourceNugetFeed { get; set; }
 		public string CacheDirectory { get; set; }
