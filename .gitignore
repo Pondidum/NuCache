@@ -19,3 +19,4 @@ AssemblyVersion.cs
 /NuCache/cache/
 /NuCache/logs/
 /NuCache/stats.json
+/NuCache/client/static

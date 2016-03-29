@@ -99,7 +99,52 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="client\app.htm" />
+    <EmbeddedResource Include="client\css\app.css" />
+    <EmbeddedResource Include="client\css\bootstrap-theme.min.css" />
+    <EmbeddedResource Include="client\css\bootstrap.min.css" />
+    <EmbeddedResource Include="client\css\material-fullpalette.css" />
+    <EmbeddedResource Include="client\css\material-fullpalette.min.css" />
+    <EmbeddedResource Include="client\css\material.css" />
+    <EmbeddedResource Include="client\css\material.min.css" />
+    <EmbeddedResource Include="client\css\ripples.css" />
+    <EmbeddedResource Include="client\css\ripples.min.css" />
+    <EmbeddedResource Include="client\css\roboto.css" />
+    <EmbeddedResource Include="client\css\roboto.min.css" />
+    <EmbeddedResource Include="client\fonts\LICENSE.txt" />
+    <EmbeddedResource Include="client\fonts\Material-Design-Icons.svg" />
+    <EmbeddedResource Include="client\index.js" />
+    <EmbeddedResource Include="client\js\jquery-1.11.3.min.js" />
+    <EmbeddedResource Include="client\js\material.js" />
+    <EmbeddedResource Include="client\js\material.min.js" />
+    <EmbeddedResource Include="client\js\ripples.js" />
+    <EmbeddedResource Include="client\js\ripples.min.js" />
+    <EmbeddedResource Include="client\static\bundle.js" />
     <Content Include="packages.config" />
+    <EmbeddedResource Include="client\css\material-fullpalette.css.map" />
+    <EmbeddedResource Include="client\css\material-fullpalette.min.css.map" />
+    <EmbeddedResource Include="client\css\material.css.map" />
+    <EmbeddedResource Include="client\css\material.min.css.map" />
+    <EmbeddedResource Include="client\css\ripples.css.map" />
+    <EmbeddedResource Include="client\css\ripples.min.css.map" />
+    <EmbeddedResource Include="client\css\roboto.css.map" />
+    <EmbeddedResource Include="client\css\roboto.min.css.map" />
+    <EmbeddedResource Include="client\fonts\glyphicons-halflings-regular.ttf" />
+    <EmbeddedResource Include="client\fonts\glyphicons-halflings-regular.woff" />
+    <EmbeddedResource Include="client\fonts\glyphicons-halflings-regular.woff2" />
+    <EmbeddedResource Include="client\fonts\Material-Design-Icons.eot" />
+    <EmbeddedResource Include="client\fonts\Material-Design-Icons.ttf" />
+    <EmbeddedResource Include="client\fonts\Material-Design-Icons.woff" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftBold.woff" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftBold.woff2" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftItalic.woff" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftItalic.woff2" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftMedium.woff" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftMedium.woff2" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftRegular.woff" />
+    <EmbeddedResource Include="client\fonts\RobotoDraftRegular.woff2" />
+    <EmbeddedResource Include="client\js\material.min.js.map" />
+    <EmbeddedResource Include="client\js\ripples.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -113,6 +158,7 @@
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="IConfiguration.cs" />
+    <Compile Include="Infrastructure\AssemblyResourceFileSystem.cs" />
     <Compile Include="Infrastructure\IFileSystem.cs" />
     <Compile Include="Infrastructure\PhysicalFileSystem.cs" />
     <Compile Include="Middlewares\InterfaceMiddleware.cs" />

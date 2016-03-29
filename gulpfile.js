@@ -42,9 +42,9 @@ gulp.task('version', function() {
 
 gulp.task('transform', function() {
   return gulp
-    .src('./Magistrate/client/index.js')
+    .src('./NuCache/client/index.js')
     .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest('./Magistrate/client/static/'));
+    .pipe(gulp.dest('./NuCache/client/static/'));
 })
 
 gulp.task('compile', [ "transform", "restore", "version" ], function() {

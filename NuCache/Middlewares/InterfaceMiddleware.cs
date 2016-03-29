@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.Owin;
 using Microsoft.Owin.StaticFiles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using NuCache.Infrastructure;
 using Owin;
 using Owin.Routing;
 
@@ -29,6 +31,17 @@ namespace NuCache.Middlewares
 			{
 				await context.WriteJson(_stats.ForAll(), _settings);
 			});
+
+			var fs = new AssemblyResourceFileSystem(Assembly.GetExecutingAssembly(), "NuCache.client");
+
+			var fileOptions = new FileServerOptions
+			{
+				FileSystem = fs,
+				EnableDefaultFiles = true,
+				DefaultFilesOptions = { DefaultFileNames = { "app.htm" } }
+			};
+
+			app.UseFileServer(fileOptions);
 		}
 	}
 }
