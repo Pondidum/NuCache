@@ -20,12 +20,7 @@ class FilteredPackageList extends Component {
     var packages = this.props.packages;
 
     if (hasFilter)
-      packages = packages.filter(p => {
-        var isName = p.name.search(exp) != -1;
-        var isDesc = p.description.search(exp) != -1;
-
-        return isName || isDesc;
-      });
+      packages = packages.filter(p => p.name.search(exp) != -1);
 
     return (
       <div>
