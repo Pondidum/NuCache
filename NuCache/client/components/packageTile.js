@@ -7,9 +7,9 @@ const PackageTile = ({ details }) => (
         <i>1.4.5</i>
       </div>
       <div className="row-content">
-        <div className="least-content">20 <i className="material-icons" style={{ verticalAlign: "middle" }}>file_download</i></div>
+        <div className="least-content"><a href="#" alt="Remove from cache"><i className="material-icons" style={{ verticalAlign: "middle" }}>delete</i></a></div>
         <h4 className="list-group-item-heading">{details.name}</h4>
-        <p className="list-group-item-text">{details.description}</p>
+        <p className="list-group-item-text">Downloads: {details.downloads}</p>
       </div>
     </div>
   </div>
