@@ -1,8 +1,16 @@
 import React from 'react'
 import { Component } from 'react'
 
+import { connect } from 'react-redux'
+
 import PackageList from './PackageList'
 import Filter from './Filter'
+
+const mapStateToProps = (state) => {
+  return {
+    packages: state
+  }
+}
 
 class FilteredPackageList extends Component {
 
@@ -31,4 +39,4 @@ class FilteredPackageList extends Component {
   }
 }
 
-export default FilteredPackageList
+export default connect(mapStateToProps, null)(FilteredPackageList)
