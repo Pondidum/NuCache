@@ -3,23 +3,28 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import remoteMiddleware from './infrastructure/remoteMiddleware'
+
+import { setState } from './actions'
+import appReducer from './reducers'
+
 import App from './components/app'
 
-var packages = [];
-
-const renderApp = () => {
-  render(
-    <App packages={packages} />,
-    document.getElementById('container')
-  )
-}
+const createStoreWithRemote = applyMiddleware(remoteMiddleware)(createStore);
+const store = createStoreWithRemote(appReducer);
 
 $.ajax({
   url: 'http://localhost:55628/api/stats',
   success: function(data) {
-    packages = data;
-    renderApp();
+    store.dispatch(setState(data));
   }
 });
 
-renderApp();
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('container')
+)
