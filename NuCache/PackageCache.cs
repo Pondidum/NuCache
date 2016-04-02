@@ -11,19 +11,19 @@ namespace NuCache
 			_directory = directory;
 		}
 
-		public bool Contains(string packageName)
+		public bool Contains(PackageName packageName)
 		{
-			return File.Exists(Path.Combine(_directory, packageName));
+			return File.Exists(Path.Combine(_directory, packageName.ToString()));
 		}
 
-		public byte[] GetPackage(string packageName)
+		public byte[] GetPackage(PackageName packageName)
 		{
-			return File.ReadAllBytes(Path.Combine(_directory, packageName));
+			return File.ReadAllBytes(Path.Combine(_directory, packageName.ToString()));
 		}
 
-		public void StorePackage(string packageName, byte[] contents)
+		public void StorePackage(PackageName packageName, byte[] contents)
 		{
-			File.WriteAllBytes(Path.Combine(_directory, packageName), contents);
+			File.WriteAllBytes(Path.Combine(_directory, packageName.ToString()), contents);
 		}
 
 		public void RemovePackage(PackageName packageName)

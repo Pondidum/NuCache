@@ -12,7 +12,7 @@ namespace NuCache.Tests
 
 		public StatisticsTests()
 		{
-			_stats =  new Statistics(Substitute.For<IFileSystem>(), Substitute.For<IConfiguration>());
+			_stats = new Statistics(Substitute.For<IFileSystem>(), Substitute.For<IConfiguration>());
 		}
 
 		[Fact]
@@ -24,7 +24,7 @@ namespace NuCache.Tests
 		[Fact]
 		public void When_there_is_one_package()
 		{
-			_stats.Add("finite.4.1.0.nupkg", "127.0.0.1");
+			_stats.Add(PackageName.Parse("finite.4.1.0.nupkg"), "127.0.0.1");
 
 			var stat = _stats.ForAll().Single();
 
@@ -38,9 +38,9 @@ namespace NuCache.Tests
 		[Fact]
 		public void When_there_is_one_package_multiple_times()
 		{
-			_stats.Add("finite.4.1.0.nupkg", "127.0.0.1");
-			_stats.Add("finite.4.1.0.nupkg", "127.0.0.1");
-			_stats.Add("finite.4.1.0.nupkg", "127.0.0.1");
+			_stats.Add(PackageName.Parse("finite.4.1.0.nupkg"), "127.0.0.1");
+			_stats.Add(PackageName.Parse("finite.4.1.0.nupkg"), "127.0.0.1");
+			_stats.Add(PackageName.Parse("finite.4.1.0.nupkg"), "127.0.0.1");
 
 			var stat = _stats.ForAll().Single();
 
@@ -54,9 +54,9 @@ namespace NuCache.Tests
 		[Fact]
 		public void When_there_is_one_package_with_multiple_versions()
 		{
-			_stats.Add("finite.3.5.8.nupkg", "127.0.0.1");
-			_stats.Add("finite.4.1.0.nupkg", "127.0.0.1");
-			_stats.Add("finite.4.1.0.nupkg", "127.0.0.1");
+			_stats.Add(PackageName.Parse("finite.3.5.8.nupkg"), "127.0.0.1");
+			_stats.Add(PackageName.Parse("finite.4.1.0.nupkg"), "127.0.0.1");
+			_stats.Add(PackageName.Parse("finite.4.1.0.nupkg"), "127.0.0.1");
 
 			var v3 = _stats.ForAll().Single(s => s.Version == "3.5.8");
 			var v4 = _stats.ForAll().Single(s => s.Version == "4.1.0");

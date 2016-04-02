@@ -33,15 +33,15 @@ namespace NuCache.Middlewares
 
 			Log.Debug("{path}", requestPath);
 
-			var packageName = Path.GetFileName(requestPath);
+			var package = PackageName.Parse(Path.GetFileName(requestPath));
 
-			if (_cache.Contains(packageName))
+			if (_cache.Contains(package))
 			{
-				_stats.Add(packageName, context.Request.RemoteIpAddress);
+				_stats.Add(package, context.Request.RemoteIpAddress);
 
-				Log.Information("Got {packageName} from the cache", packageName);
+				Log.Information("Got {packageName} from the cache", package.ToString());
 				context.Response.ContentType = "binary/octet-stream";
-				context.Response.Write(_cache.GetPackage(packageName));
+				context.Response.Write(_cache.GetPackage(package));
 
 				return Task.Delay(0);
 			}
@@ -55,16 +55,16 @@ namespace NuCache.Middlewares
 
 			if (response.IsSuccessStatusCode == false)
 			{
-				Log.Information("Unable to find {packageName} in the source feed", packageName);
+				Log.Information("Unable to find {packageName} in the source feed", package.ToString());
 				context.Response.StatusCode = (int) response.StatusCode;
 				return Task.Delay(0);
 			}
 
-			Log.Information("Got {packageName} from the source feed", packageName);
+			Log.Information("Got {packageName} from the source feed", package.ToString());
 
 			var bytes = response.Content.ReadAsByteArrayAsync().Result;
 
-			_cache.StorePackage(packageName, bytes);
+			_cache.StorePackage(package, bytes);
 
 			context.Response.ContentType = response.Content.Headers.ContentType.MediaType;
 			context.Response.Write(bytes);

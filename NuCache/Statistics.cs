@@ -21,11 +21,11 @@ namespace NuCache
 			_stats = new List<Dto>();
 		}
 
-		public void Add(string packageName, string host)
+		public void Add(PackageName packageName, string host)
 		{
 			var dto = new Dto
 			{
-				Package = PackageName.Parse(packageName),
+				Package = packageName,
 				Timestamp = DateTime.UtcNow,
 				Host = host
 			};
