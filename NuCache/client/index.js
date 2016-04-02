@@ -16,7 +16,7 @@ const createStoreWithRemote = applyMiddleware(remoteMiddleware)(createStore);
 const store = createStoreWithRemote(appReducer);
 
 $.ajax({
-  url: 'http://localhost:55628/api/stats',
+  url: '/api/stats',
   success: function(data) {
     store.dispatch(setState(data));
   }
