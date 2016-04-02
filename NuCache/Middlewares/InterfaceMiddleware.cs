@@ -12,11 +12,13 @@ namespace NuCache.Middlewares
 {
 	public class InterfaceMiddleware
 	{
+		private readonly PackageCache _cache;
 		private readonly Statistics _stats;
 		private readonly JsonSerializerSettings _settings;
 
-		public InterfaceMiddleware(Statistics stats)
+		public InterfaceMiddleware(PackageCache cache, Statistics stats)
 		{
+			_cache = cache;
 			_stats = stats;
 			_settings = new JsonSerializerSettings
 			{
@@ -32,6 +34,16 @@ namespace NuCache.Middlewares
 				await context.WriteJson(_stats.ForAll(), _settings);
 			});
 
+			app.Delete("/api/packages", async context =>
+			{
+				var dto = context.ReadJson<DeleteDto>();
+				var package = new PackageName(dto.Name, dto.Version);
+
+					_cache.RemovePackage(package);
+
+				await Task.Yield();
+			});
+
 			var fs = new AssemblyResourceFileSystem(Assembly.GetExecutingAssembly(), "NuCache.client");
 
 			var fileOptions = new FileServerOptions
@@ -42,6 +54,12 @@ namespace NuCache.Middlewares
 			};
 
 			app.UseFileServer(fileOptions);
+		}
+
+		private class DeleteDto
+		{
+			public string Name { get; set; }
+			public string Version { get; set; }
 		}
 	}
 }

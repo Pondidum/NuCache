@@ -25,5 +25,10 @@ namespace NuCache
 		{
 			File.WriteAllBytes(Path.Combine(_directory, packageName), contents);
 		}
+
+		public void RemovePackage(PackageName packageName)
+		{
+			File.Delete(Path.Combine(_directory, packageName.ToString()));
+		}
 	}
 }

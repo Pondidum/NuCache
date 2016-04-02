@@ -38,11 +38,14 @@ namespace NuCache
 			var packageCache = new PackageCache(config.CacheDirectory);
 
 			app.Use<SerilogMiddleware>();
+
+
+			var middleware = new InterfaceMiddleware(packageCache, stats);
+			middleware.Configuration(app);
+
 			app.Use<PackageCachingMiddleware>(config, packageCache, stats);
 			app.Use<UrlRewriteMiddlware>(config);
 			
-			var middleware = new InterfaceMiddleware(stats);
-			middleware.Configuration(app);
 
 			app.Run(context =>
 			{
