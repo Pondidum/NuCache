@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import remoteMiddleware from './infrastructure/remoteMiddleware'
 
-import { setState } from './actions'
+import { refreshPackages } from './actions'
 import appReducer from './reducers'
 
 import App from './components/app'
@@ -15,12 +15,7 @@ import App from './components/app'
 const createStoreWithRemote = applyMiddleware(remoteMiddleware)(createStore);
 const store = createStoreWithRemote(appReducer);
 
-$.ajax({
-  url: '/api/stats',
-  success: function(data) {
-    store.dispatch(setState(data));
-  }
-});
+store.dispatch(refreshPackages());
 
 render(
   <Provider store={store}>

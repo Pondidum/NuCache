@@ -4,7 +4,11 @@ const remoteMiddleware = store => next => action => {
     $.ajax({
       url: action.meta.url,
       method: action.meta.method,
-      data: JSON.stringify(action)
+      data: JSON.stringify(action),
+      success: (data) => {
+        if (action.meta.success)
+          action.meta.success(store, data);
+      }
     });
 
   next(action);

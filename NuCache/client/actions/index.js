@@ -17,3 +17,14 @@ export const setState = (state) => {
     state: state
   }
 }
+
+export const refreshPackages = () => {
+  return {
+    meta: {
+      remote: true,
+      url: "/api/stats",
+      success: (store, data) => store.dispatch(setState(data))
+    },
+    type: "REFRESH_PACKAGES"
+  }
+}
