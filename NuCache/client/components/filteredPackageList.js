@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import PackageList from './PackageList'
 import Filter from './Filter'
+import RefreshLink from './RefreshLink'
 
 const mapStateToProps = (state) => {
   return {
@@ -31,8 +32,11 @@ class FilteredPackageList extends Component {
     return (
       <div>
         <div className="row" style={{ marginBottom: "1em" }}>
-          <div className="col-md-4 col-md-offset-8">
+          <div className="col-md-4">
             <Filter onChange={ value => this.setState({ filter: value }) } />
+          </div>
+          <div className="col-md-2 col-md-offset-6 text-right">
+            <RefreshLink />
           </div>
         </div>
         <PackageList packages={packages} />
